@@ -19,7 +19,8 @@ body{
 
     table{
         background-color: orange;
-        width: 100%;
+        width: 80%;
+        margin:auto;
     }
 
     tr, td{
@@ -45,6 +46,7 @@ body{
         padding: 3% 5% 3% 5%;
         margin: 2% 5% 2% 5%;;
         text-align: center;
+        font-size: 150%;
         border: 2px solid orange;
         border-radius: 20px;
     }
@@ -121,7 +123,7 @@ body{
         width: 80%;
         height: auto;
         padding: 0.2% 1% 0.2% 5%;
-        margin: 0.2% 1% 0.2% 5%;
+        margin: auto;
         text-align: center;
         border: 2px solid orange;
         border-radius: 20px;
@@ -133,6 +135,19 @@ body{
         height: auto;
         padding: 0.2% 1% 0.2% 5%;
         margin: 0.2% 1% 0.2% 5%;
+        text-align: center;
+        font-size: 150%;
+        border: 2px solid white;
+        border-radius: 20px;
+    }
+
+    .Pedido{
+        background-color: green;
+        width: 50%;
+        height: auto;
+        padding: 0.2% 1% 0.2% 0.1%;
+        margin: 2px 1% 2px 5%;
+        margin: auto;
         text-align: center;
         font-size: 150%;
         border: 2px solid white;
@@ -216,7 +231,7 @@ body{
         -webkit-transform: translate(0px,0px);
     }
 
-    li:hover{
+    ul li:hover{
         background-color: white;
         width: 220px;
         height: 40px;
@@ -230,7 +245,39 @@ body{
         -webkit-transform: translate(0px,0px);
     }
 
-   
+    ol{
+        background-color: white;
+        width: 80%;
+        height: auto;
+        margin: 5% 5% 5% 5%;
+        text-align: left;
+        color: black;
+        border: 2px solid white;
+        font-size: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+        text-decoration: none;
+        border-radius: 10px;
+        -webkit-transform: translate(0px,0px);
+    }
+
+    .ol-li{
+        background-color: white;
+        width: 80%;
+        height: auto;
+        margin: auto; 
+        text-align: left;
+        padding: 4px 0 4px 0;
+        color: black;
+        border: 2px solid white;
+        font-size: 120%;
+        font-family: Arial, Helvetica, sans-serif;
+        text-decoration: none;
+        border-radius: 10px;
+        -webkit-transform: translate(0px,0px);
+    } 
+
+
+    
 
    
     

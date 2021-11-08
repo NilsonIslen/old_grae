@@ -1,0 +1,9 @@
+<?php
+$FechaD=$result->FechaD;
+$HoraD=$result->HoraD;
+$Responsable=$result->Responsable;
+$Vendedor=$result->Vendedor;
+$D14x5=$result->D14x5;
+$D16x5=$result->D16x5;
+$Minx20=$result->Minx20;
+?>

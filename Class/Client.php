@@ -1,0 +1,15 @@
+<?php
+$IdCli=$result->IdCli;
+$NameCli=$result->NameCli;
+$Barrio=$result->Barrio;
+$Direccion=$result->Direccion;
+$TelCli=$result->TelCli;
+$Frec=$result->Frecuencia;
+$Visita=$result->Visita;
+$DD14x5=$result->DD14x5;
+$DD16x5=$result->DD16x5;
+$DMinx20=$result->DMinx20;
+$IdVendedor=$result->IdVendedor;
+$NameVendedor=$result->NameVendedor;
+$Pedido=$result->Pedido;
+?>

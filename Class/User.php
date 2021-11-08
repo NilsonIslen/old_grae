@@ -1,0 +1,12 @@
+<?php
+$IdUs=$result->IdUs;
+$NameUs=$result->NameUs;
+$EmailUs=$result->EmailUs;
+$TelUs=$result->TelUs;
+$ClaveUs=$result->ClaveUs;
+$Perfil=$result->Perfil;
+$ClienteActual=$result->ClienteActual;
+$OD14x5=$result->OD14x5;
+$OD16x5=$result->OD16x5;
+$OMinx20=$result->OMinx20;
+?>
