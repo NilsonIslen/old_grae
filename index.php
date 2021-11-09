@@ -125,7 +125,7 @@ if(isset($_GET['Seccion'])){
     echo "<p> La contraseña se ha cambiado correctamente. </p>";
     echo "<p> Ahora puedes ingresar a la plataforma de repartos. </p>";
     echo "<div>";
-    echo " <a href='Index.php'> Ir a la pagina principal para iniciar sesion </a>";
+    echo " <a href='index.php'> Ir a la pagina principal para iniciar sesion </a>";
     echo "</div>";
 
     exit();
@@ -134,7 +134,7 @@ if(isset($_GET['Seccion'])){
             }else{
                 echo "<p> El codigo no es correcto o las claves no coinciden </p>";
                 echo "<div>";
-                echo " <a href='Index.php'> Regresar </a>";
+                echo " <a href='index.php'> Regresar </a>";
                 echo "</div>";
                  exit();
                     
@@ -173,7 +173,7 @@ if(isset($_GET['Seccion'])){
                 echo "<p> El Correo ingresado ya existe en nuestro sistema </p>"; 
                 echo "<p> Por favor intenta con otro o recupera la contraseña </p>";
                    echo "<Div>";
-                   echo "<a href='Index.php?Seccion=NuevoUsuario'> Regresar </a>";
+                   echo "<a href='index.php?Seccion=NuevoUsuario'> Regresar </a>";
                    echo "</Div>"; 
                 exit();
                  } 
@@ -200,7 +200,7 @@ if(isset($_GET['Seccion'])){
     echo "<p> Gracias por tu registro </p>";
     echo "<p> Ahora puedes ingresar a la plataforma de repartos </p>";
     echo "<div>";
-    echo " <a href='Index.php'> Ir a la pagina principal para iniciar sesion </a>";
+    echo " <a href='index.php'> Ir a la pagina principal para iniciar sesion </a>";
     echo "</div>";
 
     exit();
@@ -236,7 +236,7 @@ if(isset($_GET['Seccion'])){
                     session_start();
                     $Usuario=$_SESSION['Usuario'];
                     $Clave=$_SESSION['Clave'];
-                    echo "<form action='Index.php' method='POST'>";
+                    echo "<form action='index.php' method='POST'>";
                     echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
                     echo "<input type='hidden' name='Clave' Value='$Clave'>";
                     echo "<button type='submit' name='Entrar'> Regresar </button>";
@@ -272,7 +272,7 @@ if(isset($_GET['Seccion'])){
              session_start();
             $Usuario=$_SESSION['Usuario'];
             $Clave=$_SESSION['Clave'];
-            echo "<form action='Index.php' method='POST'>";
+            echo "<form action='index.php' method='POST'>";
             echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
             echo "<input type='hidden' name='Clave' Value='$Clave'>";
             echo "<button type='submit' name='Entrar'> Regresar </button>";
@@ -306,7 +306,7 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
          session_start();
             $Usuario=$_SESSION['Usuario'];
             $Clave=$_SESSION['Clave'];
-            echo "<form action='Index.php' method='POST'>";
+            echo "<form action='index.php' method='POST'>";
             echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
             echo "<input type='hidden' name='Clave' Value='$Clave'>";
             echo "<button type='submit' name='Entrar'> Regresar </button>";
@@ -319,7 +319,7 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
 
     if($Seccion == 'ListarClientes'){
 
-        echo "<Div> <a href='Index.php?Usuario=$IdUs&Seccion=Pedidos'> Nuevo pedido </a> </Div>";
+        echo "<Div> <a href='index.php?Usuario=$IdUs&Seccion=Pedidos'> Nuevo pedido </a> </Div>";
         echo "<table align='center'>";
         echo "<tr align='center'>";
         echo "<td> ID </td> <td> Cliente </td> <td> Barrio </td> <td> Direccion </td>  <td> Telefono </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td> <td> Frecuencia </td> <td> Proxima Visita </td> <td> Vendedor actual </td><td> Pedido </td>";
@@ -339,7 +339,7 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
             session_start();
             $Usuario=$_SESSION['Usuario'];
             $Clave=$_SESSION['Clave'];
-            echo "<form action='Index.php' method='POST'>";
+            echo "<form action='index.php' method='POST'>";
             echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
             echo "<input type='hidden' name='Clave' Value='$Clave'>";
             echo "<button type='submit' name='Entrar'> Regresar </button>";
@@ -350,7 +350,7 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
 
         if($Seccion == 'ListarRepartidores'){
 
-            echo "<Div> <a href='Index.php?Usuario=$IdUs&Seccion=Despacho'> Despachar Repartidor </a> </Div>";
+            echo "<Div> <a href='index.php?Usuario=$IdUs&Seccion=Despacho'> Despachar Repartidor </a> </Div>";
             echo "<table align='center'>";
             echo "<tr align='center'>";
             echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> Perfil </td> <td> Cliente actual </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td>";
@@ -376,7 +376,7 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
                 session_start();
                 $Usuario=$_SESSION['Usuario'];
                 $Clave=$_SESSION['Clave'];
-                echo "<form action='Index.php' method='POST'>";
+                echo "<form action='index.php' method='POST'>";
                 echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
                 echo "<input type='hidden' name='Clave' Value='$Clave'>";
                 echo "<button type='submit' name='Entrar'> Regresar </button>";
@@ -396,7 +396,7 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
             
             include "Forms/Despacho.php";
 
-            echo "<form action='Index.php' method='POST'>";
+            echo "<form action='index.php' method='POST'>";
             echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
             echo "<input type='hidden' name='Clave' Value='$Clave'>";
             echo "<button type='submit' name='Entrar'> Regresar </button>";
@@ -411,18 +411,19 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
 
         if($Seccion=='Pedidos'){
             echo "<Div>";
-             echo "<form action='Index.php' method='POST'>";
+             echo "<form action='index.php' method='POST'>";
              echo "<input type='hidden' name='Responsable' Value='$IdUsuario'>";
              echo "<p><input type='number' name='IdCli' placeholder='Id del Cliente' required> </p>";
              echo "<p> <input type='text' name='D14x5' placeholder='D14x5' required> </p>";
              echo "<p> <input type='text' name='D16x5' placeholder='D16x5'required> </p>";
              echo "<p> <input type='text' name='Minx20' placeholder='Minx20' required> </p>";
+             echo "<p> <input type='textarea' name='Observations' placeholder='Observaciones'> </p>";
              echo "<p><button type='submit' name='Pedido'> Registrar pedido </button> </p>";
              echo "</form>";
                 session_start();
                 $Usuario=$_SESSION['Usuario'];
                 $Clave=$_SESSION['Clave'];
-                echo "<form action='Index.php' method='POST'>";
+                echo "<form action='index.php' method='POST'>";
                 echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
                 echo "<input type='hidden' name='Clave' Value='$Clave'>";
                 echo "<p> <button type='submit' name='Entrar'> Regresar </button> </p>";
@@ -439,21 +440,17 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
                     $Clave=$_SESSION['Clave'];
 
                  echo "<Div>";
-                 echo "<form action='Index.php' method='POST'>";
+                 echo "<form action='index.php' method='POST'>";
                  echo "<p> Historial de despachos :</p>";
                  echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
                  echo "<input type='hidden' name='Clave' Value='$Clave'>";
-                 echo "<select name='CriterioDeB'>";
-                 echo "<option value='Fecha'> Fecha (DD-MM-AAAA)</option>";
-                 echo "<option value='Responsable'> Responsable </option>";
-                 echo "<option value='Vendedor'> Vendedor </option>";
-                 echo "</select>";
-                 echo "<p> <input type='Text' name='Palabra' placeholder='Busqueda'> </p>";
+                 echo "<p> <input type='Text' name='Fecha' placeholder='Fecha (DD-MM-AAAA)'> </p>";
+                 echo "<p> <input type='Text' name='Responsable' placeholder='Responsable'> </p>";
+                 echo "<p> <input type='Text' name='Vendedor' placeholder='Vendedor'> </p>";
                  echo "<p><button type='submit' name='HDespachos'> Consultar Historial </button> </p>";
                  echo "</form>";
 
-                    
-                    echo "<form action='Index.php' method='POST'>";
+                    echo "<form action='index.php' method='POST'>";
                     echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
                     echo "<input type='hidden' name='Clave' Value='$Clave'>";
                     echo "<p> <button type='submit' name='Entrar'> Regresar </button> </p>";
@@ -470,23 +467,18 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
                     $Usuario=$_SESSION['Usuario'];
                     $Clave=$_SESSION['Clave'];
 
-                 echo "<form action='Index.php' method='POST'>";
+                 echo "<form action='index.php' method='POST'>";
                  echo "<p> Historial de Ventas :</p>";
                  echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
                  echo "<input type='hidden' name='Clave' Value='$Clave'>";
-                 echo "<p>";
-                 echo "<select name='CriterioDeB'>";
-                 echo "<option value='Fecha'> Fecha (DD-MM-AAAA)</option>";
-                 echo "<option value='Vendedor'> Vendedor </option>";
-                 echo "<option value='Cliente'> Cliente </option>";
-                 echo "</select>";
-                 echo "<p>";
-                 echo "<input type='Text' name='Palabra' placeholder='Busqueda'>";
+                 echo "<input type='Text' name='FechaHV' placeholder='Fecha (DD-MM-AAAA)'>";
+                 echo "<input type='Text' name='VendedorV' placeholder='Vendedor'>";
+                 echo "<input type='Text' name='ClienteV' placeholder='Cliente'>";
                  echo "<button type='submit' name='HVentas'> Consultar </button>";
                  echo "</form>";
 
                     
-                    echo "<form action='Index.php' method='POST'>";
+                    echo "<form action='index.php' method='POST'>";
                     echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
                     echo "<input type='hidden' name='Clave' Value='$Clave'>";
                     echo "<button type='submit' name='Entrar'> Regresar </button>";
@@ -528,7 +520,7 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
         session_start();
         $Usuario=$_SESSION['Usuario'];
         $Clave=$_SESSION['Clave'];
-        echo "<form action='Index.php' method='POST'>";
+        echo "<form action='index.php' method='POST'>";
         echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
         echo "<input type='hidden' name='Clave' Value='$Clave'>";
         echo "<button type='submit' name='Entrar'> CONTINUAR </button>";
@@ -596,7 +588,7 @@ session_start();
 $Usuario=$_SESSION['Usuario'];
 $Clave=$_SESSION['Clave'];
 
-            echo "<form action='Index.php' method='POST'>";
+            echo "<form action='index.php' method='POST'>";
             echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
             echo "<input type='hidden' name='Clave' Value='$Clave'>";
             echo "<p> <button type='submit' name='Entrar'> Regresar </button> </p>";
@@ -612,13 +604,14 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
     $D14x5 = $_POST['D14x5'];
     $D16x5 = $_POST['D16x5'];
     $Minx20 = $_POST['Minx20'];
+    $Observ = $_POST['Observations'];
 
     include "dbRepAGD.php";
     if($queryClients -> rowCount() > 0){
         foreach($resultsClients as $result) {
         include "Class/Client.php";
                     if($IdClient==$IdCli){
-                    $query ="UPDATE clients SET Pedido='D14x5:$D14x5 - D16x5: $D16x5 - Minx20: $Minx20' WHERE IdCli=$IdClient";
+                    $query ="UPDATE clients SET Pedido='D14x5:$D14x5 - D16x5: $D16x5 - Minx20: $Minx20', observations='$Observ' WHERE IdCli=$IdClient";
                     $result=$connect->query($query);
 
                     echo "<p> Hemos registrado el nuevo pedido para el cliente $NameCli </p>";
@@ -627,7 +620,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                 session_start();
                 $Usuario=$_SESSION['Usuario'];
                 $Clave=$_SESSION['Clave'];
-        echo "<form action='Index.php' method='POST'>";
+        echo "<form action='index.php' method='POST'>";
         echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
         echo "<input type='hidden' name='Clave' Value='$Clave'>";
         echo "<p> <button type='submit' name='Entrar'> Regresar </button> </p>";
@@ -695,7 +688,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
     session_start();
     $Usuario=$_SESSION['Usuario'];
     $Clave=$_SESSION['Clave'];
-                        echo "<form action='Index.php' method='POST'>";
+                        echo "<form action='index.php' method='POST'>";
                         echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
                         echo "<input type='hidden' name='Clave' Value='$Clave'>";
                         echo "<p> <button type='submit' name='Entrar'> Continuar atendiendo mas clientes </button> </p>";
@@ -733,7 +726,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
 
         echo "<p> Acabas de cancelar la atencion con este cliente </p>";
 
-            echo "<form action='Index.php' method='POST'>";
+            echo "<form action='index.php' method='POST'>";
             echo "<input type='hidden' name='Usuario' Value='$UsuarioS'>";
             echo "<input type='hidden' name='Clave' Value='$ClaveS'>";
             echo "<p> <button type='submit' name='Entrar'> Regresar </button> </p>";
@@ -754,8 +747,9 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
         $UsuarioS = $_SESSION['Usuario'];
         $ClaveS = $_SESSION['Clave'];
 
-        $CriterioDeB = $_POST['CriterioDeB'];
-        $Palabra = $_POST['Palabra'];
+        $FechaHD = $_POST['Fecha'];
+        $Resp= $_POST['Responsable'];
+        $Vend = $_POST['Vendedor'];
 
         echo "<table align='center'>";
         echo "<tr align='center'>";
@@ -767,31 +761,58 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
         foreach($resultsDel as $result) {
         include "Class/Delivery.php";
 
-        if("$CriterioDeB"=="Fecha" && "$Palabra"=="$Fecha" ){
-            echo "<tr align='center'>";
-            echo "<td> $Fecha </td> <td> $Hora </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
-            echo "</tr>";
-        }
-
-        if("$CriterioDeB"=="Responsable" && "$Palabra"=="$Responsable" ){
-            echo "<tr align='center'>";
+        if("$FechaHD"=="$FechaD" && "$Resp"=="$Responsable" && "$Vend"=="$Vendedor"){
+            echo "1<tr align='center'>";
             echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
+            continue;
         }
-
-        if("$CriterioDeB"=="Vendedor" && "$Palabra"=="$Vendedor" ){
-            echo "<tr align='center'>";
+        if("$FechaHD"=="" && "$Resp"=="$Responsable" && "$Vend"=="$Vendedor"){
+            echo "1<tr align='center'>";
             echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
-           
+            continue;
         }
+        if("$FechaHD"=="$FechaD" && "$Resp"=="" && "$Vend"=="$Vendedor"){
+            echo "1<tr align='center'>";
+            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
+            echo "</tr>";
+            continue;
+        }
+        if("$FechaHD"=="$FechaD" && "$Resp"=="$Responsable" && "$Vend"==""){
+            echo "1<tr align='center'>";
+            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
+            echo "</tr>";
+            continue;
+        }
+        if("$FechaHD"=="$FechaD" && "$Resp"=="" && "$Vend"==""){
+            echo "1<tr align='center'>";
+            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
+            echo "</tr>";
+            continue;
+        }
+        if("$FechaHD"=="" && "$Resp"=="$Responsable" && "$Vend"==""){
+            echo "1<tr align='center'>";
+            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
+            echo "</tr>";
+            continue;
+        }
+        if("$FechaHD"=="" && "$Resp"=="" && "$Vend"=="$Vendedor"){
+            echo "1<tr align='center'>";
+            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
+            echo "</tr>";
+            continue;
+        }
+        continue;
+               
+        
 
         }}
 
           echo "</table>";
             
 
-            echo "<form action='Index.php' method='POST'>";
+            echo "<form action='index.php' method='POST'>";
             echo "<input type='hidden' name='Usuario' Value='$UsuarioS'>";
             echo "<input type='hidden' name='Clave' Value='$ClaveS'>";
             echo "<p> <button type='submit' name='Entrar'> Regresar </button> </p>";
@@ -811,8 +832,10 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
         $UsuarioS = $_SESSION['Usuario'];
         $ClaveS = $_SESSION['Clave'];
 
-        $CriterioDeB = $_POST['CriterioDeB'];
-        $Palabra = $_POST['Palabra'];
+        $FechaHV = $_POST['FechaHV'];
+        $VendedorV = $_POST['VendedorV'];
+        $ClienteV = $_POST['ClienteV'];
+        
         
         echo "<table align='center'>";
         echo "<tr align='center'>";
@@ -826,31 +849,48 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
         foreach($resultsVent as $result) {
         include "Class/Vent.php";
 
-        if("$CriterioDeB"=="Fecha" && "$Palabra"=="$FechaV" ){
+        if("$FechaHV"=="$FechaV" && "$VendedorV"=="$Vendedor" && "$ClienteV"=="$Cliente"){
             echo "<tr align='center'>";
             echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
         }
-
-        if("$CriterioDeB"=="Vendedor" && "$Palabra"=="$Vendedor" ){
+        if("$FechaHV"=="$FechaV" && "$VendedorV"=="$Vendedor" && "$ClienteV"==""){
             echo "<tr align='center'>";
             echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
         }
-
-        if("$CriterioDeB"=="Cliente" && "$Palabra"=="$Cliente" ){
+        if("$FechaHV"=="$FechaV" && "$VendedorV"=="" && "$ClienteV"=="$Cliente"){
             echo "<tr align='center'>";
             echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
-           
         }
+        if("$FechaHV"=="" && "$VendedorV"=="$Vendedor" && "$ClienteV"=="$Cliente"){
+            echo "<tr align='center'>";
+            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
+            echo "</tr>";
+        }
+        if("$FechaHV"=="$FechaV" && "$VendedorV"=="" && "$ClienteV"==""){
+            echo "<tr align='center'>";
+            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
+            echo "</tr>";
+        }
+        if("$FechaHV"=="" && "$VendedorV"=="$Vendedor" && "$ClienteV"==""){
+            echo "<tr align='center'>";
+            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
+            echo "</tr>";
+        }
+        if("$FechaHV"=="" && "$VendedorV"=="" && "$ClienteV"=="$Cliente"){
+            echo "<tr align='center'>";
+            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
+            echo "</tr>";
+        }        
 
         }}
 
            echo "</table>";
             
 
-            echo "<form action='Index.php' method='POST'>";
+            echo "<form action='index.php' method='POST'>";
             echo "<input type='hidden' name='Usuario' Value='$UsuarioS'>";
             echo "<input type='hidden' name='Clave' Value='$ClaveS'>";
             echo "<p> <button type='submit' name='Entrar'> Regresar </button> </p>";
@@ -878,16 +918,15 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
             
             if($UsuarioS==$NameUs&&$ClaveEnc==$ClaveUs){
 
-                echo "<p>¡ Bienvenido $NameUs !";
                 echo "<table>";
                 echo "<tr>";
-                echo "<td colspan='3'> Exitencias </td>";
+                echo "<td colspan='3'><p> Bienvenido $NameUs, Estan son tus exitencias: </p></td>";
                 echo "</tr>";
                 echo "<tr>";
-                echo "<td> D14x5 </td><td> D16x5 </td><td> Minx20 </td>";
+                echo "<td> <p> D14x5 </p></td><td> <p> D16x5 </p> </td><td> <p> Minx20 </p> </td>";
                 echo "</tr>";
                 echo "<tr>";
-                echo "<td> $OD14x5 </td><td> $OD16x5 </td><td> $OMinx20 </td>";
+                echo "<td> <p> $OD14x5 </p> </td><td> <p> $OD16x5 </p> </td><td> <p> $OMinx20 </p> </td>";
                 echo "</tr>";
                 echo "</table>";
             
@@ -913,12 +952,15 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                         echo "<p> Barrio: $Barrio </p> ";
                         echo "<p> Direccion: $Direccion </p>";
                         echo "<p> Telefono: $TelCli </p> ";
-                        if($Pedido<>'0'){echo "<p class='Pedido'> Pedido: $Pedido </p> ";}
+                        if($Pedido<>'0'){
+                            echo "<p class='Pedido'> Pedido: $Pedido <br> ";
+                            echo "Observacion: $Observation </p> ";
+                        }
                         echo "</Div>";
                                 
                         include "Forms/RegVenta.php";
                         
-                        echo "<form action='Index.php' method='POST'>";
+                        echo "<form action='index.php' method='POST'>";
                         echo "<input type='hidden' name='Usuario' Value='$UsuarioS'>";
                         echo "<input type='hidden' name='Clave' Value='$ClaveS'>";
                         echo "<button type='submit' name='Cancelar'> Cancelar </button>";
@@ -963,11 +1005,12 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                     
                                                          
                     if($Pedido<>'0'){   
-                        echo "<p class='Pedido'> Pedido: $Pedido </p> ";
-                        }
+                            echo "<p class='Pedido'> Pedido: $Pedido <br> ";
+                            echo "Observacion: $Observation </p> ";
+                            }
 
                     if($IdVendedor==0){   
-                    echo "<p> <a href='Index.php?Cliente=$IdCli&Usuario=$IdUs'> Gestionar Cliente </a> </p>";
+                    echo "<p> <a href='index.php?Cliente=$IdCli&Usuario=$IdUs'> Gestionar Cliente </a> </p>";
                     echo "</div>";
                     }
 
@@ -995,20 +1038,17 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                     
          // Final lista de clients --------------------------                    
 
-        
+        echo "<Div>";
 
-        echo'<form action="Index.php" method="POST">';
+        echo'<form action="index.php" method="POST">';
         echo '<input type="text" name="Usuario" placeholder="Usuario" required>';
         echo '<input type="password" name="Clave" placeholder="Clave" required>';
         echo '<button type="submit" name="Entrar"> Entrar </button>';     
         echo '</form>';
         
-        echo "<Div>";
-        echo "<a href='Index.php?Seccion=NuevoUsuario'> Registrarme </a>";
-        echo "</Div>";
-
-        echo "<Div>";
-        echo "<a href='Index.php?Seccion=RecuperarClave'> No recuerdo mi contraseña </a>";
+        echo "<a href='index.php?Seccion=NuevoUsuario'> Registrarme </a>";
+        
+        echo "<a href='index.php?Seccion=RecuperarClave'> No recuerdo mi contraseña </a>";
         echo "</Div>";
        
         
