@@ -1,4 +1,5 @@
 <?php
+$IdDel=$result->IdDel;
 $FechaD=$result->FechaD;
 $HoraD=$result->HoraD;
 $Responsable=$result->Responsable;

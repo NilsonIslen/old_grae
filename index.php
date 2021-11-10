@@ -647,6 +647,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                     if($D14x5==''){$D14x5=0;}
                     if($D16x5==''){$D16x5=0;}
                     if($Minx20==''){$Minx20=0;}
+                    
 
         include "dbRepAGD.php";
 
@@ -679,10 +680,22 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                 if($queryClients -> rowCount() > 0){
                     foreach($resultsClients as $result) {
                     include "Class/Client.php";
-                                           
-                            $query ="UPDATE clients SET Visita='$Fecha1D', IdVendedor=0, NameVendedor=0, Pedido=0 WHERE IdCli=$IdClient";
+
+                    if($IdCli=$IdClient){
+                    $DemD14x5=$D14x5+$DD14x5;
+                    if($DemD14x5==0){$DemandD14x5=0;}
+                    if($DemD14x5<>0){$DemandD14x5=$DemD14x5/2;}
+                    $DemD16x5=$D16x5+$DD16x5;
+                    if($DemD16x5==0){$DemandD16x5=0;}
+                    if($DemD16x5<>0){$DemandD16x5=$DemD16x5/2;}
+                    $DemMinx20=$Minx20+$DMinx20;
+                    if($DemMinx20==0){$DemandMinx20=0;}
+                    if($DemMinx20<>0){$DemandMinx20=$DemMinx20/2;}
+                    
+                            $query ="UPDATE clients SET Visita='$Fecha1D', IdVendedor=0, NameVendedor=0, Pedido=0, DD14x5=$DemandD14x5, DD16x5=$DemandD16x5, DMinx20=$DemandMinx20, Pedido=0 WHERE IdCli=$IdClient";
                                 $result=$connect->query($query);
-                            }}
+                            }}}
+
 
     echo "<p> Gracias por tu registro </p>";
     session_start();
@@ -756,58 +769,75 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
         echo "<td> Fecha </td> <td> Hora </td> <td> Responsable </td> <td> Vendedor </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td>";
         echo "</tr>";
 
+        $SumD14x5=0;
+        $SumD16x5=0;
+        $SumMinx20=0;
         include "dbRepAGD.php";
         if($queryDel -> rowCount() > 0){
         foreach($resultsDel as $result) {
         include "Class/Delivery.php";
-
+        
         if("$FechaHD"=="$FechaD" && "$Resp"=="$Responsable" && "$Vend"=="$Vendedor"){
-            echo "1<tr align='center'>";
+            echo "<tr align='center'>";
             echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
-            continue;
+            $SumD14x5+=$D14x5;
+            $SumD16x5+=$D16x5;
+            $SumMinx20+=$Minx20;
         }
+
+        
         if("$FechaHD"=="" && "$Resp"=="$Responsable" && "$Vend"=="$Vendedor"){
-            echo "1<tr align='center'>";
+            echo "<tr align='center'>";
             echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
-            continue;
+            $SumD14x5+=$D14x5;
+            $SumD16x5+=$D16x5;
+            $SumMinx20+=$Minx20;
         }
         if("$FechaHD"=="$FechaD" && "$Resp"=="" && "$Vend"=="$Vendedor"){
-            echo "1<tr align='center'>";
+            echo "<tr align='center'>";
             echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
-            continue;
+            $SumD14x5+=$D14x5;
+            $SumD16x5+=$D16x5;
+            $SumMinx20+=$Minx20;
         }
         if("$FechaHD"=="$FechaD" && "$Resp"=="$Responsable" && "$Vend"==""){
-            echo "1<tr align='center'>";
+            echo "<tr align='center'>";
             echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
-            continue;
+            $SumD14x5+=$D14x5;
+            $SumD16x5+=$D16x5;
+            $SumMinx20+=$Minx20;
         }
         if("$FechaHD"=="$FechaD" && "$Resp"=="" && "$Vend"==""){
-            echo "1<tr align='center'>";
+            echo "<tr align='center'>";
             echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
-            continue;
+            $SumD14x5+=$D14x5;
+            $SumD16x5+=$D16x5;
+            $SumMinx20+=$Minx20;
         }
         if("$FechaHD"=="" && "$Resp"=="$Responsable" && "$Vend"==""){
-            echo "1<tr align='center'>";
+            echo "<tr align='center'>";
             echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
-            continue;
+            $SumD14x5+=$D14x5;
+            $SumD16x5+=$D16x5;
+            $SumMinx20+=$Minx20;
         }
         if("$FechaHD"=="" && "$Resp"=="" && "$Vend"=="$Vendedor"){
-            echo "1<tr align='center'>";
+            echo "<tr align='center'>";
             echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
-            continue;
+            $SumD14x5+=$D14x5;
+            $SumD16x5+=$D16x5;
+            $SumMinx20+=$Minx20;
         }
-        continue;
-               
-        
-
-        }}
+        }
+        }
+        echo "<td Colspan='4'> Total <td> $SumD14x5 </td> <td> $SumD16x5 </td> <td> $SumMinx20 </td>";
 
           echo "</table>";
             
@@ -843,7 +873,9 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
         echo "</tr>";
 
 
-
+        $SumD14x5=0;
+        $SumD16x5=0;
+        $SumMinx20=0;
         include "dbRepAGD.php";
         if($queryVent -> rowCount() > 0){
         foreach($resultsVent as $result) {
@@ -853,39 +885,61 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
             echo "<tr align='center'>";
             echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
+            $SumD14x5+=$D14x5;
+            $SumD16x5+=$D16x5;
+            $SumMinx20+=$Minx20;
         }
         if("$FechaHV"=="$FechaV" && "$VendedorV"=="$Vendedor" && "$ClienteV"==""){
             echo "<tr align='center'>";
             echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
+            $SumD14x5+=$D14x5;
+            $SumD16x5+=$D16x5;
+            $SumMinx20+=$Minx20;
         }
         if("$FechaHV"=="$FechaV" && "$VendedorV"=="" && "$ClienteV"=="$Cliente"){
             echo "<tr align='center'>";
             echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
+            $SumD14x5+=$D14x5;
+            $SumD16x5+=$D16x5;
+            $SumMinx20+=$Minx20;
         }
         if("$FechaHV"=="" && "$VendedorV"=="$Vendedor" && "$ClienteV"=="$Cliente"){
             echo "<tr align='center'>";
             echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
+            $SumD14x5+=$D14x5;
+            $SumD16x5+=$D16x5;
+            $SumMinx20+=$Minx20;
         }
         if("$FechaHV"=="$FechaV" && "$VendedorV"=="" && "$ClienteV"==""){
             echo "<tr align='center'>";
             echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
+            $SumD14x5+=$D14x5;
+            $SumD16x5+=$D16x5;
+            $SumMinx20+=$Minx20;
         }
         if("$FechaHV"=="" && "$VendedorV"=="$Vendedor" && "$ClienteV"==""){
             echo "<tr align='center'>";
             echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
+            $SumD14x5+=$D14x5;
+            $SumD16x5+=$D16x5;
+            $SumMinx20+=$Minx20;
         }
         if("$FechaHV"=="" && "$VendedorV"=="" && "$ClienteV"=="$Cliente"){
             echo "<tr align='center'>";
             echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
+            $SumD14x5+=$D14x5;
+            $SumD16x5+=$D16x5;
+            $SumMinx20+=$Minx20;
         }        
 
         }}
+        echo "<td Colspan='5'> Total <td> $SumD14x5 </td> <td> $SumD16x5 </td> <td> $SumMinx20 </td>";
 
            echo "</table>";
             
@@ -993,8 +1047,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
              foreach($resultsClients as $result) {
              include "Class/Client.php";
 
-    
-                    if($Fecha==$Visita && $ClienteActual==0 && $Barrios==$Barrio){
+                    if($Fecha>=$Visita && $ClienteActual==0 && $Barrios==$Barrio){
 
                     if($OD14x5>=$DD14x5 && $OD16x5>=$DD16x5 && $OMinx20>=$DMinx20){
                     echo "<div>";
@@ -1015,7 +1068,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                     }
 
                     if($IdVendedor<>0){
-                    echo "<p>  Asignado a $NomVendedor </p>";
+                    echo "<p>  Asignado a $NameVendedor </p>";
                     echo "</div>";
                     }
                     }}}}}
