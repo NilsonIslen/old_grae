@@ -7,7 +7,7 @@
     <title> Despacho </title>
 </head>
 <body>
-        <form action='Index.php' method='POST'>
+        <form action='index.php' method='POST'>
         <?php echo "<input type='hidden' name='Responsable' Value='$Usuario'>"; ?>
         <input type='number' name='IdVendedor' placeholder='Id del vendedor' required>
         <input type='text' name='D14x5' placeholder='D14x5' required>

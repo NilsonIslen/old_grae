@@ -513,7 +513,7 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
                     $Usuario=$_SESSION['Usuario'];
                     $Clave=$_SESSION['Clave'];
 
-                 echo "<Div>";
+                 echo "<div>";
                  echo "<form action='index.php' method='POST'>";
                  echo "<p> Historial de despachos :</p>";
                  echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
@@ -530,7 +530,7 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
                     echo "<p> <button type='submit' name='Entrar'> Regresar </button> </p>";
                     echo "</form>";
                     echo "<p> <a href='Sesion.php'> Cerrar Sesion </a></p>";
-                    echo "</Div>";
+                    echo "</div>";
                     exit();
                 }
 

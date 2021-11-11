@@ -8,7 +8,7 @@
 </head>
 <body>
 
-        <form action='Index.php' method='POST'>
+        <form action='index.php' method='POST'>
         <?php echo "<input type='hidden' name='Usuario' Value='$IdUsuario'>"; ?>
         <?php echo "<input type='hidden' name='NumAl' Value='$Al'>"; ?>
         <input type='text' name='Cliente' placeholder='Nombre del cliente o negocio' required>

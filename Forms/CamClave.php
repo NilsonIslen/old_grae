@@ -8,7 +8,7 @@
 </head>
 <body>
     
-        <form action='Index.php' method='POST'>
+        <form action='index.php' method='POST'>
         <?php
         echo"<input type='hidden' name='Email' value='$Email'>";
         ?>

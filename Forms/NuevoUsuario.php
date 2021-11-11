@@ -8,7 +8,7 @@
 </head>
 <body>
     
-        <form action='Index.php' method='POST'>
+        <form action='index.php' method='POST'>
         <input type='text' name='Usuario' placeholder='Nombre de usuario' required>
         <input type='email' name='Email' placeholder='Email' required>
         <input type='email' name='ConfEmail' placeholder='Confirmar Email'required>

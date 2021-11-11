@@ -8,7 +8,7 @@
 </head>
 <body>
     
-        <form action='Index.php' method='POST'>
+        <form action='index.php' method='POST'>
         <input type='email' name='Email' placeholder='Email' required>
         <button type='submit' name='RecClave'> Recibir Codigo para recuperar la contraseña </button>
         </form>
