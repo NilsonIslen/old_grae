@@ -15,7 +15,7 @@
         <input type='text' name='Codigo' placeholder='Codigo' required>
         <input type='text' name='Clave' placeholder='Nueva Clave' required>
         <input type='text' name='ConfClave' placeholder='Confirmar Nueva Clave' required>
-        <button type='submit' name='CamClave'> Realizar el cambio de la contraseña </button>
+        <button type='submit' name='CamClave'> Actualizar contraseña </button>
         </form>
 
             

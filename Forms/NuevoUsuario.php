@@ -11,9 +11,8 @@
         <form action='Index.php' method='POST'>
         <input type='text' name='Usuario' placeholder='Nombre de usuario' required>
         <input type='email' name='Email' placeholder='Email' required>
+        <input type='email' name='ConfEmail' placeholder='Confirmar Email'required>
         <input type='number' name='Telefono' placeholder='Telefono'required>
-        <input type='password' name='Clave' placeholder='Clave'required>
-        <input type='password' name='ConfClave' placeholder='Confirmar clave'required>
         <button type='submit' name='NuevoUsuario'> Registrarme </button>
         </form>
 

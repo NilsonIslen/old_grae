@@ -12,7 +12,24 @@
     <?php
 
 $Fecha = date('d-m-Y');
-$Fecha1D = date('d-m-Y',strtotime($Fecha.'+1 days'));
+
+$Visit=array(
+1=>$Fecha1D = date('d-m-Y',strtotime($Fecha.'+1 days')),
+2=>$Fecha2D = date('d-m-Y',strtotime($Fecha.'+2 days')),
+3=>$Fecha3D = date('d-m-Y',strtotime($Fecha.'+3 days')),
+4=>$Fecha4D = date('d-m-Y',strtotime($Fecha.'+4 days')),
+5=>$Fecha5D = date('d-m-Y',strtotime($Fecha.'+5 days')),
+6=>$Fecha6D = date('d-m-Y',strtotime($Fecha.'+6 days')),
+7=>$Fecha7D = date('d-m-Y',strtotime($Fecha.'+7 days')),
+8=>$Fecha8D = date('d-m-Y',strtotime($Fecha.'+8 days')),
+9=>$Fecha9D = date('d-m-Y',strtotime($Fecha.'+9 days')),
+10=>$Fecha10D = date('d-m-Y',strtotime($Fecha.'+10 days')),
+11=>$Fecha11D = date('d-m-Y',strtotime($Fecha.'+11 days')),
+12=>$Fecha12D = date('d-m-Y',strtotime($Fecha.'+12 days')),
+13=>$Fecha13D = date('d-m-Y',strtotime($Fecha.'+13 days')),
+14=>$Fecha14D = date('d-m-Y',strtotime($Fecha.'+14 days')),
+15=>$Fecha15D = date('d-m-Y',strtotime($Fecha.'+15 days')),
+);
 
 if(isset($_GET['Seccion'])){
     $Seccion = $_GET['Seccion'];
@@ -122,7 +139,7 @@ if(isset($_GET['Seccion'])){
 
             unlink($Arc);
 
-    echo "<p> La contraseña se ha cambiado correctamente. </p>";
+    echo "<p> La contraseña se ha actualizado correctamente. </p>";
     echo "<p> Ahora puedes ingresar a la plataforma de repartos. </p>";
     echo "<div>";
     echo " <a href='index.php'> Ir a la pagina principal para iniciar sesion </a>";
@@ -144,13 +161,47 @@ if(isset($_GET['Seccion'])){
     
 
     if(isset($_POST['NuevoUsuario'])){
+        $Letter = array(
+            1=>'A',
+            2=>'B',
+            3=>'C',
+            4=>'D',
+            5=>'E',
+            6=>'F',
+            7=>'G',
+            8=>'H',
+            9=>'I',
+            10=>'J',
+            11=>'K',
+            12=>'L',
+            13=>'M',
+            14=>'N',
+            15=>'O',
+            16=>'P',
+            17=>'Q',
+            18=>'R',
+            19=>'S',
+            20=>'T',
+            21=>'U',
+            22=>'V',
+            23=>'W',
+            24=>'X',
+            25=>'Y',
+            26=>'Z',
+        );
+        $LetA = rand(1,26);
+        $LetterA = $Letter["$LetA"];
+        $NumA = rand(00,99);
+        $LetB = rand(1,26);
+        $LetterB = $Letter["$LetB"];
+        $NumB = rand(00,99);
+        $Cod = "$LetterA$NumA$LetterB$NumB";
         
         $NUsuario = $_POST['Usuario'];
-        $NEmail = $_POST['Email'];
+        $Email = $_POST['Email'];
+        $ConfEmail = $_POST['ConfEmail'];
         $NTelefono = $_POST['Telefono'];
-        $NClave = $_POST['Clave'];
-        $ConfClave = $_POST['ConfClave'];
-        $ClaveEnc = md5($NClave);
+        $CodEnc = md5($Cod);
         $Perfil='Rep';
         $ClienteActual=0;
         $OD14x5=0;
@@ -169,7 +220,7 @@ if(isset($_GET['Seccion'])){
 
                 $EmailUs=$result->EmailUs;
                 
-                if($NEmail==$EmailUs){
+                if($Email==$EmailUs){
                 echo "<p> El Correo ingresado ya existe en nuestro sistema </p>"; 
                 echo "<p> Por favor intenta con otro o recupera la contraseña </p>";
                    echo "<Div>";
@@ -179,15 +230,15 @@ if(isset($_GET['Seccion'])){
                  } 
         }}
         
-        if($NClave==$ConfClave){
+        if($Email==$ConfEmail){
         $sql="insert into usuarios(NameUs,EmailUs,TelUs,ClaveUs,Perfil,ClienteActual,OD14x5,OD16x5,OMinx20) values(:NameUs,:EmailUs,:TelUs,:ClaveUs,:Perfil,:ClienteActual,:OD14x5,:OD16x5,:OMinx20)";
 
         $sql=$connect->prepare($sql);
 
         $sql->bindParam(':NameUs',$NUsuario,PDO::PARAM_STR, 25);
-        $sql->bindParam(':EmailUs',$NEmail,PDO::PARAM_STR, 25);
+        $sql->bindParam(':EmailUs',$Email,PDO::PARAM_STR, 25);
         $sql->bindParam(':TelUs',$NTelefono,PDO::PARAM_STR,25);
-        $sql->bindParam(':ClaveUs',$ClaveEnc,PDO::PARAM_STR,25);
+        $sql->bindParam(':ClaveUs',$CodEnc,PDO::PARAM_STR,25);
         $sql->bindParam(':Perfil',$Perfil,PDO::PARAM_STR,25);
         $sql->bindParam(':ClienteActual',$ClienteActual,PDO::PARAM_STR,25);
         $sql->bindParam(':OD14x5',$OD14x5,PDO::PARAM_STR,25);
@@ -197,14 +248,38 @@ if(isset($_GET['Seccion'])){
         $sql->execute();
         $lastInsertId=$connect->lastInsertId();
 
-    echo "<p> Gracias por tu registro </p>";
-    echo "<p> Ahora puedes ingresar a la plataforma de repartos </p>";
+
+    $fp = fopen("Temp/$CodEnc.php","w");
+    fputs($fp, "<?php \n");
+    fputs($fp, "$"."Code = '$CodEnc'; \n");
+    fputs($fp, "?> \n");
+    fclose($fp);
+
+
+    $To = "$Email";
+    $Asunto =  "Confirmar correo Repartidores AGD";
+    $Contenido = "Bienvenido $NUsuario \n
+    Para crear tu contraseña en elgranodorado.com/GRAP utiliza el codigo: $Cod \n
+    Gracias por depositar tu confiansa en nosotros, esperamos que tengas buenas experiencias.\n";
+    mail($To, $Asunto, $Contenido);
+
     echo "<div>";
-    echo " <a href='index.php'> Ir a la pagina principal para iniciar sesion </a>";
+    echo "<p> Por favor utiliza el codigo que enviamos al correo $Email  </p>";
+    echo "<p> para crear tu clave de acceso </p>";
     echo "</div>";
+        echo "$Cod";
+   include "Forms/CamClave.php";
 
     exit();
-        }}
+        }else{
+            echo "<p> Los dos correops ingresados deben ser iguales</p>";
+            echo "<p> </p>";
+            echo "<p> </p>";
+            echo "<a href='index.php?Seccion=NuevoUsuario'> Intentar de nuevo </a>";
+            exit();
+        }
+    
+    }
 
 
         if(isset($_POST['NuevoCliente'])){
@@ -301,8 +376,8 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
         $Al = rand(1,4);
         $NumColor = "Color$Al";
        
+        echo "<div>";
         include "Forms/NuevoCliente.php";
-
          session_start();
             $Usuario=$_SESSION['Usuario'];
             $Clave=$_SESSION['Clave'];
@@ -311,7 +386,7 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
             echo "<input type='hidden' name='Clave' Value='$Clave'>";
             echo "<button type='submit' name='Entrar'> Regresar </button>";
             echo "</form>";
-
+        echo "</div>";
             
         exit();
 
@@ -350,7 +425,7 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
 
         if($Seccion == 'ListarRepartidores'){
 
-            echo "<Div> <a href='index.php?Usuario=$IdUs&Seccion=Despacho'> Despachar Repartidor </a> </Div>";
+            echo "<a href='index.php?Usuario=$IdUs&Seccion=Despacho'> Despachar Repartidor </a> </Div>";
             echo "<table align='center'>";
             echo "<tr align='center'>";
             echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> Perfil </td> <td> Cliente actual </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td>";
@@ -371,8 +446,6 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
 
               echo "</table>";
 
-              
-                
                 session_start();
                 $Usuario=$_SESSION['Usuario'];
                 $Clave=$_SESSION['Clave'];
@@ -381,6 +454,7 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
                 echo "<input type='hidden' name='Clave' Value='$Clave'>";
                 echo "<button type='submit' name='Entrar'> Regresar </button>";
                 echo "</form>";
+                
                 exit();
             }
 
@@ -681,22 +755,19 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                     foreach($resultsClients as $result) {
                     include "Class/Client.php";
 
-                    if($IdCli=$IdClient){
-                    $DemD14x5=$D14x5+$DD14x5;
-                    if($DemD14x5==0){$DemandD14x5=0;}
-                    if($DemD14x5<>0){$DemandD14x5=$DemD14x5/2;}
-                    $DemD16x5=$D16x5+$DD16x5;
-                    if($DemD16x5==0){$DemandD16x5=0;}
-                    if($DemD16x5<>0){$DemandD16x5=$DemD16x5/2;}
-                    $DemMinx20=$Minx20+$DMinx20;
-                    if($DemMinx20==0){$DemandMinx20=0;}
-                    if($DemMinx20<>0){$DemandMinx20=$DemMinx20/2;}
+                        if($IdCli==$IdClient){
+                        if($D14x5==0 && $DD14x5==0){$DemD14x5=0;}
+                        if($D14x5>=1 or $DD14x5>=1){$DemD14x5=($D14x5+$DD14x5)/2;}
+                        if($D16x5==0 && $DD16x5==0){$DemD16x5=0;}
+                        if($D16x5>=1 or $DD16x5>=1){$DemD16x5=($D16x5+$DD16x5)/2;}
+                        if($Minx20==0 && $DMinx20==0){$DemMinx20=0;}
+                        if($Minx20>=1 or $DMinx20>=1){$DemMinx20=($Minx20+$DMinx20)/2;}
                     
-                            $query ="UPDATE clients SET Visita='$Fecha1D', IdVendedor=0, NameVendedor=0, Pedido=0, DD14x5=$DemandD14x5, DD16x5=$DemandD16x5, DMinx20=$DemandMinx20, Pedido=0 WHERE IdCli=$IdClient";
+                            $query ="UPDATE clients SET Visita='$Visit[$Frec]', IdVendedor=0, NameVendedor=0, Pedido=0, DD14x5=$DemD14x5, DD16x5=$DemD16x5, DMinx20=$DemMinx20, Pedido='0', observations='0' WHERE IdCli=$IdClient";
                                 $result=$connect->query($query);
                             }}}
 
-
+                            
     echo "<p> Gracias por tu registro </p>";
     session_start();
     $Usuario=$_SESSION['Usuario'];
