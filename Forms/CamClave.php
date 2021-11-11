@@ -21,7 +21,7 @@
             
 
         <Div>
-        <a href='Index.php'> Regresar </a>
+        <a href='index.php'> Regresar </a>
         </Div>
 
 
