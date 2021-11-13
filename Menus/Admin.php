@@ -12,12 +12,12 @@
     <?php
 
                         echo "<ul>";
-                        echo "<li><a id='a_menu' href='index.php?Usuario=$IdUs&Seccion=NuevoCliente'> Nuevo Cliente </a></li>";
-                        echo "<li><a id='a_menu' href='index.php?Usuario=$IdUs&Seccion=ListarClientes'> Listar Clientes </a></li>";
-                        echo "<li><a id='a_menu' href='index.php?Usuario=$IdUs&Seccion=ListarRepartidores'> Listar Repartidores </a></li>";
-                        echo "<li><a id='a_menu' href='index.php?Usuario=$IdUs&Seccion=HDespachos'> Historial de despachos </a></li>";
-                        echo "<li><a id='a_menu' href='index.php?Usuario=$IdUs&Seccion=HVentas'> Historial de ventas </a></li>";
-                        echo "<li><a id='a_menu' href='Sesion.php'> Cerrar Sesion </a></li>";  
+                        echo "<li><a id='a_menu' href='index.php?usuario=$IdUs&seccion=nuevoCliente'> Nuevo Cliente &nbsp; &nbsp; &nbsp; &nbsp; NC</a></li>";
+                        echo "<li><a id='a_menu' href='index.php?usuario=$IdUs&seccion=listarClientes'> Listar Clientes &nbsp; &nbsp; &nbsp; &nbsp; LC</a></li>";
+                        echo "<li><a id='a_menu' href='index.php?usuario=$IdUs&seccion=listarRepartidores'> Listar Repartidores &nbsp; &nbsp; &nbsp; &nbsp; LR</a></li>";
+                        echo "<li><a id='a_menu' href='index.php?usuario=$IdUs&seccion=HDespachos'> Historial de despachos &nbsp; &nbsp; &nbsp; &nbsp; HD</a></li>";
+                        echo "<li><a id='a_menu' href='index.php?usuario=$IdUs&seccion=HVentas'> Historial de ventas &nbsp; &nbsp; &nbsp; &nbsp; HV</a></li>";
+                        echo "<li><a id='a_menu' href='sesion.php'> Cerrar Sesion &nbsp; &nbsp; &nbsp; &nbsp; CS</a></li>";  
                         echo "</ul>";
                         
                         

@@ -10,7 +10,7 @@
     
         <form action='index.php' method='POST'>
         <input type='email' name='Email' placeholder='Email' required>
-        <button type='submit' name='RecClave'> Recibir Codigo para recuperar la contraseña </button>
+        <button type='submit' name='recClave'> Recibir Codigo para recuperar la contraseña </button>
         </form>
 
         <Div>

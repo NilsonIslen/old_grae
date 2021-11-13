@@ -1,8 +1,6 @@
 <?php
 session_start();
-
 session_destroy();
-
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +17,7 @@ session_destroy();
 <div>
 <p> Acabas de cerrar session correctamente </p>
 <p> Gracias por usar nuestros servicios </p>
-<p> <a href="Index.php"> Ir a la pagina principal </a> </p>
+<p> <a href="index.php"> Ir a la pagina principal </a> </p>
 </div>
 
 </body>

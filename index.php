@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="Stl.css" rel="stylesheet" type="text/css"> 
-    <link  rel="icon"   href="Imgs/Logo.png" type="image/png" />
+    <link  rel="icon" href="Imgs/logo.png" type="image/png" />
     <title> Rutas AGD </title>
 </head>
 <body>
     
-    <?php
+<?php
+session_start();
 
 $Fecha = date('d-m-Y');
-
 $Visit=array(
 1=>$Fecha1D = date('d-m-Y',strtotime($Fecha.'+1 days')),
 2=>$Fecha2D = date('d-m-Y',strtotime($Fecha.'+2 days')),
@@ -32,21 +32,21 @@ $Visit=array(
 15=>$Fecha15D = date('d-m-Y',strtotime($Fecha.'+15 days')),
 );
 
-if(isset($_GET['Seccion'])){
-    $Seccion = $_GET['Seccion'];
-        if($Seccion == "NuevoUsuario"){
-            include "Forms/NuevoUsuario.php";
+if(isset($_GET['seccion'])){
+    $seccion = $_GET['seccion'];
+        if($seccion == "nuevoUsuario"){
+            include "Forms/nuevoUsuario.php";
             exit();
         }
 
-        if($Seccion == "RecuperarClave"){
-            include "Forms/RecClave.php";
+        if($seccion == "recuperarClave"){
+            include "Forms/recClave.php";
             exit();
         }
 
     }
 
-    if(isset($_POST['RecClave'])){
+    if(isset($_POST['recClave'])){
 
         $Email = $_POST['Email'];
         
@@ -106,18 +106,18 @@ if(isset($_GET['Seccion'])){
         echo "$Cod";
         echo "$Email";
 
-        include "Forms/CamClave.php";
+        include "Forms/camClave.php";
 
     }
 
 
-    if(isset($_POST['CamClave'])){
+    if(isset($_POST['camClave'])){
 
         $Email = $_POST['Email'];
         $Codigo = $_POST['Codigo'];
-        $Clave = $_POST['Clave'];
+        $clave = $_POST['clave'];
         $ConfClave = $_POST['ConfClave'];
-        $ClaveEnc=md5($Clave);
+        $ClaveEnc=md5($clave);
         $CodEnc=md5($Codigo);
 
 
@@ -126,12 +126,12 @@ if(isset($_GET['Seccion'])){
 
         if(file_exists($Arc)){
             include "$Arc";
-            if("$Code"=="$CodEnc" && "$Clave"=="$ConfClave"){
+            if("$Code"=="$CodEnc" && "$clave"=="$ConfClave"){
  
             include "dbRepAGD.php";
             if($queryUsers -> rowCount() > 0){
             foreach($resultsUsers as $result) {
-            include "Class/User.php";
+            include "Class/user.php";
                         if("$Email"=="$EmailUs"){
                          $query ="UPDATE usuarios SET ClaveUs='$ClaveEnc'
                          WHERE EmailUs='$Email'";
@@ -161,7 +161,7 @@ if(isset($_GET['Seccion'])){
     
     
 
-    if(isset($_POST['NuevoUsuario'])){
+    if(isset($_POST['nuevoUsuario'])){
         $Letter = array(
             1=>'A',
             2=>'B',
@@ -198,12 +198,12 @@ if(isset($_GET['Seccion'])){
         $NumB = rand(00,99);
         $Cod = "$LetterA$NumA$LetterB$NumB";
         
-        $NUsuario = $_POST['Usuario'];
+        $NUsuario = $_POST['usuario'];
         $Email = $_POST['Email'];
         $ConfEmail = $_POST['ConfEmail'];
         $NTelefono = $_POST['Telefono'];
         $CodEnc = md5($Cod);
-        $Perfil='Rep';
+        $Perfil='rep';
         $ClienteActual=0;
         $OD14x5=0;
         $OD16x5=0;
@@ -225,7 +225,7 @@ if(isset($_GET['Seccion'])){
                 echo "<p> El Correo ingresado ya existe en nuestro sistema </p>"; 
                 echo "<p> Por favor intenta con otro o recupera la contraseña </p>";
                    echo "<Div>";
-                   echo "<a href='index.php?Seccion=NuevoUsuario'> Regresar </a>";
+                   echo "<a href='index.php?seccion=nuevoUsuario'> Regresar </a>";
                    echo "</Div>"; 
                 exit();
                  } 
@@ -269,22 +269,22 @@ if(isset($_GET['Seccion'])){
     echo "<p> para crear tu clave de acceso </p>";
     echo "</div>";
         echo "$Cod";
-   include "Forms/CamClave.php";
+   include "Forms/camClave.php";
 
     exit();
         }else{
             echo "<p> Los dos correops ingresados deben ser iguales</p>";
             echo "<p> </p>";
             echo "<p> </p>";
-            echo "<a href='index.php?Seccion=NuevoUsuario'> Intentar de nuevo </a>";
+            echo "<a href='index.php?seccion=nuevoUsuario'> Intentar de nuevo </a>";
             exit();
         }
     
     }
 
 
-        if(isset($_POST['NuevoCliente'])){
-            $NCliente=$_POST['Cliente'];
+        if(isset($_POST['nuevoCliente'])){
+            $NCliente=$_POST['cliente'];
             $NBarrio=$_POST['Barrio'];
             $NDireccion=$_POST['Direccion'];
             $NTelefono = $_POST['Telefono'];
@@ -304,17 +304,15 @@ if(isset($_GET['Seccion'])){
 
             if($queryClients -> rowCount() > 0){
             foreach($resultsClients as $result) {
-            include "Class/Client.php";
+            include "Class/client.php";
                 
                 if($NCliente==$NameCli or $NDireccion==$Direccion or $NTelefono==$TelCli){
-                    echo "<p> Este Cliente ya existe en nuestro sistema </p>";
-
-                    session_start();
-                    $Usuario=$_SESSION['Usuario'];
-                    $Clave=$_SESSION['Clave'];
+                    echo "<p> Este cliente ya existe en nuestro sistema </p>";
+                    $UsuarioS=$_SESSION['usuario'];
+                    $ClaveS=$_SESSION['clave'];
                     echo "<form action='index.php' method='POST'>";
-                    echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
-                    echo "<input type='hidden' name='Clave' Value='$Clave'>";
+                    echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
+                    echo "<input type='hidden' name='clave' Value='$ClaveS'>";
                     echo "<button type='submit' name='Entrar'> Regresar </button>";
                     echo "</form>";
                     exit();
@@ -344,13 +342,11 @@ if(isset($_GET['Seccion'])){
         $lastInsertId=$connect->lastInsertId();
 
     echo "<p> Proceso exitoso, gracias por tu registro </p>";
-
-             session_start();
-            $Usuario=$_SESSION['Usuario'];
-            $Clave=$_SESSION['Clave'];
+            $UsuarioS=$_SESSION['usuario'];
+            $ClaveS=$_SESSION['clave'];
             echo "<form action='index.php' method='POST'>";
-            echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
-            echo "<input type='hidden' name='Clave' Value='$Clave'>";
+            echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
+            echo "<input type='hidden' name='clave' Value='$ClaveS'>";
             echo "<button type='submit' name='Entrar'> Regresar </button>";
             echo "</form>";
 
@@ -358,10 +354,10 @@ if(isset($_GET['Seccion'])){
     }}
 
 
-if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
+if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
 
-    $Seccion = $_GET['Seccion'];
-    $IdUsuario = $_GET['Usuario'];
+    $seccion = $_GET['seccion'];
+    $IdUsuario = $_GET['usuario'];
 
             include "dbRepAGD.php";
         
@@ -372,19 +368,18 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
                 
                 if($IdUs==$IdUsuario){        
 
-    if($Seccion == 'NuevoCliente'){
+    if($seccion == 'nuevoCliente'){
 
         $Al = rand(1,4);
         $NumColor = "Color$Al";
        
         echo "<div>";
-        include "Forms/NuevoCliente.php";
-         session_start();
-            $Usuario=$_SESSION['Usuario'];
-            $Clave=$_SESSION['Clave'];
+        include "Forms/nuevoCliente.php";
+            $usuario=$_SESSION['usuario'];
+            $clave=$_SESSION['clave'];
             echo "<form action='index.php' method='POST'>";
-            echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
-            echo "<input type='hidden' name='Clave' Value='$Clave'>";
+            echo "<input type='hidden' name='usuario' Value='$usuario'>";
+            echo "<input type='hidden' name='clave' Value='$clave'>";
             echo "<button type='submit' name='Entrar'> Regresar </button>";
             echo "</form>";
         echo "</div>";
@@ -393,17 +388,17 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
 
     }
 
-    if($Seccion == 'ListarClientes'){
+    if($seccion == 'listarClientes'){
 
-        echo "<Div> <a href='index.php?Usuario=$IdUs&Seccion=Pedidos'> Nuevo pedido </a> </Div>";
+        echo "<Div> <a href='index.php?usuario=$IdUs&seccion=Pedidos'> Nuevo pedido </a> </Div>";
         echo "<table align='center'>";
         echo "<tr align='center'>";
-        echo "<td> ID </td> <td> Cliente </td> <td> Barrio </td> <td> Direccion </td>  <td> Telefono </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td> <td> Frecuencia </td> <td> Proxima Visita </td> <td> Vendedor actual </td><td> Pedido </td>";
+        echo "<td> ID </td> <td> cliente </td> <td> Barrio </td> <td> Direccion </td>  <td> Telefono </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td> <td> Frecuencia </td> <td> Proxima Visita </td> <td> Vendedor actual </td><td> Pedido </td>";
         echo "</tr>";
 
         if($queryClients -> rowCount() > 0){
             foreach($resultsClients as $result) {
-            include "Class/Client.php";
+            include "Class/client.php";
 
             echo "<tr align='center'>";
                 echo "<td> $IdCli </td> <td> $NameCli </td> <td> $Barrio </td> <td> $Direccion </td> <td> $TelCli </td> <td> $DD14x5 </td> <td> $DD16x5 </td> <td> $DMinx20 </td> <td> $Frec </td> <td> $Visita </td> <td> $NameVendedor </td> <td> $Pedido </td>";
@@ -411,30 +406,28 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
         
         }}
         echo "</table>";          
-            
-            session_start();
-            $Usuario=$_SESSION['Usuario'];
-            $Clave=$_SESSION['Clave'];
+            $UsuarioS=$_SESSION['usuario'];
+            $ClaveS=$_SESSION['clave'];
             echo "<form action='index.php' method='POST'>";
-            echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
-            echo "<input type='hidden' name='Clave' Value='$Clave'>";
+            echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
+            echo "<input type='hidden' name='clave' Value='$ClaveS'>";
             echo "<button type='submit' name='Entrar'> Regresar </button>";
             echo "</form>";
             exit();
         }
 
 
-        if($Seccion == 'ListarRepartidores'){
+        if($seccion == 'listarRepartidores'){
 
-            echo "<a href='index.php?Usuario=$IdUs&Seccion=Despacho'> Despachar Repartidor </a> </Div>";
+            echo "<a href='index.php?usuario=$IdUs&seccion=despacho'> Despachar Repartidor </a> </Div>";
             echo "<table align='center'>";
             echo "<tr align='center'>";
-            echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> Perfil </td> <td> Cliente actual </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td>";
+            echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> Perfil </td> <td> cliente actual </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td>";
             echo "</tr>";
 
         if($queryUsers -> rowCount() > 0){
         foreach($resultsUsers as $result) {
-        include "Class/User.php";
+        include "Class/user.php";
 
         echo "<tr align='center'>";
                     echo "<td> $IdUs </td> <td> $NameUs </td> <td> $EmailUs </td> <td> $TelUs </td> <td> $Perfil </td> <td> $ClienteActual </td> <td> $OD14x5 </td> <td> $OD16x5 </td> <td> $OMinx20 </td>";
@@ -446,13 +439,11 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
     }}
 
               echo "</table>";
-
-                session_start();
-                $Usuario=$_SESSION['Usuario'];
-                $Clave=$_SESSION['Clave'];
+                $UsuarioS=$_SESSION['usuario'];
+                $ClaveS=$_SESSION['clave'];
                 echo "<form action='index.php' method='POST'>";
-                echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
-                echo "<input type='hidden' name='Clave' Value='$Clave'>";
+                echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
+                echo "<input type='hidden' name='clave' Value='$ClaveS'>";
                 echo "<button type='submit' name='Entrar'> Regresar </button>";
                 echo "</form>";
                 
@@ -463,62 +454,57 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
 
 
 
-    if($Seccion == 'Despacho'){
+    if($seccion == 'despacho'){
+            $UsuarioS=$_SESSION['usuario'];
+            $ClaveS=$_SESSION['clave'];
             
-            session_start();
-            $Usuario=$_SESSION['Usuario'];
-            $Clave=$_SESSION['Clave'];
-            
-            include "Forms/Despacho.php";
+            include "Forms/despacho.php";
 
             echo "<form action='index.php' method='POST'>";
-            echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
-            echo "<input type='hidden' name='Clave' Value='$Clave'>";
+            echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
+            echo "<input type='hidden' name='clave' Value='$ClaveS'>";
             echo "<button type='submit' name='Entrar'> Regresar </button>";
             echo "</form>";
 
             echo "<Div>";
-            echo "<a href='Sesion.php'> Cerrar Sesion </a>";
+            echo "<a href='sesion.php'> Cerrar sesion </a>";
             echo "</Div>";
            
             exit();
         }
 
-        if($Seccion=='Pedidos'){
+        if($seccion=='Pedidos'){
             echo "<Div>";
              echo "<form action='index.php' method='POST'>";
              echo "<input type='hidden' name='Responsable' Value='$IdUsuario'>";
-             echo "<p><input type='number' name='IdCli' placeholder='Id del Cliente' required> </p>";
+             echo "<p><input type='number' name='IdCli' placeholder='Id del cliente' required> </p>";
              echo "<p> <input type='text' name='D14x5' placeholder='D14x5' required> </p>";
              echo "<p> <input type='text' name='D16x5' placeholder='D16x5'required> </p>";
              echo "<p> <input type='text' name='Minx20' placeholder='Minx20' required> </p>";
              echo "<p> <input type='textarea' name='Observations' placeholder='Observaciones'> </p>";
              echo "<p><button type='submit' name='Pedido'> Registrar pedido </button> </p>";
              echo "</form>";
-                session_start();
-                $Usuario=$_SESSION['Usuario'];
-                $Clave=$_SESSION['Clave'];
+                $UsuarioS=$_SESSION['usuario'];
+                $ClaveS=$_SESSION['clave'];
                 echo "<form action='index.php' method='POST'>";
-                echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
-                echo "<input type='hidden' name='Clave' Value='$Clave'>";
+                echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
+                echo "<input type='hidden' name='clave' Value='$ClaveS'>";
                 echo "<p> <button type='submit' name='Entrar'> Regresar </button> </p>";
                 echo "</form>";
-                echo "<p> <a href='Sesion.php'> Cerrar Sesion </a></p>";
+                echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
                 echo "</Div>";
                 exit();
             }
 
-            if($Seccion=='HDespachos'){
-
-                    session_start();
-                    $Usuario=$_SESSION['Usuario'];
-                    $Clave=$_SESSION['Clave'];
+            if($seccion=='HDespachos'){
+                    $UsuarioS=$_SESSION['usuario'];
+                    $ClaveS=$_SESSION['clave'];
 
                  echo "<div>";
                  echo "<form action='index.php' method='POST'>";
                  echo "<p> Historial de despachos :</p>";
-                 echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
-                 echo "<input type='hidden' name='Clave' Value='$Clave'>";
+                 echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
+                 echo "<input type='hidden' name='clave' Value='$ClaveS'>";
                  echo "<p> <input type='Text' name='Fecha' placeholder='Fecha (DD-MM-AAAA)'> </p>";
                  echo "<p> <input type='Text' name='Responsable' placeholder='Responsable'> </p>";
                  echo "<p> <input type='Text' name='Vendedor' placeholder='Vendedor'> </p>";
@@ -526,41 +512,39 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
                  echo "</form>";
 
                     echo "<form action='index.php' method='POST'>";
-                    echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
-                    echo "<input type='hidden' name='Clave' Value='$Clave'>";
+                    echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
+                    echo "<input type='hidden' name='clave' Value='$ClaveS'>";
                     echo "<p> <button type='submit' name='Entrar'> Regresar </button> </p>";
                     echo "</form>";
-                    echo "<p> <a href='Sesion.php'> Cerrar Sesion </a></p>";
+                    echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
                     echo "</div>";
                     exit();
                 }
 
 
-                if($Seccion=='HVentas'){
-
-                    session_start();
-                    $Usuario=$_SESSION['Usuario'];
-                    $Clave=$_SESSION['Clave'];
+                if($seccion=='HVentas'){
+                    $UsuarioS=$_SESSION['usuario'];
+                    $ClaveS=$_SESSION['clave'];
 
                  echo "<form action='index.php' method='POST'>";
                  echo "<p> Historial de Ventas :</p>";
-                 echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
-                 echo "<input type='hidden' name='Clave' Value='$Clave'>";
+                 echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
+                 echo "<input type='hidden' name='clave' Value='$ClaveS'>";
                  echo "<input type='Text' name='FechaHV' placeholder='Fecha (DD-MM-AAAA)'>";
                  echo "<input type='Text' name='VendedorV' placeholder='Vendedor'>";
-                 echo "<input type='Text' name='ClienteV' placeholder='Cliente'>";
+                 echo "<input type='Text' name='ClienteV' placeholder='cliente'>";
                  echo "<button type='submit' name='HVentas'> Consultar </button>";
                  echo "</form>";
 
                     
                     echo "<form action='index.php' method='POST'>";
-                    echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
-                    echo "<input type='hidden' name='Clave' Value='$Clave'>";
+                    echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
+                    echo "<input type='hidden' name='clave' Value='$ClaveS'>";
                     echo "<button type='submit' name='Entrar'> Regresar </button>";
                     echo "</form>";
 
                     echo "<Div>";
-                    echo "<a href='Sesion.php'> Cerrar Sesion </a>";
+                    echo "<a href='sesion.php'> Cerrar sesion </a>";
                     echo "</Div>";
                    
                     exit();
@@ -568,19 +552,23 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
             }}}}
 
 
-    if(isset($_GET['Cliente'])&&isset($_GET['Usuario'])){ // -------------------------------------------------
-    $IdUser = $_GET['Usuario'];
-    $IdClient = $_GET['Cliente'];
+    if(isset($_GET['cliente'])&&isset($_GET['usuario'])){ // -------------------------------------------------
+
+    $UsuarioS = $_SESSION['usuario'];
+    $ClaveS = $_SESSION['clave'];
+
+    $IdUser = $_GET['usuario'];
+    $IdClient = $_GET['cliente'];
 
     include "dbRepAGD.php";
 
     if($queryUsers -> rowCount() > 0){
     foreach($resultsUsers as $result) {
-    include "Class/User.php";
+    include "Class/user.php";
 
     if($queryClients -> rowCount() > 0){
     foreach($resultsClients as $result) {
-    include "Class/Client.php";
+    include "Class/client.php";
     
    if($IdVendedor==0 && $ClienteActual==0 && $IdUser==$IdUs){ 
 
@@ -591,13 +579,9 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
         $result2=$connect->query($query2);
 
         include "Listas/Prot.php";
-
-        session_start();
-        $Usuario=$_SESSION['Usuario'];
-        $Clave=$_SESSION['Clave'];
         echo "<form action='index.php' method='POST'>";
-        echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
-        echo "<input type='hidden' name='Clave' Value='$Clave'>";
+        echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
+        echo "<input type='hidden' name='clave' Value='$ClaveS'>";
         echo "<button type='submit' name='Entrar'> CONTINUAR </button>";
         echo "</form>";
         exit();
@@ -620,7 +604,7 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
     
 
 
-    if(isset($_POST['Despacho'])){
+    if(isset($_POST['despacho'])){
 
         $Fecha = date('d-m-Y');
         $Hora = date('H:i:s');
@@ -633,7 +617,7 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
         include "dbRepAGD.php";
         if($queryUsers -> rowCount() > 0){
             foreach($resultsUsers as $result) {
-            include "Class/User.php";
+            include "Class/user.php";
                         if($IdVendedor==$IdUs){
                             $RD14x5=($OD14x5+$D14x5);
                             $RD16x5=($OD16x5+$D16x5);
@@ -659,16 +643,15 @@ if(isset($_GET['Usuario'])&&isset($_GET['Seccion'])){
 
 echo "<p> Gracias por tu registro </p>";
 echo "<p> Se acaba de registrar nuevo despacho para el repartidor $NameUs</p>";
-session_start();
-$Usuario=$_SESSION['Usuario'];
-$Clave=$_SESSION['Clave'];
+$UsuarioS=$_SESSION['usuario'];
+$ClaveS=$_SESSION['clave'];
 
             echo "<form action='index.php' method='POST'>";
-            echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
-            echo "<input type='hidden' name='Clave' Value='$Clave'>";
+            echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
+            echo "<input type='hidden' name='clave' Value='$ClaveS'>";
             echo "<p> <button type='submit' name='Entrar'> Regresar </button> </p>";
             echo "</form>";
-            echo "<p> <a href='Sesion.php'> Cerrar Sesion </a></p>";
+            echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
 
 exit();
 }
@@ -684,7 +667,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
     include "dbRepAGD.php";
     if($queryClients -> rowCount() > 0){
         foreach($resultsClients as $result) {
-        include "Class/Client.php";
+        include "Class/client.php";
                     if($IdClient==$IdCli){
                     $query ="UPDATE clients SET Pedido='D14x5:$D14x5 - D16x5: $D16x5 - Minx20: $Minx20', observations='$Observ' WHERE IdCli=$IdClient";
                     $result=$connect->query($query);
@@ -692,29 +675,30 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                     echo "<p> Hemos registrado el nuevo pedido para el cliente $NameCli </p>";
                     echo "<p> Gracias por tu gestion </p>";
 
-                session_start();
-                $Usuario=$_SESSION['Usuario'];
-                $Clave=$_SESSION['Clave'];
+                $UsuarioS=$_SESSION['usuario'];
+                $ClaveS=$_SESSION['clave'];
         echo "<form action='index.php' method='POST'>";
-        echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
-        echo "<input type='hidden' name='Clave' Value='$Clave'>";
+        echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
+        echo "<input type='hidden' name='clave' Value='$ClaveS'>";
         echo "<p> <button type='submit' name='Entrar'> Regresar </button> </p>";
         echo "</form>";
-        echo "<p> <a href='Sesion.php'> Cerrar Sesion </a></p>";
+        echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
 
                     exit();
 
                 }}}}
 
 
-    if(isset($_POST['Venta'])){ // ----------------------------------------------------------------
+    if(isset($_POST['venta'])){ // ----------------------------------------------------------------
+    $UsuarioS=$_SESSION['usuario'];
+    $ClaveS=$_SESSION['clave'];
 
                     $FechaV = date('d-m-Y');
                     $HoraV = date('H:i:s');
                     $IdClient = $_POST['IdCli'];
                     $IdUser = $_POST['IdUs'];
                     $Vendedor = $_POST['Vendedor'];
-                    $Cliente = $_POST['Cliente'];
+                    $cliente = $_POST['Cliente'];
                     $Barrio = $_POST['Barrio'];
                     $D14x5 = $_POST['D14x5'];
                     $D16x5 = $_POST['D16x5'];
@@ -726,13 +710,13 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
 
         include "dbRepAGD.php";
 
-        $sql="insert into ventas2021(FechaV,HoraV,Vendedor,Cliente,Barrio,D14x5,D16x5,Minx20) values(:FechaV,:HoraV,:Vendedor,:Cliente,:Barrio,:D14x5,:D16x5,:Minx20)";
+        $sql="insert into ventas2021(FechaV,HoraV,Vendedor,cliente,Barrio,D14x5,D16x5,Minx20) values(:FechaV,:HoraV,:Vendedor,:cliente,:Barrio,:D14x5,:D16x5,:Minx20)";
 
         $sql=$connect->prepare($sql);
         $sql->bindParam(':FechaV',$FechaV,PDO::PARAM_STR, 25);
         $sql->bindParam(':HoraV',$HoraV,PDO::PARAM_STR, 25);
         $sql->bindParam(':Vendedor',$Vendedor,PDO::PARAM_STR,25);
-        $sql->bindParam(':Cliente',$Cliente,PDO::PARAM_STR,25);
+        $sql->bindParam(':cliente',$cliente,PDO::PARAM_STR,25);
         $sql->bindParam(':Barrio',$Barrio,PDO::PARAM_STR,25);
         $sql->bindParam(':D14x5',$D14x5,PDO::PARAM_STR,25);
         $sql->bindParam(':D16x5',$D16x5,PDO::PARAM_STR,25);
@@ -742,7 +726,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
 
         if($queryUsers -> rowCount() > 0){
         foreach($resultsUsers as $result) {
-        include "Class/User.php";
+        include "Class/user.php";
                     if($IdUser==$IdUs){
                     $RD14x5=$OD14x5-$D14x5;
                     $RD16x5=$OD16x5-$D16x5;
@@ -754,15 +738,15 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
 
                 if($queryClients -> rowCount() > 0){
                     foreach($resultsClients as $result) {
-                    include "Class/Client.php";
+                    include "Class/client.php";
 
                         if($IdCli==$IdClient){
                         if($D14x5==0 && $DD14x5==0){$DemD14x5=0;}
-                        if($D14x5>=1 or $DD14x5>=1){$DemD14x5=($D14x5+$DD14x5)/2;}
+                        if($D14x5>0 or $DD14x5>0){$DemD14x5=($D14x5+$DD14x5)/2;}
                         if($D16x5==0 && $DD16x5==0){$DemD16x5=0;}
-                        if($D16x5>=1 or $DD16x5>=1){$DemD16x5=($D16x5+$DD16x5)/2;}
+                        if($D16x5>0 or $DD16x5>0){$DemD16x5=($D16x5+$DD16x5)/2;}
                         if($Minx20==0 && $DMinx20==0){$DemMinx20=0;}
-                        if($Minx20>=1 or $DMinx20>=1){$DemMinx20=($Minx20+$DMinx20)/2;}
+                        if($Minx20>0 or $DMinx20>0){$DemMinx20=($Minx20+$DMinx20)/2;}
                     
                             $query ="UPDATE clients SET Visita='$Visit[$Frec]', IdVendedor=0, NameVendedor=0, Pedido=0, DD14x5=$DemD14x5, DD16x5=$DemD16x5, DMinx20=$DemMinx20, Pedido='0', observations='0' WHERE IdCli=$IdClient";
                                 $result=$connect->query($query);
@@ -770,32 +754,25 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
 
                             
     echo "<p> Gracias por tu registro </p>";
-    session_start();
-    $Usuario=$_SESSION['Usuario'];
-    $Clave=$_SESSION['Clave'];
                         echo "<form action='index.php' method='POST'>";
-                        echo "<input type='hidden' name='Usuario' Value='$Usuario'>";
-                        echo "<input type='hidden' name='Clave' Value='$Clave'>";
+                        echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
+                        echo "<input type='hidden' name='clave' Value='$ClaveS'>";
                         echo "<p> <button type='submit' name='Entrar'> Continuar atendiendo mas clientes </button> </p>";
                         echo "</form>";
-                        echo "<p> <a href='Sesion.php'> Cerrar Sesion </a></p>";
+                        echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
 
     exit();
     }
 
     if(isset($_POST['Cancelar'])){
-
-        session_start();
-        $_SESSION['Usuario'] = $_POST['Usuario'];
-        $_SESSION['Clave'] = $_POST['Clave'];
-        $UsuarioS = $_SESSION['Usuario'];
-        $ClaveS = $_SESSION['Clave'];
+        $UsuarioS = $_SESSION['usuario'];
+        $ClaveS = $_SESSION['clave'];
 
            include "dbRepAGD.php";
 
             if($queryUsers -> rowCount() > 0){
             foreach($resultsUsers as $result) {
-            include "Class/User.php";
+            include "Class/user.php";
                            
                         $query ="UPDATE usuarios SET ClienteActual=0 WHERE NameUs='$UsuarioS'";
                         $result=$connect->query($query);
@@ -803,7 +780,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
     
             if($queryClients -> rowCount() > 0){
             foreach($resultsClients as $result) {
-            include "Class/Client.php";
+            include "Class/client.php";
                                                
                         $query ="UPDATE clients SET IdVendedor=0, NameVendedor=0 WHERE NameVendedor='$UsuarioS'";
                         $result=$connect->query($query);
@@ -812,11 +789,11 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
         echo "<p> Acabas de cancelar la atencion con este cliente </p>";
 
             echo "<form action='index.php' method='POST'>";
-            echo "<input type='hidden' name='Usuario' Value='$UsuarioS'>";
-            echo "<input type='hidden' name='Clave' Value='$ClaveS'>";
+            echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
+            echo "<input type='hidden' name='clave' Value='$ClaveS'>";
             echo "<p> <button type='submit' name='Entrar'> Regresar </button> </p>";
             echo "</form>";
-            echo "<p> <a href='Sesion.php'> Cerrar Sesion </a></p>";
+            echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
 
         
             exit();
@@ -825,12 +802,8 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
 
     
     if(isset($_POST['HDespachos'])){
-        
-        session_start();
-        $_SESSION['Usuario'] = $_POST['Usuario'];
-        $_SESSION['Clave'] = $_POST['Clave'];
-        $UsuarioS = $_SESSION['Usuario'];
-        $ClaveS = $_SESSION['Clave'];
+        $UsuarioS = $_SESSION['usuario'];
+        $ClaveS = $_SESSION['clave'];
 
         $FechaHD = $_POST['Fecha'];
         $Resp= $_POST['Responsable'];
@@ -847,7 +820,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
         include "dbRepAGD.php";
         if($queryDel -> rowCount() > 0){
         foreach($resultsDel as $result) {
-        include "Class/Delivery.php";
+        include "Class/delivery.php";
         
         if("$FechaHD"=="$FechaD" && "$Resp"=="$Responsable" && "$Vend"=="$Vendedor"){
             echo "<tr align='center'>";
@@ -915,11 +888,11 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
             
 
             echo "<form action='index.php' method='POST'>";
-            echo "<input type='hidden' name='Usuario' Value='$UsuarioS'>";
-            echo "<input type='hidden' name='Clave' Value='$ClaveS'>";
+            echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
+            echo "<input type='hidden' name='clave' Value='$ClaveS'>";
             echo "<p> <button type='submit' name='Entrar'> Regresar </button> </p>";
             echo "</form>";
-            echo "<p> <a href='Sesion.php'> Cerrar Sesion </a></p>";
+            echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
             echo "</Div>";
             exit();
                        
@@ -928,11 +901,8 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
 
 
         if(isset($_POST['HVentas'])){
-        session_start();
-        $_SESSION['Usuario'] = $_POST['Usuario'];
-        $_SESSION['Clave'] = $_POST['Clave'];
-        $UsuarioS = $_SESSION['Usuario'];
-        $ClaveS = $_SESSION['Clave'];
+        $UsuarioS = $_SESSION['usuario'];
+        $ClaveS = $_SESSION['clave'];
 
         $FechaHV = $_POST['FechaHV'];
         $VendedorV = $_POST['VendedorV'];
@@ -941,7 +911,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
         
         echo "<table align='center'>";
         echo "<tr align='center'>";
-        echo "<td> Fecha </td> <td> Hora </td> <td> Vendedor </td> <td> Cliente </td> <td> Barrio </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td>";
+        echo "<td> Fecha </td> <td> Hora </td> <td> Vendedor </td> <td> cliente </td> <td> Barrio </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td>";
         echo "</tr>";
 
 
@@ -951,11 +921,11 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
         include "dbRepAGD.php";
         if($queryVent -> rowCount() > 0){
         foreach($resultsVent as $result) {
-        include "Class/Vent.php";
+        include "Class/vent.php";
 
-        if("$FechaHV"=="$FechaV" && "$VendedorV"=="$Vendedor" && "$ClienteV"=="$Cliente"){
+        if("$FechaHV"=="$FechaV" && "$VendedorV"=="$Vendedor" && "$ClienteV"=="$cliente"){
             echo "<tr align='center'>";
-            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
+            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
             $SumD14x5+=$D14x5;
             $SumD16x5+=$D16x5;
@@ -963,15 +933,15 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
         }
         if("$FechaHV"=="$FechaV" && "$VendedorV"=="$Vendedor" && "$ClienteV"==""){
             echo "<tr align='center'>";
-            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
+            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
             $SumD14x5+=$D14x5;
             $SumD16x5+=$D16x5;
             $SumMinx20+=$Minx20;
         }
-        if("$FechaHV"=="$FechaV" && "$VendedorV"=="" && "$ClienteV"=="$Cliente"){
+        if("$FechaHV"=="$FechaV" && "$VendedorV"=="" && "$ClienteV"=="$cliente"){
             echo "<tr align='center'>";
-            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
+            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
             $SumD14x5+=$D14x5;
             $SumD16x5+=$D16x5;
@@ -979,7 +949,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
         }
         if("$FechaHV"=="" && "$VendedorV"=="$Vendedor" && "$ClienteV"=="$Cliente"){
             echo "<tr align='center'>";
-            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
+            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
             $SumD14x5+=$D14x5;
             $SumD16x5+=$D16x5;
@@ -987,7 +957,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
         }
         if("$FechaHV"=="$FechaV" && "$VendedorV"=="" && "$ClienteV"==""){
             echo "<tr align='center'>";
-            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
+            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
             $SumD14x5+=$D14x5;
             $SumD16x5+=$D16x5;
@@ -1001,9 +971,9 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
             $SumD16x5+=$D16x5;
             $SumMinx20+=$Minx20;
         }
-        if("$FechaHV"=="" && "$VendedorV"=="" && "$ClienteV"=="$Cliente"){
+        if("$FechaHV"=="" && "$VendedorV"=="" && "$ClienteV"=="$cliente"){
             echo "<tr align='center'>";
-            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
+            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
             echo "</tr>";
             $SumD14x5+=$D14x5;
             $SumD16x5+=$D16x5;
@@ -1017,11 +987,11 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
             
 
             echo "<form action='index.php' method='POST'>";
-            echo "<input type='hidden' name='Usuario' Value='$UsuarioS'>";
-            echo "<input type='hidden' name='Clave' Value='$ClaveS'>";
+            echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
+            echo "<input type='hidden' name='clave' Value='$ClaveS'>";
             echo "<p> <button type='submit' name='Entrar'> Regresar </button> </p>";
             echo "</form>";
-            echo "<p> <a href='Sesion.php'> Cerrar Sesion </a></p>";
+            echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
             echo "</Div>";
             exit();
                        
@@ -1029,24 +999,24 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
             
 //--------------------------------------------------------------------------------------------------------
     if(isset($_POST['Entrar'])){
-        session_start();
-        $_SESSION['Usuario'] = $_POST['Usuario'];
-        $_SESSION['Clave'] = $_POST['Clave'];
-        $UsuarioS = $_SESSION['Usuario'];
-        $ClaveS = $_SESSION['Clave'];
+        
+        $_SESSION['usuario'] = $_POST['usuario'];
+        $_SESSION['clave'] = $_POST['clave'];
+        $UsuarioS = $_SESSION['usuario'];
+        $ClaveS = $_SESSION['clave'];
         $ClaveEnc=md5($ClaveS);
 
 
         include "dbRepAGD.php";
         if($queryUsers -> rowCount() > 0){
         foreach($resultsUsers as $result) {
-        include "Class/User.php";
+        include "Class/user.php";
             
             if($UsuarioS==$NameUs&&$ClaveEnc==$ClaveUs){
 
                 echo "<table>";
                 echo "<tr>";
-                echo "<td colspan='3'><p> Bienvenido $NameUs, Estan son tus exitencias: </p></td>";
+                echo "<td colspan='3'><p> ¡ Bienvenido $NameUs ! </p></td>";
                 echo "</tr>";
                 echo "<tr>";
                 echo "<td> <p> D14x5 </p></td><td> <p> D16x5 </p> </td><td> <p> Minx20 </p> </td>";
@@ -1057,24 +1027,24 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                 echo "</table>";
             
 
-                    if($Perfil=='Admin'){
-                        include "Menus/Admin.php";
+                    if($Perfil=='admin'){
+                        include "Menus/admin.php";
                         }
 
-                    if($Perfil=='Rep'){
-                        include "Menus/Rep.php";
+                    if($Perfil=='rep'){
+                        include "Menus/rep.php";
                         }
                     
                     if($ClienteActual<>0){
 
                         if($queryClients -> rowCount() > 0){
                         foreach($resultsClients as $result) {
-                        include "Class/Client.php";
+                        include "Class/client.php";
 
                         if($ClienteActual==$IdCli){
 
                         echo "<Div>";
-                        echo "<p> Cliente: $NameCli </p>";
+                        echo "<p> cliente: $NameCli </p>";
                         echo "<p> Barrio: $Barrio </p> ";
                         echo "<p> Direccion: $Direccion </p>";
                         echo "<p> Telefono: $TelCli </p> ";
@@ -1084,14 +1054,14 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                         }
                         echo "</Div>";
                                 
-                        include "Forms/RegVenta.php";
+                        include "Forms/regVenta.php";
                         
                         echo "<form action='index.php' method='POST'>";
-                        echo "<input type='hidden' name='Usuario' Value='$UsuarioS'>";
-                        echo "<input type='hidden' name='Clave' Value='$ClaveS'>";
+                        echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
+                        echo "<input type='hidden' name='clave' Value='$ClaveS'>";
                         echo "<button type='submit' name='Cancelar'> Cancelar </button>";
                         echo "</form>";
-                        echo "<Div> <a href='Sesion.php'> Cerrar Sesion </a></Div>";
+                        echo "<Div> <a href='sesion.php'> Cerrar sesion </a></Div>";
                         exit();
                         }}}}
                     // Final cliente asignado --------------------------
@@ -1117,13 +1087,13 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
     
              if($queryClients -> rowCount() > 0){
              foreach($resultsClients as $result) {
-             include "Class/Client.php";
+             include "Class/client.php";
 
                     if($Fecha>=$Visita && $ClienteActual==0 && $Barrios==$Barrio){
 
                     if($OD14x5>=$DD14x5 && $OD16x5>=$DD16x5 && $OMinx20>=$DMinx20){
                     echo "<div>";
-                    echo "<p> Cliente: $NameCli </p>";
+                    echo "<p> cliente: $NameCli </p>";
                     echo "<p> Barrio: $Barrio </p> ";
                     echo "<p> Direccion: $Direccion </p>";
                     echo "<p> Telefono: $TelCli </p> ";
@@ -1135,7 +1105,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                             }
 
                     if($IdVendedor==0){   
-                    echo "<p> <a href='index.php?Cliente=$IdCli&Usuario=$IdUs'> Gestionar Cliente </a> </p>";
+                    echo "<p> <a href='index.php?cliente=$IdCli&usuario=$IdUs'> Gestionar cliente </a> </p>";
                     echo "</div>";
                     }
 
@@ -1146,7 +1116,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                     }}}}}
                    
 
-                    if($OD14x5==0 && $OD16x5==0 && $OMinx20==0){
+                    if($OD14x5<=0 && $OD16x5<=0 && $OMinx20<=0){
 
                         echo "<div>";
                         echo "<p> Para ver los clients que actualmente estan esparendo visita </p>";
@@ -1166,14 +1136,14 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
         echo "<Div>";
 
         echo'<form action="index.php" method="POST">';
-        echo '<input type="text" name="Usuario" placeholder="Usuario" required>';
-        echo '<input type="password" name="Clave" placeholder="Clave" required>';
+        echo '<input type="text" name="usuario" placeholder="usuario" required>';
+        echo '<input type="password" name="clave" placeholder="clave" required>';
         echo '<button type="submit" name="Entrar"> Entrar </button>';     
         echo '</form>';
         
-        echo "<a href='index.php?Seccion=NuevoUsuario'> Registrarme </a>";
+        echo "<a href='index.php?seccion=nuevoUsuario'> Registrarme </a>";
         
-        echo "<a href='index.php?Seccion=RecuperarClave'> No recuerdo mi contraseña </a>";
+        echo "<a href='index.php?seccion=recuperarClave'> No recuerdo mi contraseña </a>";
         echo "</Div>";
        
         

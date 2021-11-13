@@ -1,6 +1,8 @@
 body{
         background-color: rgb(172, 172, 172);
-        width: 98%;
+        width: 96%;
+        padding: 1% 1% 1% 1%;
+        margin: 1% 1% 1% 1%;
         height: auto;
         padding: 5px;
         margin: 5px;
@@ -9,17 +11,19 @@ body{
 
     div{
         background-color: white;
-        width: 90%;
+        width: 96%;
         height: auto;
-        padding: 2.5% 2.5% 2.5% 2.5%;
-        margin: 2.5% 2.5% 2.5% 2.5%;
-        border: 2px solid orange;
-        border-radius: 20px;
+        padding: 1% 1% 1% 1%;
+        margin: 1% 1% 1% 1%;
+        border: 2px solid white;
+        border-radius: 10px;
     }
 
     table{
         background-color: white;
-        width: 95%;
+        width: 96%;
+        padding: 1% 1% 1% 1%;
+        margin: 1% 1% 1% 1%;
         margin:auto;
         border-radius: 5px;
         border: 1px solid white;
@@ -180,10 +184,10 @@ body{
     #a_menu{
         background-color: transparent;
         width: 100%;
-        height: 50px;
+        height: auto;
         padding: 0% 0% 0% 0%;
-        margin: 0% 0% 0% 0%;
-        text-align: center;
+        margin: 0% 5% 0% -2%;
+        text-align: right;
         color: black;
         border: 2px solid transparent;
         font-size: 100%;
@@ -195,11 +199,11 @@ body{
 
     ul{
         background-color: transparent;
-        width: 0;
+        width: 90%;
         height:0;
         padding: 0% 0% 0% 0%;
-        margin: 0% 0% 0% 0%;
-        text-align: center;
+        margin: 0% 0% 0% -78%;
+        text-align: right;
         color: black;
         border: 2px solid transparent;
         font-size: 100%;
@@ -211,9 +215,11 @@ body{
 
     ul:hover{
         background-color: transparent;
-        width: 15%;
-        height: 300px;
-        text-align: center;
+        width: 90%;
+        height: auto;
+        padding: 0% 0% 0% 0%;
+        margin: 0% 0% 0% 0%;
+        text-align: right;
         color: black;
         border: 2px solid transparent;
         font-size: 100%;
@@ -225,9 +231,11 @@ body{
 
     li{
         background-color: orange;
-        width: 120px;
-        height: 50px;
-        text-align: center;
+        width: 90%;
+        height: auto;
+        padding: 0% 0% 0% 0%;
+        margin: 0% 0% 0% 0%;
+        text-align: right;
         color: black;
         border: 2px solid white;
         font-size: 100%;
@@ -239,9 +247,11 @@ body{
 
     ul li:hover{
         background-color: white;
-        width: 220px;
-        height: 40px;
-        text-align: center;
+        width: 90%;
+        height: auto;
+        padding: 0% 0% 0% 0%;
+        margin: 0% 0% 0% 0%;
+        text-align: right;
         color: black;
         border: 2px solid white;
         font-size: 100%;

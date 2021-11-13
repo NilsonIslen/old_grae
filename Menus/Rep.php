@@ -9,8 +9,8 @@
 <body>
     <?php
                         echo "<ul>";
-                        echo "<li> <a id='a_menu' href='index.php?Usuario=$IdUs&Seccion=NuevoCliente'> Nuevo Cliente </a> </li>";                    
-                        echo "<li> <a id='a_menu'href='Sesion.php'> Cerrar Sesion </a></li>";  
+                        echo "<li> <a id='a_menu' href='index.php?usuario=$IdUs&seccion=NuevoCliente'> Nuevo Cliente &nbsp; &nbsp; &nbsp; &nbsp; NC</a> </li>";                    
+                        echo "<li> <a id='a_menu'href='sesion.php'> Cerrar Sesion &nbsp; &nbsp; &nbsp; &nbsp; CS </a></li>";  
                         echo "</ul>";   
     ?>
 </body>

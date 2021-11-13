@@ -31,7 +31,7 @@
                  <option value=4> Verde </option>
                  </select>
 
-                 <button type='submit' name='NuevoCliente'> Registrar nuevo cliente </button>
+                 <button type='submit' name='nuevoCliente'> Registrar nuevo cliente </button>
         </form>
     
 </body>

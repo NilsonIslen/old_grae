@@ -13,7 +13,7 @@
         <input type='email' name='Email' placeholder='Email' required>
         <input type='email' name='ConfEmail' placeholder='Confirmar Email'required>
         <input type='number' name='Telefono' placeholder='Telefono'required>
-        <button type='submit' name='NuevoUsuario'> Registrarme </button>
+        <button type='submit' name='nuevoUsuario'> Registrarme </button>
         </form>
 
         <Div>

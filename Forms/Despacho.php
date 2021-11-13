@@ -8,12 +8,12 @@
 </head>
 <body>
         <form action='index.php' method='POST'>
-        <?php echo "<input type='hidden' name='Responsable' Value='$Usuario'>"; ?>
+        <?php echo "<input type='hidden' name='Responsable' Value='$UsuarioS'>"; ?>
         <input type='number' name='IdVendedor' placeholder='Id del vendedor' required>
         <input type='text' name='D14x5' placeholder='D14x5' required>
         <input type='text' name='D16x5' placeholder='D16x5'required>
         <input type='text' name='Minx20' placeholder='Minx20' required>
-        <button type='submit' name='Despacho'> Despachar </button>
+        <button type='submit' name='despacho'> Despachar </button>
         </form>
 </body>
 </html>
