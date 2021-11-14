@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,8 +12,6 @@
 <body>
     
 <?php
-session_start();
-
 $Fecha = date('d-m-Y');
 $Visit=array(
 1=>$Fecha1D = date('d-m-Y',strtotime($Fecha.'+1 days')),
@@ -281,7 +280,6 @@ if(isset($_GET['seccion'])){
         }
     
     }
-
 
         if(isset($_POST['nuevoCliente'])){
             $NCliente=$_POST['cliente'];
@@ -553,10 +551,6 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
 
 
     if(isset($_GET['cliente'])&&isset($_GET['usuario'])){ // -------------------------------------------------
-
-    $UsuarioS = $_SESSION['usuario'];
-    $ClaveS = $_SESSION['clave'];
-
     $IdUser = $_GET['usuario'];
     $IdClient = $_GET['cliente'];
 
@@ -578,10 +572,8 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
         $query2 = "UPDATE clients SET IdVendedor='$IdUser', NameVendedor='$NameUs' WHERE IdCli=$IdClient";
         $result2=$connect->query($query2);
 
-        include "Listas/Prot.php";
+        include "Listas/prot.php";
         echo "<form action='index.php' method='POST'>";
-        echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
-        echo "<input type='hidden' name='clave' Value='$ClaveS'>";
         echo "<button type='submit' name='Entrar'> CONTINUAR </button>";
         echo "</form>";
         exit();
@@ -789,8 +781,6 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
         echo "<p> Acabas de cancelar la atencion con este cliente </p>";
 
             echo "<form action='index.php' method='POST'>";
-            echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
-            echo "<input type='hidden' name='clave' Value='$ClaveS'>";
             echo "<p> <button type='submit' name='Entrar'> Regresar </button> </p>";
             echo "</form>";
             echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
@@ -999,9 +989,12 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
             
 //--------------------------------------------------------------------------------------------------------
     if(isset($_POST['Entrar'])){
-        
+
+        if(@$_POST['usuario']<>''&& $_POST['clave']<>''){
         $_SESSION['usuario'] = $_POST['usuario'];
         $_SESSION['clave'] = $_POST['clave'];
+        }
+        
         $UsuarioS = $_SESSION['usuario'];
         $ClaveS = $_SESSION['clave'];
         $ClaveEnc=md5($ClaveS);
@@ -1057,8 +1050,6 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                         include "Forms/regVenta.php";
                         
                         echo "<form action='index.php' method='POST'>";
-                        echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
-                        echo "<input type='hidden' name='clave' Value='$ClaveS'>";
                         echo "<button type='submit' name='Cancelar'> Cancelar </button>";
                         echo "</form>";
                         echo "<Div> <a href='sesion.php'> Cerrar sesion </a></Div>";
