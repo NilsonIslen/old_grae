@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include 'head.php';
 $Fecha = date('d-m-Y');
 $Visit=array(
@@ -501,6 +502,9 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
 
 
     if(isset($_GET['Cliente'])&&isset($_GET['usuario'])){ // -------------------------------------------------
+    $UsuarioS=$_SESSION['usuario'];
+    $ClaveS=$_SESSION['clave'];
+    
     $IdUser = $_GET['usuario'];
     $IdClient = $_GET['Cliente'];
 
@@ -524,6 +528,8 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
 
         include "Listas/prot.php";
         echo "<form action='index.php' method='POST'>";
+        echo "<input type='hidden' name='usuario' value='$UsuarioS'>";
+        echo "<input type='hidden' name='clave' value='$ClaveS'>";
         echo "<button type='submit' name='Entrar'> CONTINUAR </button>";
         echo "</form>";
         exit();
@@ -911,15 +917,15 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
 //--------------------------------------------------------------------------------------------------------
     if(isset($_POST['Entrar'])){
 
-        if(@$_POST['usuario']<>''&& $_POST['clave']<>''){
         $_SESSION['usuario'] = $_POST['usuario'];
-        $_SESSION['clave'] = $_POST['clave'];
-        }
+        $_SESSION['clave'] = $_POST['clave'];  
         
+        
+        if(session_status() == PHP_SESSION_ACTIVE){
         $UsuarioS = $_SESSION['usuario'];
         $ClaveS = $_SESSION['clave'];
         $ClaveEnc=md5($ClaveS);
-
+        }
 
         include "dbRepAGD.php";
         if($queryUsers -> rowCount() > 0){
