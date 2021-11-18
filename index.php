@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 include 'head.php';
 $Fecha = date('d-m-Y');
 $Visit=array(
@@ -272,6 +271,8 @@ if(isset($_GET['seccion'])){
     }
 
         if(isset($_POST['nuevoCliente'])){
+            $UsuarioS=$_SESSION['usuario'];
+            $ClaveS=$_SESSION['clave'];
             $NCliente=$_POST['Cliente'];
             $NBarrio=$_POST['Barrio'];
             $NDireccion=$_POST['Direccion'];
@@ -347,15 +348,14 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
                 if($IdUs==$IdUsuario){        
 
     if($seccion == 'nuevoCliente'){
+           include "var_session.php";
 
         $Al = rand(1,4);
         $NumColor = "Color$Al";
        
         echo "<div>";
         include "Forms/nuevoCliente.php";
-
         include 'Forms/but_return.php';
-
         echo "</div>";
             
         exit();
@@ -380,8 +380,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
         
         }}
         echo "</table>";          
-            $UsuarioS=$_SESSION['usuario'];
-            $ClaveS=$_SESSION['clave'];
+            include "var_session.php";
             echo "<form action='index.php' method='POST'>";
             echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
             echo "<input type='hidden' name='clave' Value='$ClaveS'>";
@@ -392,7 +391,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
 
 
         if($seccion == 'listarRepartidores'){
-
+            include "var_session.php";
             echo "<a href='index.php?usuario=$IdUs&seccion=despacho'> Despachar Repartidor </a> </Div>";
             echo "<table align='center'>";
             echo "<tr align='center'>";
@@ -419,14 +418,8 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
                 exit();
             }
 
-
-
-
-
     if($seccion == 'despacho'){
-
-            $UsuarioS = $_SESSION['usuario'];
-
+            include "var_session.php";
             echo "<Div>";
             include "Forms/despacho.php";
             include 'Forms/but_return.php';
@@ -437,6 +430,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
         }
 
         if($seccion=='Pedidos'){
+            include "var_session.php";
             echo "<Div>";
              echo "<form action='index.php' method='POST'>";
              echo "<input type='hidden' name='Responsable' Value='$IdUsuario'>";
@@ -502,9 +496,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
 
 
     if(isset($_GET['Cliente'])&&isset($_GET['usuario'])){ // -------------------------------------------------
-    $UsuarioS=$_SESSION['usuario'];
-    $ClaveS=$_SESSION['clave'];
-    
+    include "var_session.php";
     $IdUser = $_GET['usuario'];
     $IdClient = $_GET['Cliente'];
 
@@ -519,7 +511,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
     include "Class/client.php";
     
    if($IdVendedor==0 && $ClienteActual==0 && $IdUser==$IdUs){ 
-
+        include "var_session.php";
         $query = "UPDATE usuarios SET ClienteActual='$IdClient' WHERE IdUs=$IdUser";
         $result=$connect->query($query);
 
@@ -536,12 +528,6 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
             }
         }}}}
 
-
-        
-
-        
-
-
     if($IdVendedor<>0 && $ClienteActual==0){
         echo "<p> Lo sentimos, este Cliente lo acaba de seleccionar otro usuario </p>";
         echo "<p> Pero no te preocupes, hay mas opciones disponibles </p>";
@@ -549,14 +535,11 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
     }
     }
 
-    
-
-
     if(isset($_POST['despacho'])){
-
+        include "var_session.php";
         $Fecha = date('d-m-Y');
         $Hora = date('H:i:s');
-        $Responsable = $_POST['Responsable'];
+        $Responsable = $UsuarioS;
         $IdVendedor = $_POST['IdVendedor'];
         $D14x5 = $_POST['D14x5'];
         $D16x5 = $_POST['D16x5'];
@@ -574,7 +557,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
                          $query ="UPDATE usuarios SET OD14x5=$RD14x5, OD16x5=$RD16x5, OMinx20=$RMinx20
                          WHERE IdUs=$IdVendedor";
                         $result=$connect->query($query);
-                    }}}
+                    
 
         $sql="insert into deliveries2021(FechaD,HoraD,Responsable,Vendedor,D14x5,D16x5,Minx20)
         values(:FechaD,:HoraD,:Responsable,:Vendedor,:D14x5,:D16x5,:Minx20)";
@@ -591,7 +574,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
 
 echo "<p> Gracias por tu registro </p>";
 echo "<p> Se acaba de registrar nuevo despacho para el repartidor $NameUs</p>";
-
+}}}
             include 'Forms/but_return.php';
             echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
 
@@ -626,9 +609,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
 
 
     if(isset($_POST['venta'])){ // ----------------------------------------------------------------
-    $UsuarioS=$_SESSION['usuario'];
-    $ClaveS=$_SESSION['clave'];
-
+    include "var_session.php";
                     $FechaV = date('d-m-Y');
                     $HoraV = date('H:i:s');
                     $IdClient = $_POST['IdCli'];
@@ -990,16 +971,12 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
         
         
         
-        $Barrs=array(
-            1=>"La Galeria",
-            2=>"Lleras",
-            3=>"Santos",
-        );
+        include "arrays/neighborhoods.php";
         
 
             
             $Br = 1;
-            while($Br <= 3){
+            while($Br <= $cant_neighb){
                $Barr = $Br++; 
                $Barrios = $Barrs[$Barr]; 
     

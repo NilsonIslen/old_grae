@@ -1,6 +1,8 @@
 <?php
 
                         echo "<form action='index.php' method='POST'>";
+                        echo "<input type='hidden' name='usuario' value='$UsuarioS'>";
+                        echo "<input type='hidden' name='clave' value='$ClaveS'>";
                         echo "<input type='hidden' name='IdCli' Value='$IdCli'>";
                         echo "<input type='hidden' name='IdUs' Value='$IdUs'>";
                         echo "<input type='hidden' name='Vendedor' Value='$NameUs'>";
