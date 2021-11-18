@@ -10,19 +10,17 @@
     
         <form action='index.php' method='POST'>
         <?php
+        echo "<input type='hidden' name='usuario' value='$UsuarioS'>";
+        echo "<input type='hidden' name='clave' value='$ClaveS'>";
         echo"<input type='hidden' name='Email' value='$Email'>";
         ?>
         <input type='text' name='Codigo' placeholder='Codigo' required>
         <input type='text' name='Clave' placeholder='Nueva Clave' required>
         <input type='text' name='ConfClave' placeholder='Confirmar Nueva Clave' required>
-        <button type='submit' name='CamClave'> Actualizar contraseña </button>
+        <button type='submit' name='camClave'> Actualizar contraseña </button>
         </form>
-
-            
-
-        <Div>
         <a href='index.php'> Regresar </a>
-        </Div>
+        
 
 
 </body>

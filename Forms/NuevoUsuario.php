@@ -9,10 +9,10 @@
 <body>
     
         <form action='index.php' method='POST'>
-        <input type='text' name='Usuario' placeholder='Nombre de usuario' required>
-        <input type='email' name='Email' placeholder='Email' required>
-        <input type='email' name='ConfEmail' placeholder='Confirmar Email'required>
-        <input type='number' name='Telefono' placeholder='Telefono'required>
+        <input type='text' name='usuario' placeholder='Nombre de usuario' required>
+        <input type='email' name='email' placeholder='Email' required>
+        <input type='email' name='conf_email' placeholder='Confirmar Email'required>
+        <input type='number' name='telefono' placeholder='Telefono'required>
         <button type='submit' name='nuevoUsuario'> Registrarme </button>
         </form>
 

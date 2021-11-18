@@ -9,6 +9,10 @@
 <body>
     
         <form action='index.php' method='POST'>
+        <?php
+        echo "<input type='hidden' name='usuario' value='$UsuarioS'>";
+        echo "<input type='hidden' name='clave' value='$ClaveS'>";
+        ?>
         <input type='email' name='Email' placeholder='Email' required>
         <button type='submit' name='recClave'> Recibir Codigo para recuperar la contraseña </button>
         </form>

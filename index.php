@@ -2,23 +2,7 @@
 session_start();
 include 'head.php';
 $Fecha = date('d-m-Y');
-$Visit=array(
-1=>$Fecha1D = date('d-m-Y',strtotime($Fecha.'+1 days')),
-2=>$Fecha2D = date('d-m-Y',strtotime($Fecha.'+2 days')),
-3=>$Fecha3D = date('d-m-Y',strtotime($Fecha.'+3 days')),
-4=>$Fecha4D = date('d-m-Y',strtotime($Fecha.'+4 days')),
-5=>$Fecha5D = date('d-m-Y',strtotime($Fecha.'+5 days')),
-6=>$Fecha6D = date('d-m-Y',strtotime($Fecha.'+6 days')),
-7=>$Fecha7D = date('d-m-Y',strtotime($Fecha.'+7 days')),
-8=>$Fecha8D = date('d-m-Y',strtotime($Fecha.'+8 days')),
-9=>$Fecha9D = date('d-m-Y',strtotime($Fecha.'+9 days')),
-10=>$Fecha10D = date('d-m-Y',strtotime($Fecha.'+10 days')),
-11=>$Fecha11D = date('d-m-Y',strtotime($Fecha.'+11 days')),
-12=>$Fecha12D = date('d-m-Y',strtotime($Fecha.'+12 days')),
-13=>$Fecha13D = date('d-m-Y',strtotime($Fecha.'+13 days')),
-14=>$Fecha14D = date('d-m-Y',strtotime($Fecha.'+14 days')),
-15=>$Fecha15D = date('d-m-Y',strtotime($Fecha.'+15 days')),
-);
+include "arrays/visit_frequency.php";
 
 if(isset($_GET['seccion'])){
     $seccion = $_GET['seccion'];
@@ -35,39 +19,10 @@ if(isset($_GET['seccion'])){
     }
 
     if(isset($_POST['recClave'])){
-
+        include "var_session.php";
         $Email = $_POST['Email'];
+        include "arrays/letters.php";
         
-        $Letter = array(
-            1=>'A',
-            2=>'B',
-            3=>'C',
-            4=>'D',
-            5=>'E',
-            6=>'F',
-            7=>'G',
-            8=>'H',
-            9=>'I',
-            10=>'J',
-            11=>'K',
-            12=>'L',
-            13=>'M',
-            14=>'N',
-            15=>'O',
-            16=>'P',
-            17=>'Q',
-            18=>'R',
-            19=>'S',
-            20=>'T',
-            21=>'U',
-            22=>'V',
-            23=>'W',
-            24=>'X',
-            25=>'Y',
-            26=>'Z',
-        );
-
-
         $LetA = rand(1,26);
         $LetterA = $Letter["$LetA"];
         $NumA = rand(00,99);
@@ -87,34 +42,32 @@ if(isset($_GET['seccion'])){
 
     $To = "$Email";
     $Asunto =  "Solucitud cambio de contraseña Repartidores AGD";
-    $Contenido = " Para cambiar tu contraseña utiliza el codigo: $Cod \n";
+    $Contenido = "Para cambiar tu contraseña utiliza el codigo: $Cod \nArepas El Grano Dorado (AGD) \nhttps://elgranodorado.com";
 
     mail($To, $Asunto, $Contenido);
-
-        echo "$Cod";
-        echo "$Email";
-
-        include "Forms/camClave.php";
-
+    echo "<div>";
+    echo "<p> Hemos enviado un codigo a tu correo para actualizar tu contraseña </p>";
+    echo "<p> Si no lo encuentras en la bandeja de entrada no olvides revisar en spam </p>";
+    include "Forms/camClave.php";
+    echo "</div>";
+        exit();
     }
 
 
     if(isset($_POST['camClave'])){
-
+        include "var_session.php";
         $Email = $_POST['Email'];
         $Codigo = $_POST['Codigo'];
-        $clave = $_POST['clave'];
+        $Clave = $_POST['Clave'];
         $ConfClave = $_POST['ConfClave'];
-        $ClaveEnc=md5($clave);
+        $ClaveEnc=md5($Clave);
         $CodEnc=md5($Codigo);
 
-
         $Arc = "Temp/$CodEnc.php";
-        
 
         if(file_exists($Arc)){
             include "$Arc";
-            if("$Code"=="$CodEnc" && "$clave"=="$ConfClave"){
+            if("$Code"=="$CodEnc" && "$Clave"=="$ConfClave"){
  
             include "dbRepAGD.php";
             if($queryUsers -> rowCount() > 0){
@@ -150,34 +103,7 @@ if(isset($_GET['seccion'])){
     
 
     if(isset($_POST['nuevoUsuario'])){
-        $Letter = array(
-            1=>'A',
-            2=>'B',
-            3=>'C',
-            4=>'D',
-            5=>'E',
-            6=>'F',
-            7=>'G',
-            8=>'H',
-            9=>'I',
-            10=>'J',
-            11=>'K',
-            12=>'L',
-            13=>'M',
-            14=>'N',
-            15=>'O',
-            16=>'P',
-            17=>'Q',
-            18=>'R',
-            19=>'S',
-            20=>'T',
-            21=>'U',
-            22=>'V',
-            23=>'W',
-            24=>'X',
-            25=>'Y',
-            26=>'Z',
-        );
+        include "arrays/letters.php";
         $LetA = rand(1,26);
         $LetterA = $Letter["$LetA"];
         $NumA = rand(00,99);
@@ -187,9 +113,9 @@ if(isset($_GET['seccion'])){
         $Cod = "$LetterA$NumA$LetterB$NumB";
         
         $NUsuario = $_POST['usuario'];
-        $Email = $_POST['Email'];
-        $ConfEmail = $_POST['ConfEmail'];
-        $NTelefono = $_POST['Telefono'];
+        $Email = $_POST['email'];
+        $ConfEmail = $_POST['conf_email'];
+        $NTelefono = $_POST['telefono'];
         $CodEnc = md5($Cod);
         $Perfil='rep';
         $ClienteActual=0;
@@ -249,7 +175,7 @@ if(isset($_GET['seccion'])){
     $Asunto =  "Confirmar correo Repartidores AGD";
     $Contenido = "Bienvenido $NUsuario \n
     Para crear tu contraseña en elgranodorado.com/GRAP utiliza el codigo: $Cod \n
-    Gracias por depositar tu confiansa en nosotros, esperamos que tengas buenas experiencias.\n";
+    Gracias por tu apoyo, esperamos que tengas buenas experiencias.\n";
     mail($To, $Asunto, $Contenido);
 
     echo "<div>";
@@ -277,16 +203,17 @@ if(isset($_GET['seccion'])){
             $NBarrio=$_POST['Barrio'];
             $NDireccion=$_POST['Direccion'];
             $NTelefono = $_POST['Telefono'];
-            $Color=$_POST['Color'];
+            $NColor=$_POST['Color'];
             $NumAl=$_POST['NumAl'];
-            $Frecuencia=1;
-            $Visita="$Fecha";
-            $DD14x5=0;
-            $DD16x5=0;
-            $DMinx20=0;
-            $IdVendedor=0;
-            $NameVendedor='0';
-            $Pedido='0';
+            $NFrecuencia=1;
+            $NVisita="$Fecha";
+            $NDD14x5=0;
+            $NDD16x5=0;
+            $NDMinx20=0;
+            $NIdVendedor=0;
+            $NNameVendedor='0';
+            $NPedido='0';
+            $NObservations='0';
 
 
             include "dbRepAGD.php";
@@ -303,9 +230,9 @@ if(isset($_GET['seccion'])){
                  } 
         }}
     
-    if($Color==$NumAl){
+    if($NColor==$NumAl){
 
-        $sql="insert into clients(NameCli,Barrio,Direccion,TelCli,Frecuencia,Visita,DD14x5,DD16x5,DMinx20,IdVendedor,NameVendedor,Pedido) values(:NameCli,:Barrio,:Direccion,:TelCli,:Frecuencia,:Visita,:DD14x5,:DD16x5,:DMinx20,:IdVendedor,:NameVendedor,:Pedido)";
+        $sql="insert into clients(NameCli,Barrio,Direccion,TelCli,Frecuencia,Visita,DD14x5,DD16x5,DMinx20,IdVendedor,NameVendedor,Pedido,observations) values(:NameCli,:Barrio,:Direccion,:TelCli,:Frecuencia,:Visita,:DD14x5,:DD16x5,:DMinx20,:IdVendedor,:NameVendedor,:Pedido,:observations)";
 
         $sql=$connect->prepare($sql);
 
@@ -313,14 +240,15 @@ if(isset($_GET['seccion'])){
         $sql->bindParam(':Barrio',$NBarrio,PDO::PARAM_STR, 25);
         $sql->bindParam(':Direccion',$NDireccion,PDO::PARAM_STR,25);
         $sql->bindParam(':TelCli',$NTelefono,PDO::PARAM_STR,25);
-        $sql->bindParam(':Frecuencia',$Frecuencia,PDO::PARAM_STR,25);
-        $sql->bindParam(':Visita',$Visita,PDO::PARAM_STR,25);
-        $sql->bindParam(':DD14x5',$DD14x5,PDO::PARAM_STR,25);
-        $sql->bindParam(':DD16x5',$DD16x5,PDO::PARAM_STR,25);
-        $sql->bindParam(':DMinx20',$DMinx20,PDO::PARAM_STR, 25);
-        $sql->bindParam(':IdVendedor',$IdVendedor,PDO::PARAM_STR,25);
-        $sql->bindParam(':NameVendedor',$NameVendedor,PDO::PARAM_STR,25);
-        $sql->bindParam(':Pedido',$Pedido,PDO::PARAM_STR, 25);
+        $sql->bindParam(':Frecuencia',$NFrecuencia,PDO::PARAM_STR,25);
+        $sql->bindParam(':Visita',$NVisita,PDO::PARAM_STR,25);
+        $sql->bindParam(':DD14x5',$NDD14x5,PDO::PARAM_STR,25);
+        $sql->bindParam(':DD16x5',$NDD16x5,PDO::PARAM_STR,25);
+        $sql->bindParam(':DMinx20',$NDMinx20,PDO::PARAM_STR, 25);
+        $sql->bindParam(':IdVendedor',$NIdVendedor,PDO::PARAM_STR,25);
+        $sql->bindParam(':NameVendedor',$NNameVendedor,PDO::PARAM_STR,25);
+        $sql->bindParam(':Pedido',$NPedido,PDO::PARAM_STR, 25);
+        $sql->bindParam(':observations',$NObservations,PDO::PARAM_STR, 25);
 
         $sql->execute();
         $lastInsertId=$connect->lastInsertId();
@@ -517,13 +445,14 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
 
         $query2 = "UPDATE clients SET IdVendedor='$IdUser', NameVendedor='$NameUs' WHERE IdCli=$IdClient";
         $result2=$connect->query($query2);
-
+        echo "<div>";
         include "Listas/prot.php";
         echo "<form action='index.php' method='POST'>";
         echo "<input type='hidden' name='usuario' value='$UsuarioS'>";
         echo "<input type='hidden' name='clave' value='$ClaveS'>";
         echo "<button type='submit' name='Entrar'> CONTINUAR </button>";
         echo "</form>";
+        echo "</div>";
         exit();
             }
         }}}}
@@ -699,9 +628,11 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                         $result=$connect->query($query);
                      }}
 
+            echo "<div>";
             echo "<p> Acabas de cancelar la atencion con este Cliente </p>";
             include 'Forms/but_return.php';
             echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
+            echo "</div>";
             exit();
 
     }
@@ -953,15 +884,15 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                             echo "<p class='Pedido'> Pedido: $Pedido <br> ";
                             echo "Observacion: $Observation </p> ";
                         }
-                        echo "</Div>";
-                                
+                           
                         include "Forms/regVenta.php";
                         
                         echo "<form action='index.php' method='POST'>";
                         echo "<button type='submit' name='Cancelar'> Cancelar </button>";
                         echo "</form>";
-                        echo "<Div> <a href='sesion.php'> Cerrar sesion </a></Div>";
+                        echo "<a href='sesion.php'> Cerrar sesion </a>";
                         exit();
+                        echo "</Div>";
                         }}}}
                     // Final Cliente asignado --------------------------
                     
