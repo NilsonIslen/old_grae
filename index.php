@@ -917,7 +917,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
 
                     if($Fecha>=$Visita && $ClienteActual==0 && $Barrios==$Barrio){
 
-                    if($OD14x5>=$DD14x5 && $OD16x5>=$DD16x5 && $OMinx20>=$DMinx20){
+                    if($OD14x5>$DD14x5 && $OD16x5>$DD16x5 && $OMinx20>$DMinx20){
                     echo "<div>";
                     echo "<p> Cliente: $NameCli </p>";
                     echo "<p> Barrio: $Barrio </p> ";
