@@ -8,9 +8,9 @@
     <title> Protocolo de atencion </title>
 </head>
 <body>
-
+        <h2> ¡Importante! </h2>
     <ol>
-    <li class="ol-li"> ¡Importante!: Si no puedes establecer contacto con el cliente <br> NO envies el formulario, selecciona CANCELAR para que el cliente cuente con otra visita.</li>
+        <li class="ol-li"> Si no puedes establecer contacto con el cliente <br> NO envies el formulario, selecciona CANCELAR para que el cliente cuente con otra visita.</li>
         <li class="ol-li"> Saluda cortezmente al entrar al establecimiento </li>
         <li class="ol-li"> Solicita permiso y revisa las fechas y el estado del producto </li>
         <li class="ol-li"> Si el producto no es facilmente accesible consulta con el tendero como esta de fecha </li>

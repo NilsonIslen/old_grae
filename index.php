@@ -261,7 +261,7 @@ if(isset($_GET['seccion'])){
     }}
 
 
-if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
+if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&&isset($_GET['seccion'])&&isset($_GET['client']))){
 
     $seccion = $_GET['seccion'];
     $IdUsuario = $_GET['usuario'];
@@ -291,8 +291,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
     }
 
     if($seccion == 'listarClientes'){
-
-        echo "<Div> <a href='index.php?usuario=$IdUs&seccion=Pedidos'> Nuevo pedido </a> </Div>";
+        include "var_session.php";
         echo "<table align='center'>";
         echo "<tr align='center'>";
         echo "<td> ID </td> <td> Cliente </td> <td> Barrio </td> <td> Direccion </td>  <td> Telefono </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td> <td> Frecuencia </td> <td> Proxima Visita </td> <td> Vendedor actual </td><td> Pedido </td>";
@@ -303,7 +302,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
             include "Class/client.php";
 
             echo "<tr align='center'>";
-                echo "<td> $IdCli </td> <td> $NameCli </td> <td> $Barrio </td> <td> $Direccion </td> <td> $TelCli </td> <td> $DD14x5 </td> <td> $DD16x5 </td> <td> $DMinx20 </td> <td> $Frec </td> <td> $Visita </td> <td> $NameVendedor </td> <td> $Pedido </td>";
+                echo "<td><a href='index.php?usuario=$IdUs&seccion=Pedidos&client=$IdCli'> $IdCli </a> </td> <td> $NameCli </td> <td> $Barrio </td> <td> $Direccion </td> <td> $TelCli </td> <td> $DD14x5 </td> <td> $DD16x5 </td> <td> $DMinx20 </td> <td> $Frec </td> <td> $Visita </td> <td> $NameVendedor </td> <td> $Pedido </td>";
                 echo "</tr>";
         
         }}
@@ -320,7 +319,6 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
 
         if($seccion == 'listarRepartidores'){
             include "var_session.php";
-            echo "<a href='index.php?usuario=$IdUs&seccion=despacho'> Despachar Repartidor </a> </Div>";
             echo "<table align='center'>";
             echo "<tr align='center'>";
             echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> Perfil </td> <td> Cliente actual </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td>";
@@ -331,7 +329,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
         include "Class/user.php";
 
         echo "<tr align='center'>";
-                    echo "<td> $IdUs </td> <td> $NameUs </td> <td> $EmailUs </td> <td> $TelUs </td> <td> $Perfil </td> <td> $ClienteActual </td> <td> $OD14x5 </td> <td> $OD16x5 </td> <td> $OMinx20 </td>";
+                    echo "<td> <a href='index.php?usuario=$IdUs&seccion=despacho'> $IdUs </a> </td> <td> $NameUs </td> <td> $EmailUs </td> <td> $TelUs </td> <td> $Perfil </td> <td> $ClienteActual </td> <td> $OD14x5 </td> <td> $OD16x5 </td> <td> $OMinx20 </td>";
         echo "</tr>";
     
     
@@ -348,7 +346,9 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
 
     if($seccion == 'despacho'){
             include "var_session.php";
+            $id_rep=$_GET['usuario'];
             echo "<Div>";
+            echo "<h2> Despachar repartidor id: $id_rep </h2>";
             include "Forms/despacho.php";
             include 'Forms/but_return.php';
             echo "<a href='sesion.php'> Cerrar sesion </a>";
@@ -359,10 +359,12 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
 
         if($seccion=='Pedidos'){
             include "var_session.php";
+            $IdCli=$_GET['client'];
             echo "<Div>";
+            echo "<h2> Pedido de cliente id: $IdCli </h2>";
              echo "<form action='index.php' method='POST'>";
              echo "<input type='hidden' name='Responsable' Value='$IdUsuario'>";
-             echo "<p><input type='number' name='IdCli' placeholder='Id del Cliente' required> </p>";
+             echo "<input type='hidden' name='IdCli' Value='$IdCli'>";
              echo "<p> <input type='text' name='D14x5' placeholder='D14x5' required> </p>";
              echo "<p> <input type='text' name='D16x5' placeholder='D16x5'required> </p>";
              echo "<p> <input type='text' name='Minx20' placeholder='Minx20' required> </p>";
@@ -501,7 +503,6 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion'])){
         $sql->execute();
         $lastInsertId=$connect->lastInsertId();
 
-echo "<p> Gracias por tu registro </p>";
 echo "<p> Se acaba de registrar nuevo despacho para el repartidor $NameUs</p>";
 }}}
             include 'Forms/but_return.php';
@@ -511,7 +512,7 @@ exit();
 }
 
 if(isset($_POST['Pedido'])){ //----------------------------------------------------------------------
-
+    include "var_session.php";
     $IdClient = $_POST['IdCli'];
     $D14x5 = $_POST['D14x5'];
     $D16x5 = $_POST['D16x5'];
@@ -597,9 +598,46 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                             $query ="UPDATE clients SET Visita='$Visit[$Frec]', IdVendedor=0, NameVendedor=0, Pedido=0, DD14x5=$DemD14x5, DD16x5=$DemD16x5, DMinx20=$DemMinx20, Pedido='0', observations='0' WHERE IdCli=$IdClient";
                                 $result=$connect->query($query);
                             }}}
+                            $tD14x5=$D14x5*700;
+                            $tD16x5=$D16x5*1000;
+                            $tMinx20=$Minx20*1800;
+                            $ValTot=$tD14x5+$tD16x5+$tMinx20;
 
+                            echo "<table>";
+                            echo "<tr>";
+                            echo "<td colspan='2'> Cliente: $Cliente </td>";
+                            echo "<td colspan='2'> Barrio:$Barrio  </td>";
+                            echo "</tr>";
+                            echo "<tr>";
+                            echo "<td> Referencia </td>";
+                            echo "<td> Cantidad </td>";
+                            echo "<td> Valor Unitario </td>";
+                            echo "<td> Valor Total </td>";
+                            echo "</tr>";
+                            echo "<tr>";
+                            echo "<td> D14x5 </td>";
+                            echo "<td> $D14x5 </td>";
+                            echo "<td> 700 </td>";
+                            echo "<td> $tD14x5 </td>";
+                            echo "</tr>";
+                            echo "<tr>";
+                            echo "<td> D16x5 </td>";
+                            echo "<td> $D16x5 </td>";
+                            echo "<td> 1000 </td>";
+                            echo "<td> $tD16x5 </td>";
+                            echo "</tr>";
+                            echo "<tr>";
+                            echo "<td> DMinx20 </td>";
+                            echo "<td> $Minx20 </td>";
+                            echo "<td> 1800 </td>";
+                            echo "<td> $tMinx20 </td>";
+                            echo "</tr>";
+                            echo "<tr>";
+                            echo "<td colspan='3'> Valor total: </td>";
+                            echo "<td> $ValTot </td>";
+                            echo "</tr>";
+                            echo "</table>";
                             
-                        echo "<p> Gracias por tu registro </p>";
                          include 'Forms/but_return.php';
                         echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
 

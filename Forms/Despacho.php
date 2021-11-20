@@ -11,8 +11,8 @@
         <?php
         echo "<input type='hidden' name='usuario' value='$UsuarioS'>";
         echo "<input type='hidden' name='clave' value='$ClaveS'>";
+        echo "<input type='hidden' name='IdVendedor' value='$id_rep'>";
         ?>
-        <input type='number' name='IdVendedor' placeholder='Id del vendedor' required>
         <input type='text' name='D14x5' placeholder='D14x5' required>
         <input type='text' name='D16x5' placeholder='D16x5'required>
         <input type='text' name='Minx20' placeholder='Minx20' required>
