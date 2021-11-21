@@ -73,9 +73,9 @@ if(isset($_GET['seccion'])){
             if($queryUsers -> rowCount() > 0){
             foreach($resultsUsers as $result) {
             include "Class/user.php";
-                        if("$Email"=="$EmailUs"){
-                         $query ="UPDATE usuarios SET ClaveUs='$ClaveEnc'
-                         WHERE EmailUs='$Email'";
+                        if("$Email"=="$email_us"){
+                         $query ="UPDATE usuarios SET key_us='$ClaveEnc'
+                         WHERE email_us='$Email'";
                         $result=$connect->query($query);
                     }}}
 
@@ -117,8 +117,8 @@ if(isset($_GET['seccion'])){
         $ConfEmail = $_POST['conf_email'];
         $NTelefono = $_POST['telefono'];
         $CodEnc = md5($Cod);
-        $Perfil='rep';
-        $ClienteActual=0;
+        $profile='rep';
+        $customer=0;
         $OD14x5=0;
         $OD16x5=0;
         $OMinx20=0;
@@ -133,9 +133,9 @@ if(isset($_GET['seccion'])){
         if($query -> rowCount() > 0){
             foreach($results as $result) {
 
-                $EmailUs=$result->EmailUs;
+                $email_us=$result->email_us;
                 
-                if($Email==$EmailUs){
+                if($Email==$email_us){
                 echo "<p> El Correo ingresado ya existe en nuestro sistema </p>"; 
                 echo "<p> Por favor intenta con otro o recupera la contraseña </p>";
                    echo "<Div>";
@@ -146,16 +146,16 @@ if(isset($_GET['seccion'])){
         }}
         
         if($Email==$ConfEmail){
-        $sql="insert into usuarios(NameUs,EmailUs,TelUs,ClaveUs,Perfil,ClienteActual,OD14x5,OD16x5,OMinx20) values(:NameUs,:EmailUs,:TelUs,:ClaveUs,:Perfil,:ClienteActual,:OD14x5,:OD16x5,:OMinx20)";
+        $sql="insert into usuarios(name_us,email_us,tel_us,key_us,profile,customer,OD14x5,OD16x5,OMinx20) values(:name_us,:email_us,:tel_us,:key_us,:profile,:customer,:OD14x5,:OD16x5,:OMinx20)";
 
         $sql=$connect->prepare($sql);
 
-        $sql->bindParam(':NameUs',$NUsuario,PDO::PARAM_STR, 25);
-        $sql->bindParam(':EmailUs',$Email,PDO::PARAM_STR, 25);
-        $sql->bindParam(':TelUs',$NTelefono,PDO::PARAM_STR,25);
-        $sql->bindParam(':ClaveUs',$CodEnc,PDO::PARAM_STR,25);
-        $sql->bindParam(':Perfil',$Perfil,PDO::PARAM_STR,25);
-        $sql->bindParam(':ClienteActual',$ClienteActual,PDO::PARAM_STR,25);
+        $sql->bindParam(':name_us',$NUsuario,PDO::PARAM_STR, 25);
+        $sql->bindParam(':email_us',$Email,PDO::PARAM_STR, 25);
+        $sql->bindParam(':tel_us',$NTelefono,PDO::PARAM_STR,25);
+        $sql->bindParam(':key_us',$CodEnc,PDO::PARAM_STR,25);
+        $sql->bindParam(':profile',$profile,PDO::PARAM_STR,25);
+        $sql->bindParam(':customer',$customer,PDO::PARAM_STR,25);
         $sql->bindParam(':OD14x5',$OD14x5,PDO::PARAM_STR,25);
         $sql->bindParam(':OD16x5',$OD16x5,PDO::PARAM_STR,25);
         $sql->bindParam(':OMinx20',$OMinx20,PDO::PARAM_STR);
@@ -264,16 +264,16 @@ if(isset($_GET['seccion'])){
 if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&&isset($_GET['seccion'])&&isset($_GET['client']))){
 
     $seccion = $_GET['seccion'];
-    $IdUsuario = $_GET['usuario'];
+    $id_usuario = $_GET['usuario'];
 
             include "dbRepAGD.php";
         
         if($queryUsers -> rowCount() > 0){
             foreach($resultsUsers as $result) {
 
-                $IdUs=$result->IdUs;
+                $id_us=$result->id_us;
                 
-                if($IdUs==$IdUsuario){        
+                if($id_us==$id_usuario){        
 
     if($seccion == 'nuevoCliente'){
            include "var_session.php";
@@ -302,7 +302,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
             include "Class/client.php";
 
             echo "<tr align='center'>";
-                echo "<td><a href='index.php?usuario=$IdUs&seccion=Pedidos&client=$IdCli'> $IdCli </a> </td> <td> $NameCli </td> <td> $Barrio </td> <td> $Direccion </td> <td> $TelCli </td> <td> $DD14x5 </td> <td> $DD16x5 </td> <td> $DMinx20 </td> <td> $Frec </td> <td> $Visita </td> <td> $NameVendedor </td> <td> $Pedido </td>";
+                echo "<td><a href='index.php?usuario=$id_us&seccion=Pedidos&client=$IdCli'> $IdCli </a> </td> <td> $NameCli </td> <td> $Barrio </td> <td> $Direccion </td> <td> $TelCli </td> <td> $DD14x5 </td> <td> $DD16x5 </td> <td> $DMinx20 </td> <td> $Frec </td> <td> $Visita </td> <td> $NameVendedor </td> <td> $Pedido </td>";
                 echo "</tr>";
         
         }}
@@ -321,7 +321,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
             include "var_session.php";
             echo "<table align='center'>";
             echo "<tr align='center'>";
-            echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> Perfil </td> <td> Cliente actual </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td>";
+            echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> profile </td> <td> Cliente actual </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td>";
             echo "</tr>";
 
         if($queryUsers -> rowCount() > 0){
@@ -329,7 +329,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
         include "Class/user.php";
 
         echo "<tr align='center'>";
-                    echo "<td> <a href='index.php?usuario=$IdUs&seccion=despacho'> $IdUs </a> </td> <td> $NameUs </td> <td> $EmailUs </td> <td> $TelUs </td> <td> $Perfil </td> <td> $ClienteActual </td> <td> $OD14x5 </td> <td> $OD16x5 </td> <td> $OMinx20 </td>";
+                    echo "<td> <a href='index.php?usuario=$id_us&seccion=despacho'> $id_us </a> </td> <td> $name_us </td> <td> $email_us </td> <td> $tel_us </td> <td> $profile </td> <td> $customer </td> <td> $OD14x5 </td> <td> $OD16x5 </td> <td> $OMinx20 </td>";
         echo "</tr>";
     
     
@@ -363,7 +363,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
             echo "<Div>";
             echo "<h2> Pedido de cliente id: $IdCli </h2>";
              echo "<form action='index.php' method='POST'>";
-             echo "<input type='hidden' name='Responsable' Value='$IdUsuario'>";
+             echo "<input type='hidden' name='Responsable' Value='$id_usuario'>";
              echo "<input type='hidden' name='IdCli' Value='$IdCli'>";
              echo "<p> <input type='text' name='D14x5' placeholder='D14x5' required> </p>";
              echo "<p> <input type='text' name='D16x5' placeholder='D16x5'required> </p>";
@@ -427,7 +427,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
 
     if(isset($_GET['Cliente'])&&isset($_GET['usuario'])){ // -------------------------------------------------
     include "var_session.php";
-    $IdUser = $_GET['usuario'];
+    $id_user = $_GET['usuario'];
     $IdClient = $_GET['Cliente'];
 
     include "dbRepAGD.php";
@@ -440,12 +440,12 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
     foreach($resultsClients as $result) {
     include "Class/client.php";
     
-   if($IdVendedor==0 && $ClienteActual==0 && $IdUser==$IdUs){ 
+   if($IdVendedor==0 && $customer==0 && $id_user==$id_us){ 
         include "var_session.php";
-        $query = "UPDATE usuarios SET ClienteActual='$IdClient' WHERE IdUs=$IdUser";
+        $query = "UPDATE usuarios SET customer='$IdClient' WHERE id_us=$id_user";
         $result=$connect->query($query);
 
-        $query2 = "UPDATE clients SET IdVendedor='$IdUser', NameVendedor='$NameUs' WHERE IdCli=$IdClient";
+        $query2 = "UPDATE clients SET IdVendedor='$id_user', NameVendedor='$name_us' WHERE IdCli=$IdClient";
         $result2=$connect->query($query2);
         echo "<div>";
         include "Listas/prot.php";
@@ -459,7 +459,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
             }
         }}}}
 
-    if($IdVendedor<>0 && $ClienteActual==0){
+    if($IdVendedor<>0 && $customer==0){
         echo "<p> Lo sentimos, este Cliente lo acaba de seleccionar otro usuario </p>";
         echo "<p> Pero no te preocupes, hay mas opciones disponibles </p>";
         echo "<p> <a href='index.php'> Por favor seleccione esta linea para continuar </a> </p>";
@@ -480,13 +480,13 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
         if($queryUsers -> rowCount() > 0){
             foreach($resultsUsers as $result) {
             include "Class/user.php";
-                        if($IdVendedor==$IdUs){
+                        if($IdVendedor==$id_us){
                             $RD14x5=($OD14x5+$D14x5);
                             $RD16x5=($OD16x5+$D16x5);
                             $RMinx20=($OMinx20+$Minx20);
              
                          $query ="UPDATE usuarios SET OD14x5=$RD14x5, OD16x5=$RD16x5, OMinx20=$RMinx20
-                         WHERE IdUs=$IdVendedor";
+                         WHERE id_us=$IdVendedor";
                         $result=$connect->query($query);
                     
 
@@ -496,14 +496,14 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
         $sql->bindParam(':FechaD',$Fecha,PDO::PARAM_STR, 25);
         $sql->bindParam(':HoraD',$Hora,PDO::PARAM_STR,25);
         $sql->bindParam(':Responsable',$Responsable,PDO::PARAM_STR,25);
-        $sql->bindParam(':Vendedor',$NameUs,PDO::PARAM_STR,25);
+        $sql->bindParam(':Vendedor',$name_us,PDO::PARAM_STR,25);
         $sql->bindParam(':D14x5',$D14x5,PDO::PARAM_STR,25);
         $sql->bindParam(':D16x5',$D16x5,PDO::PARAM_STR,25);
         $sql->bindParam(':Minx20',$Minx20,PDO::PARAM_STR, 25);
         $sql->execute();
         $lastInsertId=$connect->lastInsertId();
 
-echo "<p> Se acaba de registrar nuevo despacho para el repartidor $NameUs</p>";
+echo "<p> Se acaba de registrar nuevo despacho para el repartidor $name_us</p>";
 }}}
             include 'Forms/but_return.php';
             echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
@@ -543,7 +543,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                     $FechaV = date('d-m-Y');
                     $HoraV = date('H:i:s');
                     $IdClient = $_POST['IdCli'];
-                    $IdUser = $_POST['IdUs'];
+                    $id_user = $_POST['id_us'];
                     $Vendedor = $_POST['Vendedor'];
                     $Cliente = $_POST['Cliente'];
                     $Barrio = $_POST['Barrio'];
@@ -574,12 +574,12 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
         if($queryUsers -> rowCount() > 0){
         foreach($resultsUsers as $result) {
         include "Class/user.php";
-                    if($IdUser==$IdUs){
+                    if($id_user==$id_us){
                     $RD14x5=$OD14x5-$D14x5;
                     $RD16x5=$OD16x5-$D16x5;
                     $RMinx20=$OMinx20-$Minx20;
 
-                    $query ="UPDATE usuarios SET ClienteActual=0, OD14x5=$RD14x5, OD16x5=$RD16x5, OMinx20=$RMinx20 WHERE IdUs=$IdUser";
+                    $query ="UPDATE usuarios SET customer=0, OD14x5=$RD14x5, OD16x5=$RD16x5, OMinx20=$RMinx20 WHERE id_us=$id_user";
                     $result=$connect->query($query);
                 }}}
 
@@ -654,7 +654,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
             foreach($resultsUsers as $result) {
             include "Class/user.php";
                            
-                        $query ="UPDATE usuarios SET ClienteActual=0 WHERE NameUs='$UsuarioS'";
+                        $query ="UPDATE usuarios SET customer=0 WHERE name_us='$UsuarioS'";
                         $result=$connect->query($query);
                     }}
     
@@ -882,11 +882,11 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
         foreach($resultsUsers as $result) {
         include "Class/user.php";
             
-            if($UsuarioS==$NameUs&&$ClaveEnc==$ClaveUs){
+            if($UsuarioS==$name_us&&$ClaveEnc==$key_us){
 
                 echo "<table>";
                 echo "<tr>";
-                echo "<td colspan='3'><p> ¡ Bienvenido $NameUs ! </p></td>";
+                echo "<td colspan='3'><p> ¡ Bienvenido $name_us ! </p></td>";
                 echo "</tr>";
                 echo "<tr>";
                 echo "<td> <p> D14x5 </p></td><td> <p> D16x5 </p> </td><td> <p> Minx20 </p> </td>";
@@ -897,21 +897,21 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                 echo "</table>";
             
 
-                    if($Perfil=='admin'){
+                    if($profile=='admin'){
                         include "Menus/admin.php";
                         }
 
-                    if($Perfil=='rep'){
+                    if($profile=='rep'){
                         include "Menus/rep.php";
                         }
                     
-                    if($ClienteActual<>0){
+                    if($customer<>0){
 
                         if($queryClients -> rowCount() > 0){
                         foreach($resultsClients as $result) {
                         include "Class/client.php";
 
-                        if($ClienteActual==$IdCli){
+                        if($customer==$IdCli){
 
                         echo "<Div>";
                         echo "<p> Cliente: $NameCli </p>";
@@ -953,7 +953,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
              foreach($resultsClients as $result) {
              include "Class/client.php";
 
-                    if($Fecha>=$Visita && $ClienteActual==0 && $Barrios==$Barrio){
+                    if($Fecha>=$Visita && $customer==0 && $Barrios==$Barrio){
 
                     if($OD14x5>$DD14x5 && $OD16x5>$DD16x5 && $OMinx20>$DMinx20){
                     echo "<div>";
@@ -969,7 +969,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                             }
 
                     if($IdVendedor==0){   
-                    echo "<p> <a href='index.php?Cliente=$IdCli&usuario=$IdUs'> Gestionar Cliente </a> </p>";
+                    echo "<p> <a href='index.php?Cliente=$IdCli&usuario=$id_us'> Gestionar Cliente </a> </p>";
                     echo "</div>";
                     }
 
@@ -998,7 +998,6 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
          // Final lista de clients --------------------------                    
 
         echo "<Div>";
-
         echo'<form action="index.php" method="POST">';
         echo '<input type="text" name="usuario" placeholder="usuario" required>';
         echo '<input type="password" name="clave" placeholder="clave" required>';
