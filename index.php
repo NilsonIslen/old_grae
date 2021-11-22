@@ -19,7 +19,6 @@ if(isset($_GET['seccion'])){
     }
 
     if(isset($_POST['recClave'])){
-        include "var_session.php";
         $Email = $_POST['Email'];
         include "arrays/letters.php";
         
@@ -55,7 +54,6 @@ if(isset($_GET['seccion'])){
 
 
     if(isset($_POST['camClave'])){
-        include "var_session.php";
         $Email = $_POST['Email'];
         $Codigo = $_POST['Codigo'];
         $Clave = $_POST['Clave'];
@@ -74,7 +72,7 @@ if(isset($_GET['seccion'])){
             foreach($resultsUsers as $result) {
             include "Class/user.php";
                         if("$Email"=="$email_us"){
-                         $query ="UPDATE usuarios SET key_us='$ClaveEnc'
+                         $query ="UPDATE users SET key_us='$ClaveEnc'
                          WHERE email_us='$Email'";
                         $result=$connect->query($query);
                     }}}
@@ -392,9 +390,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
                  echo "<p> <input type='Text' name='Vendedor' placeholder='Vendedor'> </p>";
                  echo "<p><button type='submit' name='HDespachos'> Consultar Historial </button> </p>";
                  echo "</form>";
-
                     include 'Forms/but_return.php';
-                    echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
                     echo "</div>";
                     exit();
                 }
@@ -416,10 +412,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
                  echo "</form>";
 
                  include 'Forms/but_return.php';
-
-                    echo "<a href='sesion.php'> Cerrar sesion </a>";
                     echo "</Div>";
-                   
                     exit();
                 }
             }}}}
@@ -442,7 +435,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
     
    if($IdVendedor==0 && $customer==0 && $id_user==$id_us){ 
         include "var_session.php";
-        $query = "UPDATE usuarios SET customer='$IdClient' WHERE id_us=$id_user";
+        $query = "UPDATE users SET customer='$IdClient' WHERE id_us=$id_user";
         $result=$connect->query($query);
 
         $query2 = "UPDATE clients SET IdVendedor='$id_user', NameVendedor='$name_us' WHERE IdCli=$IdClient";
@@ -485,7 +478,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
                             $RD16x5=($OD16x5+$D16x5);
                             $RMinx20=($OMinx20+$Minx20);
              
-                         $query ="UPDATE usuarios SET OD14x5=$RD14x5, OD16x5=$RD16x5, OMinx20=$RMinx20
+                         $query ="UPDATE users SET OD14x5=$RD14x5, OD16x5=$RD16x5, OMinx20=$RMinx20
                          WHERE id_us=$IdVendedor";
                         $result=$connect->query($query);
                     
@@ -579,7 +572,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                     $RD16x5=$OD16x5-$D16x5;
                     $RMinx20=$OMinx20-$Minx20;
 
-                    $query ="UPDATE usuarios SET customer=0, OD14x5=$RD14x5, OD16x5=$RD16x5, OMinx20=$RMinx20 WHERE id_us=$id_user";
+                    $query ="UPDATE users SET customer=0, OD14x5=$RD14x5, OD16x5=$RD16x5, OMinx20=$RMinx20 WHERE id_us=$id_user";
                     $result=$connect->query($query);
                 }}}
 
@@ -588,6 +581,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                     include "Class/client.php";
 
                         if($IdCli==$IdClient){
+                           $neighborhood=$Barrio;
                         if($D14x5==0 && $DD14x5==0){$DemD14x5=0;}
                         if($D14x5>0 or $DD14x5>0){$DemD14x5=($D14x5+$DD14x5)/2;}
                         if($D16x5==0 && $DD16x5==0){$DemD16x5=0;}
@@ -597,16 +591,17 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                     
                             $query ="UPDATE clients SET Visita='$Visit[$Frec]', IdVendedor=0, NameVendedor=0, Pedido=0, DD14x5=$DemD14x5, DD16x5=$DemD16x5, DMinx20=$DemMinx20, Pedido='0', observations='0' WHERE IdCli=$IdClient";
                                 $result=$connect->query($query);
+                                
                             }}}
                             $tD14x5=$D14x5*700;
                             $tD16x5=$D16x5*1000;
                             $tMinx20=$Minx20*1800;
                             $ValTot=$tD14x5+$tD16x5+$tMinx20;
-
+                            echo "<div>";
                             echo "<table>";
                             echo "<tr>";
                             echo "<td colspan='2'> Cliente: $Cliente </td>";
-                            echo "<td colspan='2'> Barrio:$Barrio  </td>";
+                            echo "<td colspan='2'> Barrio: $neighborhood  </td>";
                             echo "</tr>";
                             echo "<tr>";
                             echo "<td> Referencia </td>";
@@ -637,9 +632,10 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                             echo "<td> $ValTot </td>";
                             echo "</tr>";
                             echo "</table>";
-                            
+                            echo "<P> Registro exitoso </P>";
                          include 'Forms/but_return.php';
-                        echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
+                         echo "<div>";
+                        
 
     exit();
     }
@@ -654,7 +650,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
             foreach($resultsUsers as $result) {
             include "Class/user.php";
                            
-                        $query ="UPDATE usuarios SET customer=0 WHERE name_us='$UsuarioS'";
+                        $query ="UPDATE users SET customer=0 WHERE name_us='$UsuarioS'";
                         $result=$connect->query($query);
                     }}
     
@@ -669,7 +665,6 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
             echo "<div>";
             echo "<p> Acabas de cancelar la atencion con este Cliente </p>";
             include 'Forms/but_return.php';
-            echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
             echo "</div>";
             exit();
 
@@ -928,9 +923,9 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                         echo "<form action='index.php' method='POST'>";
                         echo "<button type='submit' name='Cancelar'> Cancelar </button>";
                         echo "</form>";
-                        echo "<a href='sesion.php'> Cerrar sesion </a>";
-                        exit();
                         echo "</Div>";
+                        exit();
+                        
                         }}}}
                     // Final Cliente asignado --------------------------
                     
@@ -958,7 +953,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                     if($OD14x5>$DD14x5 && $OD16x5>$DD16x5 && $OMinx20>$DMinx20){
                     echo "<div>";
                     echo "<p> Cliente: $NameCli </p>";
-                    echo "<p> Barrio: $Barrio </p> ";
+                    echo "<p class='p_br'> Barrio: $Barrio </p> ";
                     echo "<p> Direccion: $Direccion </p>";
                     echo "<p> Telefono: $TelCli </p> ";
                     

@@ -10,8 +10,6 @@
     
         <form action='index.php' method='POST'>
         <?php
-        echo "<input type='hidden' name='usuario' value='$UsuarioS'>";
-        echo "<input type='hidden' name='clave' value='$ClaveS'>";
         echo"<input type='hidden' name='Email' value='$Email'>";
         ?>
         <input type='text' name='Codigo' placeholder='Codigo' required>

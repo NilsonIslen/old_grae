@@ -148,6 +148,18 @@ body{
         border-radius: 20px;
     }
 
+    .p_br{
+        background-color: rgb(172, 172, 172);
+        width: 97%;
+        height: auto;
+        padding: 0.2% 1% 0.2% 1%;
+        margin: 0.2% 1% 0.2% 1%;
+        text-align: center;
+        font-size: 150%;
+        border: 2px solid transparent;
+        border-radius: 10px;
+    }
+
     
 
     .Pedido{

@@ -9,7 +9,7 @@
 <body>
     <?php
                         echo "<ul>";
-                        echo "<li> <a id='a_menu' href='index.php?usuario=$IdUs&seccion=nuevoCliente'> Nuevo Cliente &nbsp; &nbsp; &nbsp; &nbsp; NC</a> </li>";                    
+                        echo "<li> <a id='a_menu' href='index.php?usuario=$id_us&seccion=nuevoCliente'> Nuevo Cliente &nbsp; &nbsp; &nbsp; &nbsp; NC</a> </li>";                    
                         echo "<li> <a id='a_menu'href='sesion.php'> Cerrar Sesion &nbsp; &nbsp; &nbsp; &nbsp; CS </a></li>";  
                         echo "</ul>";   
     ?>

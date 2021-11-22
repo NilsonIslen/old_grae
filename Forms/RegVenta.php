@@ -4,8 +4,8 @@
                         echo "<input type='hidden' name='usuario' value='$UsuarioS'>";
                         echo "<input type='hidden' name='clave' value='$ClaveS'>";
                         echo "<input type='hidden' name='IdCli' Value='$IdCli'>";
-                        echo "<input type='hidden' name='IdUs' Value='$IdUs'>";
-                        echo "<input type='hidden' name='Vendedor' Value='$NameUs'>";
+                        echo "<input type='hidden' name='id_us' Value='$id_us'>";
+                        echo "<input type='hidden' name='Vendedor' Value='$name_us'>";
                         echo "<input type='hidden' name='Cliente' Value='$NameCli'>";
                         echo "<input type='hidden' name='Barrio' Value='$Barrio'>";
                         echo "<input type='text' name='D14x5' placeholder='D14x5'>";

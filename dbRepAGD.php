@@ -16,7 +16,7 @@ catch (PDOException $e)
 exit("Error: " . $e->getMessage());
 }
 
-$sqlUsers= "SELECT * FROM usuarios"; 
+$sqlUsers= "SELECT * FROM users"; 
 $queryUsers = $connect -> prepare($sqlUsers); 
 $queryUsers -> execute(); 
 $resultsUsers = $queryUsers -> fetchAll(PDO::FETCH_OBJ); 
