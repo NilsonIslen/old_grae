@@ -1,5 +1,5 @@
 <?php
-$cant_neighb=24;
+$cant_neighb=66;
 $Barrs=array(
     1=>"Alcazares",
     2=>"Alferez Real",
