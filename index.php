@@ -909,10 +909,10 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                         if($customer==$IdCli){
 
                         echo "<Div>";
-                        echo "<p> Cliente: $NameCli </p>";
-                        echo "<p> Barrio: $Barrio </p> ";
-                        echo "<p> Direccion: $Direccion </p>";
-                        echo "<p> Telefono: $TelCli </p> ";
+                        echo "<p> $NameCli </p>";
+                        echo "<p class='p_br'> $Barrio </p> ";
+                        echo "<p> $Direccion </p>";
+                        echo "<p> $TelCli </p> ";
                         if($Pedido<>'0'){
                             echo "<p class='Pedido'> Pedido: $Pedido <br> ";
                             echo "Observacion: $Observation </p> ";
@@ -952,10 +952,10 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
 
                     if($OD14x5>$DD14x5 && $OD16x5>$DD16x5 && $OMinx20>$DMinx20){
                     echo "<div>";
-                    echo "<p> Cliente: $NameCli </p>";
-                    echo "<p class='p_br'> Barrio: $Barrio </p> ";
-                    echo "<p> Direccion: $Direccion </p>";
-                    echo "<p> Telefono: $TelCli </p> ";
+                    echo "<p> $NameCli </p>";
+                    echo "<p class='p_br'> $Barrio </p> ";
+                    echo "<p> $Direccion </p>";
+                    echo "<p> $TelCli </p> ";
                     
                                                          
                     if($Pedido<>'0'){   
