@@ -6,6 +6,7 @@ $Direccion=$result->Direccion;
 $TelCli=$result->TelCli;
 $Frec=$result->Frecuencia;
 $Visita=$result->Visita;
+$hour=$result->hour;
 $DD14x5=$result->DD14x5;
 $DD16x5=$result->DD16x5;
 $DMinx20=$result->DMinx20;

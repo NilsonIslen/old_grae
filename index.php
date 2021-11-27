@@ -205,6 +205,7 @@ if(isset($_GET['seccion'])){
             $NumAl=$_POST['NumAl'];
             $NFrecuencia=1;
             $NVisita="$Fecha";
+            $Nhour=date('H:i');
             $NDD14x5=0;
             $NDD16x5=0;
             $NDMinx20=0;
@@ -230,7 +231,7 @@ if(isset($_GET['seccion'])){
     
     if($NColor==$NumAl){
 
-        $sql="insert into clients(NameCli,Barrio,Direccion,TelCli,Frecuencia,Visita,DD14x5,DD16x5,DMinx20,IdVendedor,NameVendedor,Pedido,observations) values(:NameCli,:Barrio,:Direccion,:TelCli,:Frecuencia,:Visita,:DD14x5,:DD16x5,:DMinx20,:IdVendedor,:NameVendedor,:Pedido,:observations)";
+        $sql="insert into clients(NameCli,Barrio,Direccion,TelCli,Frecuencia,Visita,hour,DD14x5,DD16x5,DMinx20,IdVendedor,NameVendedor,Pedido,observations) values(:NameCli,:Barrio,:Direccion,:TelCli,:Frecuencia,:Visita,:hour,:DD14x5,:DD16x5,:DMinx20,:IdVendedor,:NameVendedor,:Pedido,:observations)";
 
         $sql=$connect->prepare($sql);
 
@@ -240,6 +241,7 @@ if(isset($_GET['seccion'])){
         $sql->bindParam(':TelCli',$NTelefono,PDO::PARAM_STR,25);
         $sql->bindParam(':Frecuencia',$NFrecuencia,PDO::PARAM_STR,25);
         $sql->bindParam(':Visita',$NVisita,PDO::PARAM_STR,25);
+        $sql->bindParam(':hour',$Nhour,PDO::PARAM_STR,25);
         $sql->bindParam(':DD14x5',$NDD14x5,PDO::PARAM_STR,25);
         $sql->bindParam(':DD16x5',$NDD16x5,PDO::PARAM_STR,25);
         $sql->bindParam(':DMinx20',$NDMinx20,PDO::PARAM_STR, 25);
@@ -300,7 +302,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
             include "Class/client.php";
 
             echo "<tr align='center'>";
-                echo "<td><a href='index.php?usuario=$id_us&seccion=Pedidos&client=$IdCli'> $IdCli </a> </td> <td> $NameCli </td> <td> $Barrio </td> <td> $Direccion </td> <td> $TelCli </td> <td> $DD14x5 </td> <td> $DD16x5 </td> <td> $DMinx20 </td> <td> $Frec </td> <td> $Visita </td> <td> $NameVendedor </td> <td> $Pedido </td>";
+                echo "<td> $IdCli </td> <td> $NameCli </td> <td> $Barrio </td> <td> $Direccion </td> <td> $TelCli </td> <td> $DD14x5 </td> <td> $DD16x5 </td> <td> $DMinx20 </td> <td><a href='index.php?usuario=$id_us&seccion=frecuencia_visita&client=$IdCli'> $Frec </a> </td> <td> $Visita </td> <td> $NameVendedor </td> <td> <a href='index.php?usuario=$id_us&seccion=Pedidos&client=$IdCli'> $Pedido </a> </td>";
                 echo "</tr>";
         
         }}
@@ -327,7 +329,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
         include "Class/user.php";
 
         echo "<tr align='center'>";
-                    echo "<td> <a href='index.php?usuario=$id_us&seccion=despacho'> $id_us </a> </td> <td> $name_us </td> <td> $email_us </td> <td> $tel_us </td> <td> $profile </td> <td> $customer </td> <td> $OD14x5 </td> <td> $OD16x5 </td> <td> $OMinx20 </td>";
+                    echo "<td> $id_us </td> <td> $name_us </td> <td> $email_us </td> <td> $tel_us </td> <td> $profile </td> <td> $customer </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OD14x5 </a> </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OD16x5 </a> </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OMinx20 </a> </td>";
         echo "</tr>";
     
     
@@ -376,6 +378,26 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
                 exit();
             }
 
+
+            if($seccion=='frecuencia_visita'){
+                include "var_session.php";
+                $IdCli=$_GET['client'];
+                echo "<Div>";
+                echo "<h2> frecuencia de visita cliente id: $IdCli </h2>";
+                 echo "<form action='index.php' method='POST'>";
+                 echo "<input type='hidden' name='IdCli' Value='$IdCli'>";
+                 echo "<p> <input type='number' name='fdias' placeholder='dias' required> </p>";
+                 echo "<p><button type='submit' name='frecuencia_visita'> Cambiar Frecuencia </button> </p>";
+                 echo "</form>";
+    
+                    include 'Forms/but_return.php';
+                    echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
+                    echo "</Div>";
+                    exit();
+                }
+
+
+
             if($seccion=='HDespachos'){
                 $UsuarioS=$_SESSION['usuario'];
                 $ClaveS=$_SESSION['clave'];
@@ -418,7 +440,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
             }}}}
 
 
-    if(isset($_GET['Cliente'])&&isset($_GET['usuario'])){ // -------------------------------------------------
+    if(isset($_GET['Cliente'])&&isset($_GET['usuario'])){ 
     include "var_session.php";
     $id_user = $_GET['usuario'];
     $IdClient = $_GET['Cliente'];
@@ -504,7 +526,7 @@ echo "<p> Se acaba de registrar nuevo despacho para el repartidor $name_us</p>";
 exit();
 }
 
-if(isset($_POST['Pedido'])){ //----------------------------------------------------------------------
+if(isset($_POST['Pedido'])){ 
     include "var_session.php";
     $IdClient = $_POST['IdCli'];
     $D14x5 = $_POST['D14x5'];
@@ -530,11 +552,35 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
 
                 }}}}
 
+                if(isset($_POST['frecuencia_visita'])){ 
+                    include "var_session.php";
+                    $IdClient = $_POST['IdCli'];
+                    $fdias = $_POST['fdias'];
+                    
+                    include "dbRepAGD.php";
+                    if($queryClients -> rowCount() > 0){
+                        foreach($resultsClients as $result) {
+                        include "Class/client.php";
+                                    if($IdClient==$IdCli){
+                                    $query ="UPDATE clients SET Frecuencia='$fdias' WHERE IdCli=$IdClient";
+                                    $result=$connect->query($query);
+                
+                                    echo "<p> Hemos actualizado la frecuencia de visita para el Cliente $NameCli </p>";
+                                    echo "<p> Gracias por tu gestion </p>";
+                
+                                    include 'Forms/but_return.php';
+                                    echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
+                
+                                    exit();
+                
+                                }}}}
+
 
     if(isset($_POST['venta'])){ // ----------------------------------------------------------------
     include "var_session.php";
                     $FechaV = date('d-m-Y');
                     $HoraV = date('H:i:s');
+                    $hora = date('H:i');
                     $IdClient = $_POST['IdCli'];
                     $id_user = $_POST['id_us'];
                     $Vendedor = $_POST['Vendedor'];
@@ -581,7 +627,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                     include "Class/client.php";
 
                         if($IdCli==$IdClient){
-                           $neighborhood=$Barrio;
+                        $neighborhood=$Barrio;
                         if($D14x5==0 && $DD14x5==0){$DemD14x5=0;}
                         if($D14x5>0 or $DD14x5>0){$DemD14x5=($D14x5+$DD14x5)/2;}
                         if($D16x5==0 && $DD16x5==0){$DemD16x5=0;}
@@ -589,7 +635,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                         if($Minx20==0 && $DMinx20==0){$DemMinx20=0;}
                         if($Minx20>0 or $DMinx20>0){$DemMinx20=($Minx20+$DMinx20)/2;}
                     
-                            $query ="UPDATE clients SET Visita='$Visit[$Frec]', IdVendedor=0, NameVendedor=0, Pedido=0, DD14x5=$DemD14x5, DD16x5=$DemD16x5, DMinx20=$DemMinx20, Pedido='0', observations='0' WHERE IdCli=$IdClient";
+                            $query ="UPDATE clients SET Visita='$Visit[$Frec]',hour='$hora',IdVendedor=0, NameVendedor=0, Pedido=0, DD14x5=$DemD14x5, DD16x5=$DemD16x5, DMinx20=$DemMinx20, Pedido='0', observations='0' WHERE IdCli=$IdClient";
                                 $result=$connect->query($query);
                                 
                             }}}
@@ -600,8 +646,8 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                             echo "<div>";
                             echo "<table>";
                             echo "<tr>";
-                            echo "<td colspan='2'> Cliente: $Cliente </td>";
-                            echo "<td colspan='2'> Barrio: $neighborhood  </td>";
+                            echo "<td colspan='2'> $Cliente </td>";
+                            echo "<td colspan='2'> $neighborhood  </td>";
                             echo "</tr>";
                             echo "<tr>";
                             echo "<td> Referencia </td>";
@@ -859,12 +905,10 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                        
             }
             
-//--------------------------------------------------------------------------------------------------------
     if(isset($_POST['Entrar'])){
 
         $_SESSION['usuario'] = $_POST['usuario'];
         $_SESSION['clave'] = $_POST['clave'];  
-        
         
         if(session_status() == PHP_SESSION_ACTIVE){
         $UsuarioS = $_SESSION['usuario'];
@@ -926,29 +970,24 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                         echo "</Div>";
                         exit();
                         
-                        }}}}
-                    // Final Cliente asignado --------------------------
+                        }}}}     
+
+        
+            $cola_h = 0;
+            while($cola_h <= 23){
+               $colahh = $cola_h++; 
+
+               $cola_m=0;
+               while($cola_m<=60){
+                $colamm = $cola_m++; 
+                
+                $cola="$colahh:$colamm";
                     
-
-        // Inicio lista de clients------------------------------------------------
-        
-        
-        
-        
-        include "arrays/neighborhoods.php";
-        
-
-            
-            $Br = 1;
-            while($Br <= $cant_neighb){
-               $Barr = $Br++; 
-               $Barrios = $Barrs[$Barr]; 
-    
              if($queryClients -> rowCount() > 0){
              foreach($resultsClients as $result) {
              include "Class/client.php";
 
-                    if($Fecha>=$Visita && $customer==0 && $Barrios==$Barrio){
+                    if($Fecha>=$Visita && $customer==0 && "$cola"=="$hour"){
 
                     if($OD14x5>$DD14x5 && $OD16x5>$DD16x5 && $OMinx20>$DMinx20){
                     echo "<div>";
@@ -972,7 +1011,7 @@ if(isset($_POST['Pedido'])){ //-------------------------------------------------
                     echo "<p>  Asignado a $NameVendedor </p>";
                     echo "</div>";
                     }
-                    }}}}}
+                    }}}}}}
                    
 
                     if($OD14x5<=0 && $OD16x5<=0 && $OMinx20<=0){

@@ -12,10 +12,10 @@
     <ol>
         <li class="ol-li"> Si no puedes establecer contacto con el cliente <br> NO envies el formulario, selecciona CANCELAR para que el cliente cuente con otra visita.</li>
         <li class="ol-li"> Saluda cortezmente al entrar al establecimiento </li>
-        <li class="ol-li"> Solicita permiso y revisa las fechas y el estado del producto </li>
+        <li class="ol-li"> Revisa las fechas y el estado del producto </li>
         <li class="ol-li"> Si el producto no es facilmente accesible consulta con el tendero como esta de fecha </li>
-        <li class="ol-li"> Si el producto esta vencido o su estado no es ideal anunciale al cliente que lo cambiaras </li>
-        <li class="ol-li"> Informale al cliente cuantos paquetes tiene y preguntale cuantos desea comprar </li>
+        <li class="ol-li"> Si el producto del cliente esta vencido o su estado no es ideal realiza el cambio por producto fresco </li>
+        <li class="ol-li"> Consulta cuantos desea comprar </li>
         <li class="ol-li"> Entrega el pedido y realiza el cobro correspondiente </li>
         
     </ol>
