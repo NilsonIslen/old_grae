@@ -539,15 +539,14 @@ if(isset($_POST['Pedido'])){
         foreach($resultsClients as $result) {
         include "Class/client.php";
                     if($IdClient==$IdCli){
-                    $query ="UPDATE clients SET Pedido='D14x5:$D14x5 - D16x5: $D16x5 - Minx20: $Minx20', observations='$Observ' WHERE IdCli=$IdClient";
+                    $query ="UPDATE clients SET Visita='$Fecha', Pedido='D14x5:$D14x5 - D16x5: $D16x5 - Minx20: $Minx20', observations='$Observ' WHERE IdCli=$IdClient";
                     $result=$connect->query($query);
 
+                    echo "<div>";
                     echo "<p> Hemos registrado el nuevo pedido para el Cliente $NameCli </p>";
                     echo "<p> Gracias por tu gestion </p>";
-
                     include 'Forms/but_return.php';
-                    echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
-
+                    echo "<div>";
                     exit();
 
                 }}}}
@@ -973,16 +972,18 @@ if(isset($_POST['Pedido'])){
                         }}}}     
 
         
-            $cola_h = 0;
+            $cola_h=0;
             while($cola_h <= 23){
                $colahh = $cola_h++; 
+               if($colahh<=9){$colahh='0'.$cola_h;}
 
-               $cola_m=0;
-               while($cola_m<=60){
+               $cola_m=-1;
+               while($cola_m<=59){
                 $colamm = $cola_m++; 
+                if($colamm<=9){$colamm='0'.$cola_m;}
                 
                 $cola="$colahh:$colamm";
-                    
+
              if($queryClients -> rowCount() > 0){
              foreach($resultsClients as $result) {
              include "Class/client.php";
