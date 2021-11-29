@@ -970,19 +970,15 @@ if(isset($_POST['Pedido'])){
                         exit();
                         
                         }}}}     
+            
 
-        
+            include "arrays/time.php";
+            
             $cola_h=0;
-            while($cola_h <= 23){
-               $colahh = $cola_h++; 
-               if($colahh<=9){$colahh='0'.$cola_h;}
+            while($cola_h <= 1379){
+               $cola_h2 = $cola_h++; 
 
-               $cola_m=-1;
-               while($cola_m<=59){
-                $colamm = $cola_m++; 
-                if($colamm<=9){$colamm='0'.$cola_m;}
-                
-                $cola="$colahh:$colamm";
+                $cola = $time[$cola_h2];                
 
              if($queryClients -> rowCount() > 0){
              foreach($resultsClients as $result) {
@@ -1012,7 +1008,7 @@ if(isset($_POST['Pedido'])){
                     echo "<p>  Asignado a $NameVendedor </p>";
                     echo "</div>";
                     }
-                    }}}}}}
+                    }}}}}
                    
 
                     if($OD14x5<=0 && $OD16x5<=0 && $OMinx20<=0){
