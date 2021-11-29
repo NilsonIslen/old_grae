@@ -123,7 +123,7 @@ if(isset($_GET['seccion'])){
 
 
         include "dbRepAGD.php";
-        $sql = "SELECT * FROM usuarios"; 
+        $sql = "SELECT * FROM users"; 
         $query = $connect -> prepare($sql); 
         $query -> execute(); 
         $results = $query -> fetchAll(PDO::FETCH_OBJ); 
@@ -144,7 +144,7 @@ if(isset($_GET['seccion'])){
         }}
         
         if($Email==$ConfEmail){
-        $sql="insert into usuarios(name_us,email_us,tel_us,key_us,profile,customer,OD14x5,OD16x5,OMinx20) values(:name_us,:email_us,:tel_us,:key_us,:profile,:customer,:OD14x5,:OD16x5,:OMinx20)";
+        $sql="insert into users(name_us,email_us,tel_us,key_us,profile,customer,OD14x5,OD16x5,OMinx20) values(:name_us,:email_us,:tel_us,:key_us,:profile,:customer,:OD14x5,:OD16x5,:OMinx20)";
 
         $sql=$connect->prepare($sql);
 
@@ -180,7 +180,6 @@ if(isset($_GET['seccion'])){
     echo "<p> Por favor utiliza el codigo que enviamos al correo $Email  </p>";
     echo "<p> para crear tu clave de acceso </p>";
     echo "</div>";
-        echo "$Cod";
    include "Forms/camClave.php";
 
     exit();
@@ -292,6 +291,8 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
 
     if($seccion == 'listarClientes'){
         include "var_session.php";
+        echo "<div>";
+        include 'Forms/but_return.php';
         echo "<table align='center'>";
         echo "<tr align='center'>";
         echo "<td> ID </td> <td> Cliente </td> <td> Barrio </td> <td> Direccion </td>  <td> Telefono </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td> <td> Frecuencia </td> <td> Proxima Visita </td> <td> Vendedor actual </td><td> Pedido </td>";
@@ -308,17 +309,16 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
         }}
         echo "</table>";          
             include "var_session.php";
-            echo "<form action='index.php' method='POST'>";
-            echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
-            echo "<input type='hidden' name='clave' Value='$ClaveS'>";
-            echo "<button type='submit' name='Entrar'> Regresar </button>";
-            echo "</form>";
+            include 'Forms/but_return.php';
+            echo "</div>";
             exit();
         }
 
 
         if($seccion == 'listarRepartidores'){
             include "var_session.php";
+            echo "<div>";
+            include 'Forms/but_return.php';
             echo "<table align='center'>";
             echo "<tr align='center'>";
             echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> profile </td> <td> Cliente actual </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td>";
@@ -331,16 +331,11 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
         echo "<tr align='center'>";
                     echo "<td> $id_us </td> <td> $name_us </td> <td> $email_us </td> <td> $tel_us </td> <td> $profile </td> <td> $customer </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OD14x5 </a> </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OD16x5 </a> </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OMinx20 </a> </td>";
         echo "</tr>";
-    
-    
-    
-    
     }}
 
-              echo "</table>";
-
+                echo "</table>";
                 include 'Forms/but_return.php';
-                
+                echo "</div>";
                 exit();
             }
 
@@ -403,6 +398,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
                 $ClaveS=$_SESSION['clave'];
 
                  echo "<div>";
+                 include 'Forms/but_return.php';
                  echo "<form action='index.php' method='POST'>";
                  echo "<p> Historial de despachos :</p>";
                  echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
@@ -423,6 +419,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
                 $ClaveS=$_SESSION['clave'];
 
                  echo "<Div>";
+                 include 'Forms/but_return.php';
                  echo "<form action='index.php' method='POST'>";
                  echo "<p> Historial de Ventas :</p>";
                  echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
@@ -432,9 +429,8 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
                  echo "<input type='Text' name='ClienteV' placeholder='Cliente'>";
                  echo "<button type='submit' name='HVentas'> Consultar </button>";
                  echo "</form>";
-
                  include 'Forms/but_return.php';
-                    echo "</Div>";
+                 echo "</Div>";
                     exit();
                 }
             }}}}
@@ -724,6 +720,7 @@ if(isset($_POST['Pedido'])){
         $Resp= $_POST['Responsable'];
         $Vend = $_POST['Vendedor'];
 
+        include 'Forms/but_return.php';
         echo "<table align='center'>";
         echo "<tr align='center'>";
         echo "<td> Fecha </td> <td> Hora </td> <td> Responsable </td> <td> Vendedor </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td>";
@@ -814,12 +811,11 @@ if(isset($_POST['Pedido'])){
         if(isset($_POST['HVentas'])){
         $UsuarioS = $_SESSION['usuario'];
         $ClaveS = $_SESSION['clave'];
-
         $FechaHV = $_POST['FechaHV'];
         $VendedorV = $_POST['VendedorV'];
         $ClienteV = $_POST['ClienteV'];
         
-        
+        include 'Forms/but_return.php';        
         echo "<table align='center'>";
         echo "<tr align='center'>";
         echo "<td> Fecha </td> <td> Hora </td> <td> Vendedor </td> <td> Cliente </td> <td> Barrio </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td>";
