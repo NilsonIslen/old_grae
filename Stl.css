@@ -163,16 +163,16 @@ body{
     
 
     .Pedido{
-        background-color: green;
-        width: 50%;
+        background-color: white;
+        width: 97%;
         height: auto;
         padding: 1% 1% 1% 1%;
         margin: 1px 1% 1px 1%;
         margin: auto;
         text-align: left;
-        font-size: 130%;
-        border: 2px solid white;
-        border-radius: 20px;
+        font-size: 100%;
+        border: 3px solid green;
+        border-radius: 10px;
     }
 
     a{

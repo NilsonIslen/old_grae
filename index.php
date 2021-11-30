@@ -2,8 +2,8 @@
 session_start();
 include 'head.php';
 $Fecha = date('d-m-Y');
+$fecha_actual=strtotime("$Fecha");
 include "arrays/visit_frequency.php";
-
 if(isset($_GET['seccion'])){
     $seccion = $_GET['seccion'];
         if($seccion == "nuevoUsuario"){
@@ -360,10 +360,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
              echo "<form action='index.php' method='POST'>";
              echo "<input type='hidden' name='Responsable' Value='$id_usuario'>";
              echo "<input type='hidden' name='IdCli' Value='$IdCli'>";
-             echo "<p> <input type='text' name='D14x5' placeholder='D14x5' required> </p>";
-             echo "<p> <input type='text' name='D16x5' placeholder='D16x5'required> </p>";
-             echo "<p> <input type='text' name='Minx20' placeholder='Minx20' required> </p>";
-             echo "<p> <input type='textarea' name='Observations' placeholder='Observaciones'> </p>";
+             echo "<p> <input type='textarea' name='detalles' placeholder='Detalles'> </p>";
              echo "<p><button type='submit' name='Pedido'> Registrar pedido </button> </p>";
              echo "</form>";
 
@@ -525,17 +522,14 @@ exit();
 if(isset($_POST['Pedido'])){ 
     include "var_session.php";
     $IdClient = $_POST['IdCli'];
-    $D14x5 = $_POST['D14x5'];
-    $D16x5 = $_POST['D16x5'];
-    $Minx20 = $_POST['Minx20'];
-    $Observ = $_POST['Observations'];
+    $detalles_pedido = $_POST['detalles'];
 
     include "dbRepAGD.php";
     if($queryClients -> rowCount() > 0){
         foreach($resultsClients as $result) {
         include "Class/client.php";
                     if($IdClient==$IdCli){
-                    $query ="UPDATE clients SET Visita='$Fecha', Pedido='D14x5:$D14x5 - D16x5: $D16x5 - Minx20: $Minx20', observations='$Observ' WHERE IdCli=$IdClient";
+                    $query ="UPDATE clients SET Visita='$Fecha', Pedido='$detalles_pedido' WHERE IdCli=$IdClient";
                     $result=$connect->query($query);
 
                     echo "<div>";
@@ -630,7 +624,7 @@ if(isset($_POST['Pedido'])){
                         if($Minx20==0 && $DMinx20==0){$DemMinx20=0;}
                         if($Minx20>0 or $DMinx20>0){$DemMinx20=($Minx20+$DMinx20)/2;}
                     
-                            $query ="UPDATE clients SET Visita='$Visit[$Frec]',hour='$hora',IdVendedor=0, NameVendedor=0, Pedido=0, DD14x5=$DemD14x5, DD16x5=$DemD16x5, DMinx20=$DemMinx20, Pedido='0', observations='0' WHERE IdCli=$IdClient";
+                            $query ="UPDATE clients SET Visita='$Visit[$Frec]',hour='$hora',IdVendedor=0, NameVendedor=0, Pedido=0, DD14x5=$DemD14x5, DD16x5=$DemD16x5, DMinx20=$DemMinx20, Pedido='0' WHERE IdCli=$IdClient";
                                 $result=$connect->query($query);
                                 
                             }}}
@@ -953,8 +947,7 @@ if(isset($_POST['Pedido'])){
                         echo "<p> $Direccion </p>";
                         echo "<p> $TelCli </p> ";
                         if($Pedido<>'0'){
-                            echo "<p class='Pedido'> Pedido: $Pedido <br> ";
-                            echo "Observacion: $Observation </p> ";
+                            echo "<p class='Pedido'> <b> Pedido </b> <br> $Pedido <br> </p>";
                         }
                            
                         include "Forms/regVenta.php";
@@ -980,7 +973,9 @@ if(isset($_POST['Pedido'])){
              foreach($resultsClients as $result) {
              include "Class/client.php";
 
-                    if($Fecha>=$Visita && $customer==0 && "$cola"=="$hour"){
+                    $visita_unix=strtotime("$Visita");
+
+                    if($fecha_actual>=$visita_unix && $customer==0 && "$cola"=="$hour"){
 
                     if($OD14x5>$DD14x5 && $OD16x5>$DD16x5 && $OMinx20>$DMinx20){
                     echo "<div>";
@@ -991,8 +986,7 @@ if(isset($_POST['Pedido'])){
                     
                                                          
                     if($Pedido<>'0'){   
-                            echo "<p class='Pedido'> Pedido: $Pedido <br> ";
-                            echo "Observacion: $Observation </p> ";
+                            echo "<p class='Pedido'> <b> Pedido </b> <br> $Pedido <br> </p>";
                             }
 
                     if($IdVendedor==0){   
@@ -1010,7 +1004,7 @@ if(isset($_POST['Pedido'])){
                     if($OD14x5<=0 && $OD16x5<=0 && $OMinx20<=0){
 
                         echo "<div>";
-                        echo "<p> Para ver los clients que actualmente estan esparendo visita </p>";
+                        echo "<p> Para ver los clientes que actualmente estan esparendo visita </p>";
                         echo "<p> debes contar con producto disponible.</p>";
                         echo "<p> lo puedes adquirir en la direccion:</p>";
                         echo "<p> Carrera 30a # 50a 65 Barrio Eucaliptus (Manizales - Caldas)</p>";
@@ -1022,7 +1016,8 @@ if(isset($_POST['Pedido'])){
                 
                         
                     
-         // Final lista de clients --------------------------                    
+         // Final lista de clients --------------------------    
+         
 
         echo "<Div>";
         echo'<form action="index.php" method="POST">';
