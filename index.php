@@ -211,7 +211,6 @@ if(isset($_GET['seccion'])){
             $NIdVendedor=0;
             $NNameVendedor='0';
             $NPedido='0';
-            $NObservations='0';
 
 
             include "dbRepAGD.php";
@@ -230,7 +229,7 @@ if(isset($_GET['seccion'])){
     
     if($NColor==$NumAl){
 
-        $sql="insert into clients(NameCli,Barrio,Direccion,TelCli,Frecuencia,Visita,hour,DD14x5,DD16x5,DMinx20,IdVendedor,NameVendedor,Pedido,observations) values(:NameCli,:Barrio,:Direccion,:TelCli,:Frecuencia,:Visita,:hour,:DD14x5,:DD16x5,:DMinx20,:IdVendedor,:NameVendedor,:Pedido,:observations)";
+        $sql="insert into clients(NameCli,Barrio,Direccion,TelCli,Frecuencia,Visita,hour,DD14x5,DD16x5,DMinx20,IdVendedor,NameVendedor,Pedido) values(:NameCli,:Barrio,:Direccion,:TelCli,:Frecuencia,:Visita,:hour,:DD14x5,:DD16x5,:DMinx20,:IdVendedor,:NameVendedor,:Pedido)";
 
         $sql=$connect->prepare($sql);
 
@@ -247,7 +246,6 @@ if(isset($_GET['seccion'])){
         $sql->bindParam(':IdVendedor',$NIdVendedor,PDO::PARAM_STR,25);
         $sql->bindParam(':NameVendedor',$NNameVendedor,PDO::PARAM_STR,25);
         $sql->bindParam(':Pedido',$NPedido,PDO::PARAM_STR, 25);
-        $sql->bindParam(':observations',$NObservations,PDO::PARAM_STR, 25);
 
         $sql->execute();
         $lastInsertId=$connect->lastInsertId();
@@ -1013,11 +1011,6 @@ if(isset($_POST['Pedido'])){
                         }
                         exit();
                     }}}}
-                
-                        
-                    
-         // Final lista de clients --------------------------    
-         
 
         echo "<Div>";
         echo'<form action="index.php" method="POST">';

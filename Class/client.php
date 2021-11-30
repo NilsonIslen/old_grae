@@ -13,5 +13,4 @@ $DMinx20=$result->DMinx20;
 $IdVendedor=$result->IdVendedor;
 $NameVendedor=$result->NameVendedor;
 $Pedido=$result->Pedido;
-$Observation=$result->observations;
 ?>
