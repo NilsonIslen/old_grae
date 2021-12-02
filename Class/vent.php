@@ -8,4 +8,5 @@ $Barrio=$result->Barrio;
 $D14x5=$result->D14x5;
 $D16x5=$result->D16x5;
 $Minx20=$result->Minx20;
+$masax1k=$result->masax1k;
 ?>

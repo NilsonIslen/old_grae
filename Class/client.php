@@ -10,6 +10,7 @@ $hour=$result->hour;
 $DD14x5=$result->DD14x5;
 $DD16x5=$result->DD16x5;
 $DMinx20=$result->DMinx20;
+$d_masax1k=$result->d_masax1k;
 $IdVendedor=$result->IdVendedor;
 $NameVendedor=$result->NameVendedor;
 $Pedido=$result->Pedido;

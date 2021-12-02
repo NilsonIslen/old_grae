@@ -9,4 +9,5 @@ $customer=$result->customer;
 $OD14x5=$result->OD14x5;
 $OD16x5=$result->OD16x5;
 $OMinx20=$result->OMinx20;
+$o_masax1k=$result->o_masax1k;
 ?>
