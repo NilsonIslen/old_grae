@@ -323,7 +323,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
             include 'Forms/but_return.php';
             echo "<table align='center'>";
             echo "<tr align='center'>";
-            echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> profile </td> <td> Cliente actual </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td>";
+            echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> profile </td> <td> Cliente actual </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td><td> Masax1k </td>";
             echo "</tr>";
 
         if($queryUsers -> rowCount() > 0){
@@ -675,9 +675,9 @@ if(isset($_POST['Pedido'])){
                             echo "<td> $tMinx20 </td>";
                             echo "</tr>";
                             echo "<tr>";
-                            echo "<td> DMinx20 </td>";
+                            echo "<td> Masax1k </td>";
                             echo "<td> $masax1k </td>";
-                            echo "<td> 1800 </td>";
+                            echo "<td> 1500 </td>";
                             echo "<td> $t_masax1k </td>";
                             echo "</tr>";
                             echo "<tr>";

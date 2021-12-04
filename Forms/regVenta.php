@@ -8,10 +8,10 @@
                         echo "<input type='hidden' name='Vendedor' Value='$name_us'>";
                         echo "<input type='hidden' name='Cliente' Value='$NameCli'>";
                         echo "<input type='hidden' name='Barrio' Value='$Barrio'>";
-                        echo "<input type='text' name='D14x5' placeholder='D14x5'>";
-                        echo "<input type='text' name='D16x5' placeholder='D16x5'>";
-                        echo "<input type='text' name='Minx20' placeholder='Minx20'>";
-                        echo "<input type='text' name='masax1k' placeholder='Masax1K'>";
+                        echo "<input type='int' name='D14x5' placeholder='D14x5'>";
+                        echo "<input type='int' name='D16x5' placeholder='D16x5'>";
+                        echo "<input type='int' name='Minx20' placeholder='Minx20'>";
+                        echo "<input type='int' name='masax1k' placeholder='Masax1K'>";
                         echo "<button type='submit' name='venta'> Enviar </button>";
                         echo "</form>";
 
