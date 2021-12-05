@@ -293,7 +293,6 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
 
     if($seccion == 'listarClientes'){
         include "var_session.php";
-        echo "<div>";
         include 'Forms/but_return.php';
         echo "<table align='center'>";
         echo "<tr align='center'>";
@@ -312,14 +311,12 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
         echo "</table>";          
             include "var_session.php";
             include 'Forms/but_return.php';
-            echo "</div>";
             exit();
         }
 
 
         if($seccion == 'listarRepartidores'){
             include "var_session.php";
-            echo "<div>";
             include 'Forms/but_return.php';
             echo "<table align='center'>";
             echo "<tr align='center'>";
@@ -337,7 +334,6 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
 
                 echo "</table>";
                 include 'Forms/but_return.php';
-                echo "</div>";
                 exit();
             }
 
@@ -814,12 +810,8 @@ if(isset($_POST['Pedido'])){
         }
         echo "<td Colspan='4'> Total <td> $SumD14x5 </td> <td> $SumD16x5 </td> <td> $SumMinx20 </td><td> $Sum_masax1k </td>";
 
-          echo "</table>";
-            
-
+            echo "</table>";
             include 'Forms/but_return.php';
-            echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
-            echo "</Div>";
             exit();
                        
                         }
@@ -939,7 +931,7 @@ if(isset($_POST['Pedido'])){
         include "Class/user.php";
             
             if($UsuarioS==$name_us&&$ClaveEnc==$key_us){
-
+                include "profiles.php";
                 echo "<table>";
                 echo "<tr>";
                 echo "<td colspan='4'><p> ¡ Bienvenido $name_us ! </p></td>";
@@ -954,11 +946,11 @@ if(isset($_POST['Pedido'])){
             
 
                     if($profile=='admin'){
-                        include "Menus/admin.php";
+                        admin($opens_list,$new_client,$list_clients,$list_delivery_men,$dispatch_history,$sales_history,$close_session,$closes_list);
                         }
 
                     if($profile=='rep'){
-                        include "Menus/rep.php";
+                        rep($opens_list,$new_client,$close_session,$closes_list);
                         }
                     
                     if($customer<>0){

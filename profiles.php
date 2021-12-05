@@ -28,10 +28,4 @@ echo $close_session;
 echo $closes_list;
 }
 
-// para insertar en el index: admin($opens_list,$new_client,$list_clients,$list_delivery_men,$dispatch_history,$sales_history,$close_session,$closes_list);
-
-// para insertar en el index: rep($opens_list,$new_client,$close_session,$closes_list);
-
-
-
 ?>
