@@ -3,7 +3,7 @@
 define('DB_HOST','localhost');
 define('DB_USER','root');
 define('DB_PASS','');
-define('DB_NAME','repartoagd');
+define('DB_NAME','elgranod_repartoagd');
 // establecemos la conexión.
 try
 {
