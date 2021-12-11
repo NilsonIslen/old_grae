@@ -149,14 +149,15 @@ body{
     }
 
     .p_green{
-        background-color: orange;
+        background-color: green;
         width: 80%;
         height: auto;
         padding: 0.2% 1% 0.2% 5%;
         margin: 0.2% 1% 0.2% 5%;
         text-align: center;
         font-size: 100%;
-        border: 2px solid orange;
+        color: white;
+        border: 2px solid green;
         border-radius: 20px;
     }
 
