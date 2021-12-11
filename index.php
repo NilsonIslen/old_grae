@@ -1016,7 +1016,7 @@ if(isset($_POST['Pedido'])){
                     }
 
                     if($IdVendedor<>0){
-                    echo "<p>  Asignado a $NameVendedor </p>";
+                    echo "<p class='p_orange'>  Asignado a $NameVendedor </p>";
                     echo "</div>";
                     }
                     }}}}}
