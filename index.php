@@ -635,7 +635,7 @@ if(isset($_POST['Pedido'])){
                                 $result=$connect->query($query);
                                 
                             }}}
-                            $tD14x5=$D14x5*700;
+                            $tD14x5=$D14x5*750;
                             $tD16x5=$D16x5*1000;
                             $tMinx20=$Minx20*1800;
                             $t_masax1k=$masax1k*1500;
@@ -655,7 +655,7 @@ if(isset($_POST['Pedido'])){
                             echo "<tr>";
                             echo "<td> D14x5 </td>";
                             echo "<td> $D14x5 </td>";
-                            echo "<td> 700 </td>";
+                            echo "<td> 750 </td>";
                             echo "<td> $tD14x5 </td>";
                             echo "</tr>";
                             echo "<tr>";
