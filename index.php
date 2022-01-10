@@ -498,7 +498,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
                         $result=$connect->query($query);
                     
 
-        $sql="insert into deliveries2021(FechaD,HoraD,Responsable,Vendedor,D14x5,D16x5,Minx20,masax1k)
+        $sql="insert into deliveries2022(FechaD,HoraD,Responsable,Vendedor,D14x5,D16x5,Minx20,masax1k)
         values(:FechaD,:HoraD,:Responsable,:Vendedor,:D14x5,:D16x5,:Minx20,:masax1k)";
         $sql=$connect->prepare($sql);
         $sql->bindParam(':FechaD',$Fecha,PDO::PARAM_STR, 25);
@@ -587,7 +587,7 @@ if(isset($_POST['Pedido'])){
 
         include "dbRepAGD.php";
 
-        $sql="insert into ventas2021(FechaV,HoraV,Vendedor,Cliente,Barrio,D14x5,D16x5,Minx20,masax1k) values(:FechaV,:HoraV,:Vendedor,:Cliente,:Barrio,:D14x5,:D16x5,:Minx20,:masax1k)";
+        $sql="insert into ventas2022(FechaV,HoraV,Vendedor,Cliente,Barrio,D14x5,D16x5,Minx20,masax1k) values(:FechaV,:HoraV,:Vendedor,:Cliente,:Barrio,:D14x5,:D16x5,:Minx20,:masax1k)";
 
         $sql=$connect->prepare($sql);
         $sql->bindParam(':FechaV',$FechaV,PDO::PARAM_STR, 25);
