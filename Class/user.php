@@ -6,8 +6,9 @@ $tel_us=$result->tel_us;
 $key_us=$result->key_us;
 $profile=$result->profile;
 $customer=$result->customer;
-$OD14x5=$result->OD14x5;
-$OD16x5=$result->OD16x5;
-$OMinx20=$result->OMinx20;
-$o_masax1k=$result->o_masax1k;
+$OAM400g5=$result->AM400g5;
+$OAM550g5=$result->AM550g5;
+$OAm700g10=$result->AM800g20;
+$ODMinx20=$result->AM800g20;
+$o_masax1k=$result->masax1k;
 ?>

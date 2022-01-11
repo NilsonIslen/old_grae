@@ -4,8 +4,9 @@ $FechaD=$result->FechaD;
 $HoraD=$result->HoraD;
 $Responsable=$result->Responsable;
 $Vendedor=$result->Vendedor;
-$D14x5=$result->D14x5;
-$D16x5=$result->D16x5;
-$Minx20=$result->Minx20;
+$AM400g5=$result->AM400g5;
+$AM550g5=$result->AM550g5;
+$Am700g10=$result->AM800g20;
+$DMinx20=$result->AM800g20;
 $masax1k=$result->masax1k;
 ?>

@@ -117,9 +117,9 @@ if(isset($_GET['seccion'])){
         $CodEnc = md5($Cod);
         $profile='rep';
         $customer=0;
-        $OD14x5=0;
-        $OD16x5=0;
-        $OMinx20=0;
+        $OAM400g5=0;
+        $OAM550g5=0;
+        $OAM800g20=0;
         $o_masax1k=0;
 
 
@@ -145,7 +145,7 @@ if(isset($_GET['seccion'])){
         }}
         
         if($Email==$ConfEmail){
-        $sql="insert into users(name_us,email_us,tel_us,key_us,profile,customer,OD14x5,OD16x5,OMinx20,o_masax1k) values(:name_us,:email_us,:tel_us,:key_us,:profile,:customer,:OD14x5,:OD16x5,:OMinx20,:o_masax1k)";
+        $sql="insert into users(name_us,email_us,tel_us,key_us,profile,customer,OAM400g5,OAM550g5,OAM800g20,o_masax1k) values(:name_us,:email_us,:tel_us,:key_us,:profile,:customer,:OAM400g5,:OAM550g5,:OAM800g20,:o_masax1k)";
 
         $sql=$connect->prepare($sql);
 
@@ -155,9 +155,9 @@ if(isset($_GET['seccion'])){
         $sql->bindParam(':key_us',$CodEnc,PDO::PARAM_STR,25);
         $sql->bindParam(':profile',$profile,PDO::PARAM_STR,25);
         $sql->bindParam(':customer',$customer,PDO::PARAM_STR,25);
-        $sql->bindParam(':OD14x5',$OD14x5,PDO::PARAM_STR,25);
-        $sql->bindParam(':OD16x5',$OD16x5,PDO::PARAM_STR,25);
-        $sql->bindParam(':OMinx20',$OMinx20,PDO::PARAM_STR);
+        $sql->bindParam(':OAM400g5',$OAM400g5,PDO::PARAM_STR,25);
+        $sql->bindParam(':OAM550g5',$OAM550g5,PDO::PARAM_STR,25);
+        $sql->bindParam(':OAM800g20',$OAM800g20,PDO::PARAM_STR);
         $sql->bindParam(':o_masax1k',$o_masax1k,PDO::PARAM_STR);
 
         $sql->execute();
@@ -207,9 +207,9 @@ if(isset($_GET['seccion'])){
             $NFrecuencia=1;
             $NVisita="$Fecha";
             $Nhour=date('H:i');
-            $NDD14x5=0;
-            $NDD16x5=0;
-            $NDMinx20=0;
+            $NDAM400g5=0;
+            $NDAM550g5=0;
+            $NDAM800g20=0;
             $n_d_masax1k=0;
             $NIdVendedor=0;
             $NNameVendedor='0';
@@ -232,7 +232,7 @@ if(isset($_GET['seccion'])){
     
     if($NColor==$NumAl){
 
-        $sql="insert into clients(NameCli,Barrio,Direccion,TelCli,Frecuencia,Visita,hour,DD14x5,DD16x5,DMinx20,d_masax1k,IdVendedor,NameVendedor,Pedido) values(:NameCli,:Barrio,:Direccion,:TelCli,:Frecuencia,:Visita,:hour,:DD14x5,:DD16x5,:DMinx20,:d_masax1k,:IdVendedor,:NameVendedor,:Pedido)";
+        $sql="insert into clients(NameCli,Barrio,Direccion,TelCli,Frecuencia,Visita,hour,DAM400g5,DAM550g5,DAM800g20,d_masax1k,IdVendedor,NameVendedor,Pedido) values(:NameCli,:Barrio,:Direccion,:TelCli,:Frecuencia,:Visita,:hour,:DAM400g5,:DAM550g5,:DAM800g20,:d_masax1k,:IdVendedor,:NameVendedor,:Pedido)";
 
         $sql=$connect->prepare($sql);
 
@@ -243,9 +243,9 @@ if(isset($_GET['seccion'])){
         $sql->bindParam(':Frecuencia',$NFrecuencia,PDO::PARAM_STR,25);
         $sql->bindParam(':Visita',$NVisita,PDO::PARAM_STR,25);
         $sql->bindParam(':hour',$Nhour,PDO::PARAM_STR,25);
-        $sql->bindParam(':DD14x5',$NDD14x5,PDO::PARAM_STR,25);
-        $sql->bindParam(':DD16x5',$NDD16x5,PDO::PARAM_STR,25);
-        $sql->bindParam(':DMinx20',$NDMinx20,PDO::PARAM_STR, 25);
+        $sql->bindParam(':DAM400g5',$NDAM400g5,PDO::PARAM_STR,25);
+        $sql->bindParam(':DAM550g5',$NDAM550g5,PDO::PARAM_STR,25);
+        $sql->bindParam(':DAM800g20',$NDAM800g20,PDO::PARAM_STR, 25);
         $sql->bindParam(':d_masax1k',$n_d_masax1k,PDO::PARAM_STR, 25);
         $sql->bindParam(':IdVendedor',$NIdVendedor,PDO::PARAM_STR,25);
         $sql->bindParam(':NameVendedor',$NNameVendedor,PDO::PARAM_STR,25);
@@ -296,7 +296,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
         include 'Forms/but_return.php';
         echo "<table align='center'>";
         echo "<tr align='center'>";
-        echo "<td> ID </td> <td> Cliente </td> <td> Barrio </td> <td> Direccion </td>  <td> Telefono </td> <td> Pedido </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td> <td> Masax1k </td> <td> Frecuencia </td> <td> Proxima Visita </td> <td> Vendedor actual </td>";
+        echo "<td> ID </td> <td> Cliente </td> <td> Barrio </td> <td> Direccion </td>  <td> Telefono </td> <td> Pedido </td> <td> AM400g5 </td> <td> AM550g5 </td> <td> AM800g20 </td> <td> Masax1k </td> <td> Frecuencia </td> <td> Proxima Visita </td> <td> Vendedor actual </td>";
         echo "</tr>";
 
         if($queryClients -> rowCount() > 0){
@@ -304,7 +304,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
             include "Class/client.php";
 
             echo "<tr align='center'>";
-                echo "<td> $IdCli </td> <td> $NameCli </td> <td> $Barrio </td> <td> $Direccion </td> <td> $TelCli </td> <td> <a href='index.php?usuario=$id_us&seccion=Pedidos&client=$IdCli'> $Pedido </a> </td> <td> $DD14x5 </td> <td> $DD16x5 </td> <td> $DMinx20 </td>  <td> $d_masax1k </td> <td><a href='index.php?usuario=$id_us&seccion=frecuencia_visita&client=$IdCli'> $Frec </a> </td> <td> $Visita </td> <td> $NameVendedor </td> ";
+                echo "<td> $IdCli </td> <td> $NameCli </td> <td> $Barrio </td> <td> $Direccion </td> <td> $TelCli </td> <td> <a href='index.php?usuario=$id_us&seccion=Pedidos&client=$IdCli'> $Pedido </a> </td> <td> $DAM400g5 </td> <td> $DAM550g5 </td> <td> $DAM800g20 </td>  <td> $d_masax1k </td> <td><a href='index.php?usuario=$id_us&seccion=frecuencia_visita&client=$IdCli'> $Frec </a> </td> <td> $Visita </td> <td> $NameVendedor </td> ";
                 echo "</tr>";
         
         }}
@@ -320,7 +320,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
             include 'Forms/but_return.php';
             echo "<table align='center'>";
             echo "<tr align='center'>";
-            echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> profile </td> <td> Cliente actual </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td><td> Masax1k </td>";
+            echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> profile </td> <td> Cliente actual </td> <td> AM400g5 </td> <td> AM550g5 </td> <td> AM800g20 </td><td> Masax1k </td>";
             echo "</tr>";
 
         if($queryUsers -> rowCount() > 0){
@@ -328,7 +328,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
         include "Class/user.php";
 
         echo "<tr align='center'>";
-                    echo "<td> $id_us </td> <td> $name_us </td> <td> $email_us </td> <td> $tel_us </td> <td> $profile </td> <td> $customer </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OD14x5 </a> </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OD16x5 </a> </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OMinx20 </a> </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $o_masax1k </a> </td>";
+                    echo "<td> $id_us </td> <td> $name_us </td> <td> $email_us </td> <td> $tel_us </td> <td> $profile </td> <td> $customer </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OAM400g5 </a> </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OAM550g5 </a> </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OAM800g20 </a> </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $o_masax1k </a> </td>";
         echo "</tr>";
     }}
 
@@ -478,9 +478,9 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
         $Hora = date('H:i:s');
         $Responsable = $UsuarioS;
         $IdVendedor = $_POST['IdVendedor'];
-        $D14x5 = $_POST['D14x5'];
-        $D16x5 = $_POST['D16x5'];
-        $Minx20 = $_POST['Minx20'];
+        $AM400g5 = $_POST['AM400g5'];
+        $AM550g5 = $_POST['AM550g5'];
+        $AM800g20 = $_POST['AM800g20'];
         $masax1k = $_POST['masax1k'];
 
         include "dbRepAGD.php";
@@ -488,26 +488,26 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
             foreach($resultsUsers as $result) {
             include "Class/user.php";
                         if($IdVendedor==$id_us){
-                            $RD14x5=($OD14x5+$D14x5);
-                            $RD16x5=($OD16x5+$D16x5);
-                            $RMinx20=($OMinx20+$Minx20);
+                            $RAM400g5=($OAM400g5+$AM400g5);
+                            $RAM550g5=($OAM550g5+$AM550g5);
+                            $RAM800g20=($OAM800g20+$AM800g20);
                             $R_masax1k=($o_masax1k+$masax1k);
              
-                         $query ="UPDATE users SET OD14x5=$RD14x5, OD16x5=$RD16x5, OMinx20=$RMinx20, o_masax1k=$R_masax1k
+                         $query ="UPDATE users SET OAM400g5=$RAM400g5, OAM550g5=$RAM550g5, OAM800g20=$RAM800g20, o_masax1k=$R_masax1k
                          WHERE id_us=$IdVendedor";
                         $result=$connect->query($query);
                     
 
-        $sql="insert into deliveries2022(FechaD,HoraD,Responsable,Vendedor,D14x5,D16x5,Minx20,masax1k)
-        values(:FechaD,:HoraD,:Responsable,:Vendedor,:D14x5,:D16x5,:Minx20,:masax1k)";
+        $sql="insert into deliveries2022(FechaD,HoraD,Responsable,Vendedor,AM400g5,AM550g5,AM800g20,masax1k)
+        values(:FechaD,:HoraD,:Responsable,:Vendedor,:AM400g5,:AM550g5,:AM800g20,:masax1k)";
         $sql=$connect->prepare($sql);
         $sql->bindParam(':FechaD',$Fecha,PDO::PARAM_STR, 25);
         $sql->bindParam(':HoraD',$Hora,PDO::PARAM_STR,25);
         $sql->bindParam(':Responsable',$Responsable,PDO::PARAM_STR,25);
         $sql->bindParam(':Vendedor',$name_us,PDO::PARAM_STR,25);
-        $sql->bindParam(':D14x5',$D14x5,PDO::PARAM_STR,25);
-        $sql->bindParam(':D16x5',$D16x5,PDO::PARAM_STR,25);
-        $sql->bindParam(':Minx20',$Minx20,PDO::PARAM_STR, 25);
+        $sql->bindParam(':AM400g5',$AM400g5,PDO::PARAM_STR,25);
+        $sql->bindParam(':AM550g5',$AM550g5,PDO::PARAM_STR,25);
+        $sql->bindParam(':AM800g20',$AM800g20,PDO::PARAM_STR, 25);
         $sql->bindParam(':masax1k',$masax1k,PDO::PARAM_STR, 25);
         $sql->execute();
         $lastInsertId=$connect->lastInsertId();
@@ -575,19 +575,19 @@ if(isset($_POST['Pedido'])){
                     $Vendedor = $_POST['Vendedor'];
                     $Cliente = $_POST['Cliente'];
                     $Barrio = $_POST['Barrio'];
-                    $D14x5 = $_POST['D14x5'];
-                    $D16x5 = $_POST['D16x5'];
-                    $Minx20 = $_POST['Minx20'];
+                    $AM400g5 = $_POST['AM400g5'];
+                    $AM550g5 = $_POST['AM550g5'];
+                    $AM800g20 = $_POST['AM800g20'];
                     $masax1k = $_POST['masax1k'];
-                    if($D14x5==''){$D14x5=0;}
-                    if($D16x5==''){$D16x5=0;}
-                    if($Minx20==''){$Minx20=0;}
+                    if($AM400g5==''){$AM400g5=0;}
+                    if($AM550g5==''){$AM550g5=0;}
+                    if($AM800g20==''){$AM800g20=0;}
                     if($masax1k==''){$masax1k=0;}
                     
 
         include "dbRepAGD.php";
 
-        $sql="insert into ventas2022(FechaV,HoraV,Vendedor,Cliente,Barrio,D14x5,D16x5,Minx20,masax1k) values(:FechaV,:HoraV,:Vendedor,:Cliente,:Barrio,:D14x5,:D16x5,:Minx20,:masax1k)";
+        $sql="insert into ventas2022(FechaV,HoraV,Vendedor,Cliente,Barrio,AM400g5,AM550g5,AM800g20,masax1k) values(:FechaV,:HoraV,:Vendedor,:Cliente,:Barrio,:AM400g5,:AM550g5,:AM800g20,:masax1k)";
 
         $sql=$connect->prepare($sql);
         $sql->bindParam(':FechaV',$FechaV,PDO::PARAM_STR, 25);
@@ -595,9 +595,9 @@ if(isset($_POST['Pedido'])){
         $sql->bindParam(':Vendedor',$Vendedor,PDO::PARAM_STR,25);
         $sql->bindParam(':Cliente',$Cliente,PDO::PARAM_STR,25);
         $sql->bindParam(':Barrio',$Barrio,PDO::PARAM_STR,25);
-        $sql->bindParam(':D14x5',$D14x5,PDO::PARAM_STR,25);
-        $sql->bindParam(':D16x5',$D16x5,PDO::PARAM_STR,25);
-        $sql->bindParam(':Minx20',$Minx20,PDO::PARAM_STR, 25);
+        $sql->bindParam(':AM400g5',$AM400g5,PDO::PARAM_STR,25);
+        $sql->bindParam(':AM550g5',$AM550g5,PDO::PARAM_STR,25);
+        $sql->bindParam(':AM800g20',$AM800g20,PDO::PARAM_STR, 25);
         $sql->bindParam(':masax1k',$masax1k,PDO::PARAM_STR, 25);
         $sql->execute();
         $lastInsertId=$connect->lastInsertId();
@@ -606,13 +606,13 @@ if(isset($_POST['Pedido'])){
         foreach($resultsUsers as $result) {
         include "Class/user.php";
                     if($id_user==$id_us){
-                    $RD14x5=$OD14x5-$D14x5;
-                    $RD16x5=$OD16x5-$D16x5;
-                    $RMinx20=$OMinx20-$Minx20;
+                    $RAM400g5=$OAM400g5-$AM400g5;
+                    $RAM550g5=$OAM550g5-$AM550g5;
+                    $RAM800g20=$OAM800g20-$AM800g20;
                     $R_masax1k=$o_masax1k-$masax1k;
 
 
-                    $query ="UPDATE users SET customer=0, OD14x5=$RD14x5, OD16x5=$RD16x5, OMinx20=$RMinx20,o_masax1k=$R_masax1k WHERE id_us=$id_user";
+                    $query ="UPDATE users SET customer=0, OAM400g5=$RAM400g5, OAM550g5=$RAM550g5, OAM800g20=$RAM800g20,o_masax1k=$R_masax1k WHERE id_us=$id_user";
                     $result=$connect->query($query);
                 }}}
 
@@ -622,24 +622,24 @@ if(isset($_POST['Pedido'])){
 
                         if($IdCli==$IdClient){
                         $neighborhood=$Barrio;
-                        if($D14x5==0 && $DD14x5==0){$DemD14x5=0;}
-                        if($D14x5>0 or $DD14x5>0){$DemD14x5=($D14x5+$DD14x5)/2;}
-                        if($D16x5==0 && $DD16x5==0){$DemD16x5=0;}
-                        if($D16x5>0 or $DD16x5>0){$DemD16x5=($D16x5+$DD16x5)/2;}
-                        if($Minx20==0 && $DMinx20==0){$DemMinx20=0;}
-                        if($Minx20>0 or $DMinx20>0){$DemMinx20=($Minx20+$DMinx20)/2;}
+                        if($AM400g5==0 && $DAM400g5==0){$DemAM400g5=0;}
+                        if($AM400g5>0 or $DAM400g5>0){$DemAM400g5=($AM400g5+$DAM400g5)/2;}
+                        if($AM550g5==0 && $DAM550g5==0){$DemAM550g5=0;}
+                        if($AM550g5>0 or $DAM550g5>0){$DemAM550g5=($AM550g5+$DAM550g5)/2;}
+                        if($AM800g20==0 && $DAM800g20==0){$DemAM800g20=0;}
+                        if($AM800g20>0 or $DAM800g20>0){$DemAM800g20=($AM800g20+$DAM800g20)/2;}
                         if($masax1k==0 && $d_masax1k==0){$Dem_masax1k=0;}
                         if($masax1k>0 or $d_masax1k>0){$Dem_masax1k=($masax1k+$d_masax1k)/100;}
                     
-                            $query ="UPDATE clients SET Visita='$Visit[$Frec]',hour='$hora',IdVendedor=0, NameVendedor=0, Pedido=0, DD14x5=$DemD14x5, DD16x5=$DemD16x5, DMinx20=$DemMinx20, d_masax1k=$Dem_masax1k, Pedido='0' WHERE IdCli=$IdClient";
+                            $query ="UPDATE clients SET Visita='$Visit[$Frec]',hour='$hora',IdVendedor=0, NameVendedor=0, Pedido=0, DAM400g5=$DemAM400g5, DAM550g5=$DemAM550g5, DAM800g20=$DemAM800g20, d_masax1k=$Dem_masax1k, Pedido='0' WHERE IdCli=$IdClient";
                                 $result=$connect->query($query);
                                 
                             }}}
-                            $tD14x5=$D14x5*750;
-                            $tD16x5=$D16x5*1000;
-                            $tMinx20=$Minx20*1800;
+                            $tAM400g5=$AM400g5*750;
+                            $tAM550g5=$AM550g5*1000;
+                            $tAM800g20=$AM800g20*1800;
                             $t_masax1k=$masax1k*1500;
-                            $ValTot=$tD14x5+$tD16x5+$tMinx20+$t_masax1k;
+                            $ValTot=$tAM400g5+$tAM550g5+$tAM800g20+$t_masax1k;
                             echo "<div>";
                             echo "<table>";
                             echo "<tr>";
@@ -653,22 +653,22 @@ if(isset($_POST['Pedido'])){
                             echo "<td> Valor Total </td>";
                             echo "</tr>";
                             echo "<tr>";
-                            echo "<td> D14x5 </td>";
-                            echo "<td> $D14x5 </td>";
+                            echo "<td> AM400g5 </td>";
+                            echo "<td> $AM400g5 </td>";
                             echo "<td> 750 </td>";
-                            echo "<td> $tD14x5 </td>";
+                            echo "<td> $tAM400g5 </td>";
                             echo "</tr>";
                             echo "<tr>";
-                            echo "<td> D16x5 </td>";
-                            echo "<td> $D16x5 </td>";
+                            echo "<td> AM550g5 </td>";
+                            echo "<td> $AM550g5 </td>";
                             echo "<td> 1000 </td>";
-                            echo "<td> $tD16x5 </td>";
+                            echo "<td> $tAM550g5 </td>";
                             echo "</tr>";
                             echo "<tr>";
-                            echo "<td> DMinx20 </td>";
-                            echo "<td> $Minx20 </td>";
+                            echo "<td> DAM800g20 </td>";
+                            echo "<td> $AM800g20 </td>";
                             echo "<td> 1800 </td>";
-                            echo "<td> $tMinx20 </td>";
+                            echo "<td> $tAM800g20 </td>";
                             echo "</tr>";
                             echo "<tr>";
                             echo "<td> Masax1k </td>";
@@ -729,12 +729,12 @@ if(isset($_POST['Pedido'])){
         include 'Forms/but_return.php';
         echo "<table align='center'>";
         echo "<tr align='center'>";
-        echo "<td> Fecha </td> <td> Hora </td> <td> Responsable </td> <td> Vendedor </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td> <td> Masax1k </td>";
+        echo "<td> Fecha </td> <td> Hora </td> <td> Responsable </td> <td> Vendedor </td> <td> AM400g5 </td> <td> AM550g5 </td> <td> AM800g20 </td> <td> Masax1k </td>";
         echo "</tr>";
 
-        $SumD14x5=0;
-        $SumD16x5=0;
-        $SumMinx20=0;
+        $SumAM400g5=0;
+        $SumAM550g5=0;
+        $SumAM800g20=0;
         $Sum_masax1k=0;
         include "dbRepAGD.php";
         if($queryDel -> rowCount() > 0){
@@ -743,72 +743,72 @@ if(isset($_POST['Pedido'])){
         
         if("$FechaHD"=="$FechaD" && "$Resp"=="$Responsable" && "$Vend"=="$Vendedor"){
             echo "<tr align='center'>";
-            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td>";
+            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM800g20 </td>";
             echo "</tr>";
-            $SumD14x5+=$D14x5;
-            $SumD16x5+=$D16x5;
-            $SumMinx20+=$Minx20;
+            $SumAM400g5+=$AM400g5;
+            $SumAM550g5+=$AM550g5;
+            $SumAM800g20+=$AM800g20;
             $Sum_masax1k+=$masax1k;
         }
 
         
         if("$FechaHD"=="" && "$Resp"=="$Responsable" && "$Vend"=="$Vendedor"){
             echo "<tr align='center'>";
-            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td> <td> $masax1k </td>";
+            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM800g20 </td> <td> $masax1k </td>";
             echo "</tr>";
-            $SumD14x5+=$D14x5;
-            $SumD16x5+=$D16x5;
-            $SumMinx20+=$Minx20;
+            $SumAM400g5+=$AM400g5;
+            $SumAM550g5+=$AM550g5;
+            $SumAM800g20+=$AM800g20;
             $Sum_masax1k+=$masax1k;
         }
         if("$FechaHD"=="$FechaD" && "$Resp"=="" && "$Vend"=="$Vendedor"){
             echo "<tr align='center'>";
-            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td> <td> $masax1k </td>";
+            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM800g20 </td> <td> $masax1k </td>";
             echo "</tr>";
-            $SumD14x5+=$D14x5;
-            $SumD16x5+=$D16x5;
-            $SumMinx20+=$Minx20;
+            $SumAM400g5+=$AM400g5;
+            $SumAM550g5+=$AM550g5;
+            $SumAM800g20+=$AM800g20;
             $Sum_masax1k+=$masax1k;
         }
         if("$FechaHD"=="$FechaD" && "$Resp"=="$Responsable" && "$Vend"==""){
             echo "<tr align='center'>";
-            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td><td> $masax1k </td>";
+            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM800g20 </td><td> $masax1k </td>";
             echo "</tr>";
-            $SumD14x5+=$D14x5;
-            $SumD16x5+=$D16x5;
-            $SumMinx20+=$Minx20;
+            $SumAM400g5+=$AM400g5;
+            $SumAM550g5+=$AM550g5;
+            $SumAM800g20+=$AM800g20;
             $Sum_masax1k+=$masax1k;
         }
         if("$FechaHD"=="$FechaD" && "$Resp"=="" && "$Vend"==""){
             echo "<tr align='center'>";
-            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td><td> $masax1k </td>";
+            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM800g20 </td><td> $masax1k </td>";
             echo "</tr>";
-            $SumD14x5+=$D14x5;
-            $SumD16x5+=$D16x5;
-            $SumMinx20+=$Minx20;
+            $SumAM400g5+=$AM400g5;
+            $SumAM550g5+=$AM550g5;
+            $SumAM800g20+=$AM800g20;
             $Sum_masax1k+=$masax1k;
         }
         if("$FechaHD"=="" && "$Resp"=="$Responsable" && "$Vend"==""){
             echo "<tr align='center'>";
-            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td><td> $masax1k </td>";
+            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM800g20 </td><td> $masax1k </td>";
             echo "</tr>";
-            $SumD14x5+=$D14x5;
-            $SumD16x5+=$D16x5;
-            $SumMinx20+=$Minx20;
+            $SumAM400g5+=$AM400g5;
+            $SumAM550g5+=$AM550g5;
+            $SumAM800g20+=$AM800g20;
             $Sum_masax1k+=$masax1k;
         }
         if("$FechaHD"=="" && "$Resp"=="" && "$Vend"=="$Vendedor"){
             echo "<tr align='center'>";
-            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td><td> $masax1k </td>";
+            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM800g20 </td><td> $masax1k </td>";
             echo "</tr>";
-            $SumD14x5+=$D14x5;
-            $SumD16x5+=$D16x5;
-            $SumMinx20+=$Minx20;
+            $SumAM400g5+=$AM400g5;
+            $SumAM550g5+=$AM550g5;
+            $SumAM800g20+=$AM800g20;
             $Sum_masax1k+=$masax1k;
         }
         }
         }
-        echo "<td Colspan='4'> Total <td> $SumD14x5 </td> <td> $SumD16x5 </td> <td> $SumMinx20 </td><td> $Sum_masax1k </td>";
+        echo "<td Colspan='4'> Total <td> $SumAM400g5 </td> <td> $SumAM550g5 </td> <td> $SumAM800g20 </td><td> $Sum_masax1k </td>";
 
             echo "</table>";
             include 'Forms/but_return.php';
@@ -828,13 +828,13 @@ if(isset($_POST['Pedido'])){
         include 'Forms/but_return.php';        
         echo "<table align='center'>";
         echo "<tr align='center'>";
-        echo "<td> Fecha </td> <td> Hora </td> <td> Vendedor </td> <td> Cliente </td> <td> Barrio </td> <td> D14x5 </td> <td> D16x5 </td> <td> Minx20 </td> <td> masax1k </td>";
+        echo "<td> Fecha </td> <td> Hora </td> <td> Vendedor </td> <td> Cliente </td> <td> Barrio </td> <td> AM400g5 </td> <td> AM550g5 </td> <td> AM800g20 </td> <td> masax1k </td>";
         echo "</tr>";
 
 
-        $SumD14x5=0;
-        $SumD16x5=0;
-        $SumMinx20=0;
+        $SumAM400g5=0;
+        $SumAM550g5=0;
+        $SumAM800g20=0;
         $Sum_masax1k=0;
         include "dbRepAGD.php";
         if($queryVent -> rowCount() > 0){
@@ -843,70 +843,70 @@ if(isset($_POST['Pedido'])){
 
         if("$FechaHV"=="$FechaV" && "$VendedorV"=="$Vendedor" && "$ClienteV"=="$Cliente"){
             echo "<tr align='center'>";
-            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td> <td> $masax1k </td>";
+            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM800g20 </td> <td> $masax1k </td>";
             echo "</tr>";
-            $SumD14x5+=$D14x5;
-            $SumD16x5+=$D16x5;
-            $SumMinx20+=$Minx20;
+            $SumAM400g5+=$AM400g5;
+            $SumAM550g5+=$AM550g5;
+            $SumAM800g20+=$AM800g20;
             $Sum_masax1k+=$masax1k;
         }
         if("$FechaHV"=="$FechaV" && "$VendedorV"=="$Vendedor" && "$ClienteV"==""){
             echo "<tr align='center'>";
-            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td> <td> $masax1k </td>";
+            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM800g20 </td> <td> $masax1k </td>";
             echo "</tr>";
-            $SumD14x5+=$D14x5;
-            $SumD16x5+=$D16x5;
-            $SumMinx20+=$Minx20;
+            $SumAM400g5+=$AM400g5;
+            $SumAM550g5+=$AM550g5;
+            $SumAM800g20+=$AM800g20;
             $Sum_masax1k+=$masax1k;
         }
         if("$FechaHV"=="$FechaV" && "$VendedorV"=="" && "$ClienteV"=="$Cliente"){
             echo "<tr align='center'>";
-            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td><td> $masax1k </td>";
+            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM800g20 </td><td> $masax1k </td>";
             echo "</tr>";
-            $SumD14x5+=$D14x5;
-            $SumD16x5+=$D16x5;
-            $SumMinx20+=$Minx20;
+            $SumAM400g5+=$AM400g5;
+            $SumAM550g5+=$AM550g5;
+            $SumAM800g20+=$AM800g20;
             $Sum_masax1k+=$masax1k;
         }
         if("$FechaHV"=="" && "$VendedorV"=="$Vendedor" && "$ClienteV"=="$Cliente"){
             echo "<tr align='center'>";
-            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td><td> $masax1k </td>";
+            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM800g20 </td><td> $masax1k </td>";
             echo "</tr>";
-            $SumD14x5+=$D14x5;
-            $SumD16x5+=$D16x5;
-            $SumMinx20+=$Minx20;
+            $SumAM400g5+=$AM400g5;
+            $SumAM550g5+=$AM550g5;
+            $SumAM800g20+=$AM800g20;
             $Sum_masax1k+=$masax1k;
         }
         if("$FechaHV"=="$FechaV" && "$VendedorV"=="" && "$ClienteV"==""){
             echo "<tr align='center'>";
-            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td><td> $masax1k </td>";
+            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM800g20 </td><td> $masax1k </td>";
             echo "</tr>";
-            $SumD14x5+=$D14x5;
-            $SumD16x5+=$D16x5;
-            $SumMinx20+=$Minx20;
+            $SumAM400g5+=$AM400g5;
+            $SumAM550g5+=$AM550g5;
+            $SumAM800g20+=$AM800g20;
             $Sum_masax1k+=$masax1k;
         }
         if("$FechaHV"=="" && "$VendedorV"=="$Vendedor" && "$ClienteV"==""){
             echo "<tr align='center'>";
-            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td><td> $masax1k </td>";
+            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM800g20 </td><td> $masax1k </td>";
             echo "</tr>";
-            $SumD14x5+=$D14x5;
-            $SumD16x5+=$D16x5;
-            $SumMinx20+=$Minx20;
+            $SumAM400g5+=$AM400g5;
+            $SumAM550g5+=$AM550g5;
+            $SumAM800g20+=$AM800g20;
             $Sum_masax1k+=$masax1k;
         }
         if("$FechaHV"=="" && "$VendedorV"=="" && "$ClienteV"=="$Cliente"){
             echo "<tr align='center'>";
-            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $D14x5 </td> <td> $D16x5 </td> <td> $Minx20 </td><td> $masax1k </td>";
+            echo "<td> $FechaV </td> <td> $HoraV </td> <td> $Vendedor </td> <td> $Cliente </td> <td> $Barrio </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM800g20 </td><td> $masax1k </td>";
             echo "</tr>";
-            $SumD14x5+=$D14x5;
-            $SumD16x5+=$D16x5;
-            $SumMinx20+=$Minx20;
+            $SumAM400g5+=$AM400g5;
+            $SumAM550g5+=$AM550g5;
+            $SumAM800g20+=$AM800g20;
             $Sum_masax1k+=$masax1k;
         }        
 
         }}
-        echo "<td Colspan='5'> Total <td> $SumD14x5 </td> <td> $SumD16x5 </td> <td> $SumMinx20 </td><td> $Sum_masax1k </td>";
+        echo "<td Colspan='5'> Total <td> $SumAM400g5 </td> <td> $SumAM550g5 </td> <td> $SumAM800g20 </td><td> $Sum_masax1k </td>";
 
            echo "</table>";
             include 'Forms/but_return.php';
@@ -937,10 +937,10 @@ if(isset($_POST['Pedido'])){
                 echo "<td colspan='4'><p> ¡ Bienvenido $name_us ! </p></td>";
                 echo "</tr>";
                 echo "<tr>";
-                echo "<td> <p> D14x5 </p></td><td> <p> D16x5 </p> </td><td> <p> Minx20 </p> </td><td> <p> Masax1k </p> </td>";
+                echo "<td> <p> AM400g5 </p></td><td> <p> AM550g5 </p> </td><td> <p> AM800g20 </p> </td><td> <p> Masax1k </p> </td>";
                 echo "</tr>";
                 echo "<tr>";
-                echo "<td> <p> $OD14x5 </p> </td><td> <p> $OD16x5 </p> </td><td> <p> $OMinx20 </p> </td> <td> <p> $o_masax1k </p> </td>";
+                echo "<td> <p> $OAM400g5 </p> </td><td> <p> $OAM550g5 </p> </td><td> <p> $OAM800g20 </p> </td> <td> <p> $o_masax1k </p> </td>";
                 echo "</tr>";
                 echo "</table>";
             
@@ -997,8 +997,8 @@ if(isset($_POST['Pedido'])){
 
                     if($fecha_actual>=$visita_unix && $customer==0 && "$cola"=="$hour"){
 
-                    if($OD14x5>=$DD14x5 && $OD16x5>=$DD16x5 && $OMinx20>=$DMinx20 && $o_masax1k>=$d_masax1k
-                    &&($OD14x5>0 or $OD16x5>0 or $OMinx20>0 or $o_masax1k>0)){
+                    if($OAM400g5>=$DAM400g5 && $OAM550g5>=$DAM550g5 && $OAM800g20>=$DAM800g20 && $o_masax1k>=$d_masax1k
+                    &&($OAM400g5>0 or $OAM550g5>0 or $OAM800g20>0 or $o_masax1k>0)){
                     echo "<div>";
                     echo "<p> $NameCli </p>";
                     echo "<p class='p_br'> $Barrio </p> ";
@@ -1022,7 +1022,7 @@ if(isset($_POST['Pedido'])){
                     }}}}}
                    
 
-                    if($OD14x5<=0 && $OD16x5<=0 && $OMinx20<=0 && $o_masax1k<=0){
+                    if($OAM400g5<=0 && $OAM550g5<=0 && $OAM800g20<=0 && $o_masax1k<=0){
 
                         echo "<div>";
                         echo "<p> Para ver los clientes que actualmente estan esparendo visita </p>";

@@ -13,10 +13,10 @@
         echo "<input type='hidden' name='clave' value='$ClaveS'>";
         echo "<input type='hidden' name='IdVendedor' value='$id_rep'>";
         ?>
-        <input type='number' name='D14x5' placeholder='D14x5' required>
-        <input type='number' name='D16x5' placeholder='D16x5'required>
-        <input type='number' name='Minx20' placeholder='Minx20' required>
-        <input type='number' name='masax1k' placeholder='Masax1K' required>
+        <input type='number' name='AM400g5' placeholder='AM400g5'>
+        <input type='number' name='AM550g5' placeholder='AM550g5'>
+        <input type='number' name='AM800g20' placeholder='AM800g20'>
+        <input type='number' name='masax1k' placeholder='Masax1K'>
         <button type='submit' name='despacho'> Despachar </button>
         </form>
 </body>
