@@ -15,6 +15,7 @@
         ?>
         <input type='number' name='AM400g5' placeholder='AM400g5'>
         <input type='number' name='AM550g5' placeholder='AM550g5'>
+        <input type='number' name='AM700g10' placeholder='AM700g10'>
         <input type='number' name='AM800g20' placeholder='AM800g20'>
         <input type='number' name='masax1k' placeholder='Masax1K'>
         <button type='submit' name='despacho'> Despachar </button>

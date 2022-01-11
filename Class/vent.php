@@ -7,7 +7,7 @@ $Cliente=$result->Cliente;
 $Barrio=$result->Barrio;
 $AM400g5=$result->AM400g5;
 $AM550g5=$result->AM550g5;
-$Am700g10=$result->AM800g20;
-$DMinx20=$result->AM800g20;
+$AM700g10=$result->AM700g10;
+$AM800g20=$result->AM800g20;
 $masax1k=$result->masax1k;
 ?>
