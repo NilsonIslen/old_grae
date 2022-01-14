@@ -13,6 +13,11 @@
                         echo "<input type='number' min='0' max='$OAM700g10' name='AM700g10' placeholder='AM700g10'>";
                         echo "<input type='number' min='0' max='$OAM800g20' name='AM800g20' placeholder='AM800g20'>";
                         echo "<input type='number' min='0' max='$o_masax1k' name='masax1k' placeholder='Masax1K'>";
+                        echo "<p> El cliente tiene producto vencido o en mal estado para cambiar?</p>";
+                        echo "<select id='cambios' name='cambios'>"; 
+                        echo "<option value='No'> No </option>";
+                        echo "<option value='Si'> Si </option>";
+                        echo "</select>";
                         echo "<button type='submit' name='venta'> Enviar </button>";
                         echo "</form>";
 

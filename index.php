@@ -495,7 +495,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
                             $RAM800g20=($OAM800g20+$AM800g20);
                             $R_masax1k=($o_masax1k+$masax1k);
              
-                         $query ="UPDATE users SET OAM400g5=$RAM400g5, OAM550g5=$RAM550g5, OAM700g10=$RAM700g10, OAM800g20=$RAM800g20, o_masax1k=$R_masax1k
+                         $query ="UPDATE users SET AM400g5=$RAM400g5, AM550g5=$RAM550g5, AM700g10=$RAM700g10, AM800g20=$RAM800g20, masax1k=$R_masax1k
                          WHERE id_us=$IdVendedor";
                         $result=$connect->query($query);
                     
@@ -584,6 +584,7 @@ if(isset($_POST['Pedido'])){
                     $AM700g10 = $_POST['AM700g10'];
                     $AM800g20 = $_POST['AM800g20'];
                     $masax1k = $_POST['masax1k'];
+                    $cambios = $_POST['cambios'];
                     if($AM400g5==''){$AM400g5=0;}
                     if($AM550g5==''){$AM550g5=0;}
                     if($AM700g10==''){$AM700g10=0;}
@@ -640,9 +641,18 @@ if(isset($_POST['Pedido'])){
                         if($AM800g20>0 or $DAM800g20>0){$DemAM800g20=($AM800g20+$DAM800g20)/2;}
                         if($masax1k==0 && $d_masax1k==0){$Dem_masax1k=0;}
                         if($masax1k>0 or $d_masax1k>0){$Dem_masax1k=($masax1k+$d_masax1k)/100;}
-                    
+                        if($cambios=='Si'){
+                            $query ="UPDATE clients SET Visita='$FechaV',hour='$hora',IdVendedor=0, NameVendedor=0, Pedido='<span><b>$Fecha a las $Hora</b><br> Visitar para realizar cambio de producto</span>', AM400g5=$DemAM400g5, AM550g5=$DemAM550g5,AM700g10=$DemAM700g10, AM800g20=$DemAM800g20, masax1k=$Dem_masax1k, Pedido='0' WHERE IdCli=$IdClient";
+                            $result=$connect->query($query);                            
+                        }
+                        if($cambios=='No'){
                             $query ="UPDATE clients SET Visita='$Visit[$Frec]',hour='$hora',IdVendedor=0, NameVendedor=0, Pedido=0, AM400g5=$DemAM400g5, AM550g5=$DemAM550g5,AM700g10=$DemAM700g10, AM800g20=$DemAM800g20, masax1k=$Dem_masax1k, Pedido='0' WHERE IdCli=$IdClient";
-                                $result=$connect->query($query);
+                            $result=$connect->query($query);
+                        }
+
+                        echo "$cambios";
+                    
+                            
                                 
                             }}}
                             $tAM400g5=$AM400g5*800;
@@ -967,7 +977,7 @@ if(isset($_POST['Pedido'])){
                 include "profiles.php";
                 echo "<table>";
                 echo "<tr>";
-                echo "<td colspan='4'><p> ¡ Bienvenido $name_us ! </p></td>";
+                echo "<td colspan='5'><p> ¡ Bienvenido $name_us ! </p></td>";
                 echo "</tr>";
                 echo "<tr>";
                 echo "<td> <p> AM400g5 </p></td><td> <p> AM550g5 </p> </td><td> <p> AM700g10 </p> </td><td> <p> AM800g20 </p> </td><td> <p> Masax1k </p> </td>";
