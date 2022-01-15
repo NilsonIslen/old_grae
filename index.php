@@ -642,18 +642,13 @@ if(isset($_POST['Pedido'])){
                         if($masax1k==0 && $d_masax1k==0){$Dem_masax1k=0;}
                         if($masax1k>0 or $d_masax1k>0){$Dem_masax1k=($masax1k+$d_masax1k)/100;}
                         if($cambios=='Si'){
-                            $query ="UPDATE clients SET Visita='$FechaV',hour='$hora',IdVendedor=0, NameVendedor=0, Pedido='<span><b>$Fecha a las $Hora</b><br> Visitar para realizar cambio de producto</span>', AM400g5=$DemAM400g5, AM550g5=$DemAM550g5,AM700g10=$DemAM700g10, AM800g20=$DemAM800g20, masax1k=$Dem_masax1k, Pedido='0' WHERE IdCli=$IdClient";
+                            $query ="UPDATE clients SET Visita='$FechaV',hour='$hora',IdVendedor=0, NameVendedor=0, AM400g5=$DemAM400g5, AM550g5=$DemAM550g5,AM700g10=$DemAM700g10, AM800g20=$DemAM800g20, masax1k=$Dem_masax1k, Pedido='<span><b>$Fecha a las $hora</b><br> Visitar para realizar cambio de producto</span>' WHERE IdCli=$IdClient";
                             $result=$connect->query($query);                            
                         }
                         if($cambios=='No'){
-                            $query ="UPDATE clients SET Visita='$Visit[$Frec]',hour='$hora',IdVendedor=0, NameVendedor=0, Pedido=0, AM400g5=$DemAM400g5, AM550g5=$DemAM550g5,AM700g10=$DemAM700g10, AM800g20=$DemAM800g20, masax1k=$Dem_masax1k, Pedido='0' WHERE IdCli=$IdClient";
+                            $query ="UPDATE clients SET Visita='$Visit[$Frec]',hour='$hora',IdVendedor=0, NameVendedor=0, AM400g5=$DemAM400g5, AM550g5=$DemAM550g5,AM700g10=$DemAM700g10, AM800g20=$DemAM800g20, masax1k=$Dem_masax1k, Pedido='0' WHERE IdCli=$IdClient";
                             $result=$connect->query($query);
-                        }
-
-                        echo "$cambios";
-                    
-                            
-                                
+                        }      
                             }}}
                             $tAM400g5=$AM400g5*800;
                             $tAM550g5=$AM550g5*1100;
