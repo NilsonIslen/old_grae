@@ -117,10 +117,11 @@ if(isset($_GET['seccion'])){
         $CodEnc = md5($Cod);
         $profile='rep';
         $customer=0;
-        $OAM400g5=0;
-        $OAM550g5=0;
-        $OAM800g20=0;
-        $o_masax1k=0;
+        $AM400g5=0;
+        $AM550g5=0;
+        $AM700g10=0;
+        $AM800g20=0;
+        $masax1k=0;
 
 
         include "dbRepAGD.php";
@@ -145,7 +146,7 @@ if(isset($_GET['seccion'])){
         }}
         
         if($Email==$ConfEmail){
-        $sql="insert into users(name_us,email_us,tel_us,key_us,profile,customer,OAM400g5,OAM550g5,OAM800g20,o_masax1k) values(:name_us,:email_us,:tel_us,:key_us,:profile,:customer,:OAM400g5,:OAM550g5,:OAM800g20,:o_masax1k)";
+        $sql="insert into users(name_us,email_us,tel_us,key_us,profile,customer,AM400g5,AM550g5,AM700g10,AM800g20,masax1k) values(:name_us,:email_us,:tel_us,:key_us,:profile,:customer,:AM400g5,:AM550g5,:AM700g10,:AM800g20,:masax1k)";
 
         $sql=$connect->prepare($sql);
 
@@ -155,10 +156,11 @@ if(isset($_GET['seccion'])){
         $sql->bindParam(':key_us',$CodEnc,PDO::PARAM_STR,25);
         $sql->bindParam(':profile',$profile,PDO::PARAM_STR,25);
         $sql->bindParam(':customer',$customer,PDO::PARAM_STR,25);
-        $sql->bindParam(':OAM400g5',$OAM400g5,PDO::PARAM_STR,25);
-        $sql->bindParam(':OAM550g5',$OAM550g5,PDO::PARAM_STR,25);
-        $sql->bindParam(':OAM800g20',$OAM800g20,PDO::PARAM_STR);
-        $sql->bindParam(':o_masax1k',$o_masax1k,PDO::PARAM_STR);
+        $sql->bindParam(':AM400g5',$AM400g5,PDO::PARAM_STR,25);
+        $sql->bindParam(':AM550g5',$AM550g5,PDO::PARAM_STR,25);
+        $sql->bindParam(':AM700g10',$AM700g10,PDO::PARAM_STR,25);
+        $sql->bindParam(':AM800g20',$AM800g20,PDO::PARAM_STR);
+        $sql->bindParam(':masax1k',$masax1k,PDO::PARAM_STR);
 
         $sql->execute();
         $lastInsertId=$connect->lastInsertId();
