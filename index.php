@@ -211,6 +211,7 @@ if(isset($_GET['seccion'])){
             $Nhour=date('H:i');
             $NDAM400g5=0;
             $NDAM550g5=0;
+            $NDAM700g10=0;
             $NDAM800g20=0;
             $n_d_masax1k=0;
             $NIdVendedor=0;
@@ -234,7 +235,7 @@ if(isset($_GET['seccion'])){
     
     if($NColor==$NumAl){
 
-        $sql="insert into clients(NameCli,Barrio,Direccion,TelCli,Frecuencia,Visita,hour,DAM400g5,DAM550g5,DAM800g20,d_masax1k,IdVendedor,NameVendedor,Pedido) values(:NameCli,:Barrio,:Direccion,:TelCli,:Frecuencia,:Visita,:hour,:DAM400g5,:DAM550g5,:DAM800g20,:d_masax1k,:IdVendedor,:NameVendedor,:Pedido)";
+        $sql="insert into clients(NameCli,Barrio,Direccion,TelCli,Frecuencia,Visita,hour,AM400g5,AM550g5,AM700g10, AM800g20,masax1k,IdVendedor,NameVendedor,Pedido) values(:NameCli,:Barrio,:Direccion,:TelCli,:Frecuencia,:Visita,:hour,:AM400g5,:AM550g5,:AM700g10,:AM800g20,:masax1k,:IdVendedor,:NameVendedor,:Pedido)";
 
         $sql=$connect->prepare($sql);
 
@@ -245,10 +246,11 @@ if(isset($_GET['seccion'])){
         $sql->bindParam(':Frecuencia',$NFrecuencia,PDO::PARAM_STR,25);
         $sql->bindParam(':Visita',$NVisita,PDO::PARAM_STR,25);
         $sql->bindParam(':hour',$Nhour,PDO::PARAM_STR,25);
-        $sql->bindParam(':DAM400g5',$NDAM400g5,PDO::PARAM_STR,25);
-        $sql->bindParam(':DAM550g5',$NDAM550g5,PDO::PARAM_STR,25);
-        $sql->bindParam(':DAM800g20',$NDAM800g20,PDO::PARAM_STR, 25);
-        $sql->bindParam(':d_masax1k',$n_d_masax1k,PDO::PARAM_STR, 25);
+        $sql->bindParam(':AM400g5',$NDAM400g5,PDO::PARAM_STR,25);
+        $sql->bindParam(':AM550g5',$NDAM550g5,PDO::PARAM_STR,25);
+        $sql->bindParam(':AM700g10',$NDAM700g10,PDO::PARAM_STR,25);
+        $sql->bindParam(':AM800g20',$NDAM800g20,PDO::PARAM_STR, 25);
+        $sql->bindParam(':masax1k',$n_d_masax1k,PDO::PARAM_STR, 25);
         $sql->bindParam(':IdVendedor',$NIdVendedor,PDO::PARAM_STR,25);
         $sql->bindParam(':NameVendedor',$NNameVendedor,PDO::PARAM_STR,25);
         $sql->bindParam(':Pedido',$NPedido,PDO::PARAM_STR, 25);
