@@ -450,7 +450,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
     foreach($resultsClients as $result) {
     include "Class/client.php";
 
-    if($IdVendedor<>0 && $customer<>0){
+    if($IdClient==$IdCli && $IdVendedor<>0 && $customer<>0){
         include "var_session.php";
         echo "<div>";
         echo "<p> Lo sentimos, este Cliente lo acaba de seleccionar otro usuario";
