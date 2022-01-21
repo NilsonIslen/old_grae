@@ -441,7 +441,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
     $IdClient = $_GET['Cliente'];
 
     include "dbRepAGD.php";
-
+    
     if($queryUsers -> rowCount() > 0){
     foreach($resultsUsers as $result) {
     include "Class/user.php";
@@ -449,8 +449,18 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
     if($queryClients -> rowCount() > 0){
     foreach($resultsClients as $result) {
     include "Class/client.php";
+
+    if($IdVendedor<>0 && $customer<>0){
+        include "var_session.php";
+        echo "<div>";
+        echo "<p> Lo sentimos, este Cliente lo acaba de seleccionar otro usuario";
+        echo "Pero no te preocupes, hay mas opciones disponibles </p>";
+        echo "<div>";
+        include 'Forms/but_return.php';
+        exit();
+    }
     
-   if($IdVendedor==0 && $customer==0 && $id_user==$id_us){ 
+   if($id_user==$id_us && $IdClient==$IdCli && $customer==0 && $IdVendedor==0){ 
         include "var_session.php";
         $query = "UPDATE users SET customer='$IdClient' WHERE id_us=$id_user";
         $result=$connect->query($query);
@@ -465,15 +475,9 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
         echo "<button type='submit' name='Entrar'> CONTINUAR </button>";
         echo "</form>";
         echo "</div>";
-        exit();
-            }
-        }}}}
+        exit();        
+     }}}}}
 
-    if($IdVendedor<>0 && $customer==0){
-        echo "<p> Lo sentimos, este Cliente lo acaba de seleccionar otro usuario </p>";
-        echo "<p> Pero no te preocupes, hay mas opciones disponibles </p>";
-        echo "<p> <a href='index.php'> Por favor seleccione esta linea para continuar </a> </p>";
-    }
     }
 
     if(isset($_POST['despacho'])){
@@ -522,7 +526,6 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
 echo "<p> Se acaba de registrar nuevo despacho para el repartidor $name_us</p>";
 }}}
             include 'Forms/but_return.php';
-            echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
 
 exit();
 }
@@ -1002,7 +1005,6 @@ if(isset($_POST['Pedido'])){
                         include "Class/client.php";
 
                         if($customer==$IdCli){
-
                         echo "<Div>";
                         echo "<p> $NameCli </p>";
                         echo "<p class='p_br'> $Barrio </p> ";
@@ -1011,8 +1013,12 @@ if(isset($_POST['Pedido'])){
                         if($Pedido<>'0'){
                             echo "<p class='Pedido'>$Pedido</p>";
                         }
-                           
-                        include "Forms/regVenta.php";
+
+                        if($NameVendedor==$UsuarioS){
+                            include "Forms/regVenta.php";
+                            }else{
+                            echo "<p class='p_green'>  Asignado a $NameVendedor </p>";
+                            }
                         
                         echo "<form action='index.php' method='POST'>";
                         echo "<button type='submit' name='Cancelar'> Cancelar </button>";
@@ -1067,7 +1073,7 @@ if(isset($_POST['Pedido'])){
                     if($OAM400g5<=0 && $OAM550g5<=0 && $OAM700g10<=0 && $OAM800g20<=0 && $o_masax1k<=0){
 
                         echo "<div>";
-                        echo "<p> Para ver los clientes que actualmente estan esparendo visita </p>";
+                        echo "<p> Para ver los clientes que actualmente estan esparando visita </p>";
                         echo "<p> debes contar con producto disponible.</p>";
                         echo "<p> lo puedes adquirir en la direccion:</p>";
                         echo "<p> Carrera 30a # 50a 65 Barrio Eucaliptus (Manizales - Caldas)</p>";
