@@ -1084,6 +1084,8 @@ if(isset($_POST['Pedido'])){
                     }}}}
 
         echo "<Div>";
+        echo "<img src='Imgs/logo.png' width='120' height='120' align='center'>";
+        include 'Listas/Pres.php';
         echo'<form action="index.php" method="POST">';
         echo '<input type="text" name="usuario" placeholder="usuario" required>';
         echo '<input type="password" name="clave" placeholder="clave" required>';

@@ -19,6 +19,16 @@ body{
         border-radius: 10px;
     }
 
+    .div-border{
+        background-color: transparent;
+        width: 78%;
+        height: auto;
+        padding: 0% 1% 0% 1%;
+        margin: 1% 0% 0% 10%;
+        border: 2px solid transparent;
+        border-radius: 10px;
+    }
+
     table{
         background-color: white;
         width: 100%;
@@ -148,15 +158,38 @@ body{
         border: 2px solid orange;
         border-radius: 20px;
     }
+
+    .h2_pres{
+        background-color: orange;
+        width: 100%;
+        height: auto;
+        padding: 0% 0% 0% 0%;
+        margin: 2% 0% 2% 0%;
+        text-align: center;
+        border: 2px solid white;
+        border-radius: 20px;
+    }
    
     p{
         background-color: transparent;
-        width: 80%;
+        width: 100%;
         height: auto;
-        padding: 0% 0% 00% 0%;
+        padding: 0% 0% 0% 0%;
         margin: 0% 0% 0% 0%;
         text-align: center;
         font-size: 90%;
+        border: 2px solid transparent;
+        border-radius: 20px;
+    }
+
+    .p_pres{
+        background-color: transparent;
+        width: 100%;
+        height: auto;
+        padding: 0% 0% 0% 0%;
+        margin: 2% 0% 2% 0%;
+        text-align: center;
+        font-size: 140%;
         border: 2px solid transparent;
         border-radius: 20px;
     }
@@ -200,7 +233,38 @@ body{
         border-radius: 10px;
     }
 
-    
+    .pres{
+        background-color: white;
+        width: 80%;
+        height: auto;
+        margin: auto; 
+        text-align: center;
+        padding: 0px 0 0px 0;
+        color: rgb(29, 24, 24)9, 24, 24);
+        border: 2px solid white;
+        font-size: 120%;
+        font-family: Arial, Helvetica, sans-serif;
+        text-decoration: none;
+        border-radius: 10px;
+        -webkit-transform: translate(0px,0px);
+    } 
+
+    .pres{
+        background-color: white;
+        width: 80%;
+        height: auto;
+        margin: auto; 
+        text-align: center;
+        padding: 0px 0 0px 0;
+        color: rgb(29, 24, 24)9, 24, 24);
+        border: 2px solid white;
+        font-size: 120%;
+        font-family: Arial, Helvetica, sans-serif;
+        text-decoration: none;
+        border-radius: 10px;
+        -webkit-transform: translate(0px,0px);
+    } 
+
 
     .Pedido{
         background-color: white;
@@ -377,6 +441,7 @@ body{
         -webkit-transform: translate(0px,0px);
     } 
 
+    
 
     
 
