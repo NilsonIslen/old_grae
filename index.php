@@ -1077,6 +1077,9 @@ if(isset($_POST['Pedido'])){
                         echo "<p> debes contar con producto disponible.</p>";
                         echo "<p> lo puedes adquirir en la direccion:</p>";
                         echo "<p> Carrera 30a # 50a 65 Barrio Eucaliptus (Manizales - Caldas)</p>";
+                        echo "<p> movil de contacto: 3008188284";
+                        echo "<p> Para contar con el apoyo del equipo ingresa a nuestro grupo de whatsapp a travez de la siguiente imagen:</p>";
+                        echo "<p><a href='https://chat.whatsapp.com/FOrZ9xwootL56cCiYCzU3b'><img src='Imgs/banner_GROUP_whatsapp.png' width='250' height='90'></a></p>";
                         echo "</div>";
                         exit();
                         }
