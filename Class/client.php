@@ -15,4 +15,5 @@ $d_masax1k=$result->masax1k;
 $IdVendedor=$result->IdVendedor;
 $NameVendedor=$result->NameVendedor;
 $Pedido=$result->Pedido;
+$RutaC=$result->Ruta;
 ?>

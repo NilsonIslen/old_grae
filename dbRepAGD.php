@@ -1,8 +1,8 @@
 <?php
 
-define('DB_HOST','localhost');
-define('DB_USER','root');
-define('DB_PASS','');
+define('DB_HOST','localhost:3306');
+define('DB_USER','elgranod_Nilson');
+define('DB_PASS','elgranod_2516');
 define('DB_NAME','elgranod_repartoagd');
 // establecemos la conexión.
 try

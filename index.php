@@ -146,7 +146,7 @@ if(isset($_GET['seccion'])){
         }}
         
         if($Email==$ConfEmail){
-        $sql="insert into users(name_us,email_us,tel_us,key_us,profile,customer,AM400g5,AM550g5,AM700g10,AM800g20,masax1k) values(:name_us,:email_us,:tel_us,:key_us,:profile,:customer,:AM400g5,:AM550g5,:AM700g10,:AM800g20,:masax1k)";
+        $sql="insert into users(name_us,email_us,tel_us,key_us,profile,customer,AM400g5,AM550g5,AM700g10,AM800g20,masax1k,Ruta) values(:name_us,:email_us,:tel_us,:key_us,:profile,:customer,:AM400g5,:AM550g5,:AM700g10,:AM800g20,:masax1k,:Ruta)";
 
         $sql=$connect->prepare($sql);
 
@@ -161,6 +161,7 @@ if(isset($_GET['seccion'])){
         $sql->bindParam(':AM700g10',$AM700g10,PDO::PARAM_STR,25);
         $sql->bindParam(':AM800g20',$AM800g20,PDO::PARAM_STR);
         $sql->bindParam(':masax1k',$masax1k,PDO::PARAM_STR);
+        $sql->bindParam(':Ruta',$Ruta,PDO::PARAM_STR);
 
         $sql->execute();
         $lastInsertId=$connect->lastInsertId();
@@ -217,7 +218,7 @@ if(isset($_GET['seccion'])){
             $NIdVendedor=0;
             $NNameVendedor='0';
             $NPedido='0';
-
+            $Ruta=rand(1,2);
 
             include "dbRepAGD.php";
 
@@ -235,7 +236,7 @@ if(isset($_GET['seccion'])){
     
     if($NColor==$NumAl){
 
-        $sql="insert into clients(NameCli,Barrio,Direccion,TelCli,Frecuencia,Visita,hour,AM400g5,AM550g5,AM700g10, AM800g20,masax1k,IdVendedor,NameVendedor,Pedido) values(:NameCli,:Barrio,:Direccion,:TelCli,:Frecuencia,:Visita,:hour,:AM400g5,:AM550g5,:AM700g10,:AM800g20,:masax1k,:IdVendedor,:NameVendedor,:Pedido)";
+        $sql="insert into clients(NameCli,Barrio,Direccion,TelCli,Frecuencia,Visita,hour,AM400g5,AM550g5,AM700g10,AM800g20,masax1k,IdVendedor,NameVendedor,Pedido,Ruta) values(:NameCli,:Barrio,:Direccion,:TelCli,:Frecuencia,:Visita,:hour,:AM400g5,:AM550g5,:AM700g10,:AM800g20,:masax1k,:IdVendedor,:NameVendedor,:Pedido,:Ruta)";
 
         $sql=$connect->prepare($sql);
 
@@ -254,6 +255,7 @@ if(isset($_GET['seccion'])){
         $sql->bindParam(':IdVendedor',$NIdVendedor,PDO::PARAM_STR,25);
         $sql->bindParam(':NameVendedor',$NNameVendedor,PDO::PARAM_STR,25);
         $sql->bindParam(':Pedido',$NPedido,PDO::PARAM_STR, 25);
+        $sql->bindParam(':Ruta',$Ruta,PDO::PARAM_STR, 25);
 
         $sql->execute();
         $lastInsertId=$connect->lastInsertId();
@@ -300,7 +302,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
         include 'Forms/but_return.php';
         echo "<table align='center'>";
         echo "<tr align='center'>";
-        echo "<td> ID </td> <td> Cliente </td> <td> Barrio </td> <td> Direccion </td>  <td> Telefono </td> <td> Pedido </td> <td> AM400g5 </td> <td> AM550g5 </td> <td> AM800g20 </td> <td> Masax1k </td> <td> Frecuencia </td> <td> Proxima Visita </td> <td> Vendedor actual </td>";
+        echo "<td> ID </td> <td> Cliente </td> <td> Barrio </td> <td> Direccion </td>  <td> Telefono </td> <td> Pedido </td> <td> AM400g5 </td> <td> AM550g5 </td> <td> AM800g20 </td> <td> Masax1k </td> <td> Frecuencia </td> <td> Proxima Visita </td> <td> Vendedor actual </td> <td> Ruta </td>";
         echo "</tr>";
 
         if($queryClients -> rowCount() > 0){
@@ -308,7 +310,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
             include "Class/client.php";
 
             echo "<tr align='center'>";
-                echo "<td> $IdCli </td> <td> $NameCli </td> <td> $Barrio </td> <td> $Direccion </td> <td> $TelCli </td> <td> <a href='index.php?usuario=$id_us&seccion=Pedidos&client=$IdCli'> $Pedido </a> </td> <td> $DAM400g5 </td> <td> $DAM550g5 </td> <td> $DAM800g20 </td>  <td> $d_masax1k </td> <td><a href='index.php?usuario=$id_us&seccion=frecuencia_visita&client=$IdCli'> $Frec </a> </td> <td> $Visita </td> <td> $NameVendedor </td> ";
+                echo "<td> $IdCli </td> <td> $NameCli </td> <td> $Barrio </td> <td> $Direccion </td> <td> $TelCli </td> <td> <a href='index.php?usuario=$id_us&seccion=Pedidos&client=$IdCli'> $Pedido </a> </td> <td> $DAM400g5 </td> <td> $DAM550g5 </td> <td> $DAM800g20 </td>  <td> $d_masax1k </td> <td><a href='index.php?usuario=$id_us&seccion=frecuencia_visita&client=$IdCli'> $Frec </a> </td> <td> $Visita </td> <td> $NameVendedor </td> <td> $RutaC </td> ";
                 echo "</tr>";
         
         }}
@@ -324,7 +326,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
             include 'Forms/but_return.php';
             echo "<table align='center'>";
             echo "<tr align='center'>";
-            echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> profile </td> <td> Cliente actual </td> <td> AM400g5 </td> <td> AM550g5 </td> <td> AM700g10 </td> <td> AM800g20 </td><td> Masax1k </td>";
+            echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> profile </td> <td> Cliente actual </td> <td> AM400g5 </td> <td> AM550g5 </td> <td> AM700g10 </td> <td> AM800g20 </td><td> Masax1k </td><td> Ruta </td>";
             echo "</tr>";
 
         if($queryUsers -> rowCount() > 0){
@@ -332,7 +334,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
         include "Class/user.php";
 
         echo "<tr align='center'>";
-                    echo "<td> $id_us </td> <td> $name_us </td> <td> $email_us </td> <td> $tel_us </td> <td> $profile </td> <td> $customer </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OAM400g5 </a> </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OAM550g5 </a> </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OAM700g10 </a> </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OAM800g20 </a> </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $o_masax1k </a> </td>";
+                    echo "<td> $id_us </td> <td> $name_us </td> <td> $email_us </td> <td> $tel_us </td> <td> $profile </td> <td> $customer </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OAM400g5 </a> </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OAM550g5 </a> </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OAM700g10 </a> </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $OAM800g20 </a> </td> <td> <a href='index.php?usuario=$id_us&seccion=despacho'> $o_masax1k </a> </td><td> <a href='index.php?usuario=$id_us&seccion=despacho'> $RutaV </a> </td>";
         echo "</tr>";
     }}
 
@@ -491,6 +493,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
         $AM700g10 = $_POST['AM700g10'];
         $AM800g20 = $_POST['AM800g20'];
         $masax1k = $_POST['masax1k'];
+        $Ruta = $_POST['Ruta'];
 
         include "dbRepAGD.php";
         if($queryUsers -> rowCount() > 0){
@@ -503,7 +506,7 @@ if(isset($_GET['usuario'])&&isset($_GET['seccion']) or (isset($_GET['usuario'])&
                             $RAM800g20=($OAM800g20+$AM800g20);
                             $R_masax1k=($o_masax1k+$masax1k);
              
-                         $query ="UPDATE users SET AM400g5=$RAM400g5, AM550g5=$RAM550g5, AM700g10=$RAM700g10, AM800g20=$RAM800g20, masax1k=$R_masax1k
+                         $query ="UPDATE users SET AM400g5=$RAM400g5, AM550g5=$RAM550g5, AM700g10=$RAM700g10, AM800g20=$RAM800g20, masax1k=$R_masax1k, Ruta=$Ruta
                          WHERE id_us=$IdVendedor";
                         $result=$connect->query($query);
                     
@@ -758,7 +761,7 @@ if(isset($_POST['Pedido'])){
         include 'Forms/but_return.php';
         echo "<table align='center'>";
         echo "<tr align='center'>";
-        echo "<td> Fecha </td> <td> Hora </td> <td> Responsable </td> <td> Vendedor </td> <td> AM400g5 </td> <td> AM550g5 </td> <td> AM700g10 </td> <td> AM800g20 </td> <td> Masax1k </td>";
+        echo "<td> Fecha </td> <td> Hora </td> <td> Responsable </td> <td> Vendedor </td> <td> AM400g5 </td> <td> AM550g5 </td> <td> AM700g10 </td> <td> AM800g20 </td> <td> Masax1k </td> <td> Ruta </td>";
         echo "</tr>";
 
         $SumAM400g5=0;
@@ -773,7 +776,7 @@ if(isset($_POST['Pedido'])){
         
         if("$FechaHD"=="$FechaD" && "$Resp"=="$Responsable" && "$Vend"=="$Vendedor"){
             echo "<tr align='center'>";
-            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM700g10 </td> <td> $AM800g20 </td>";
+            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM700g10 </td> <td> $AM800g20 </td><td> $RutaV </td>";
             echo "</tr>";
             $SumAM400g5+=$AM400g5;
             $SumAM550g5+=$AM550g5;
@@ -785,7 +788,7 @@ if(isset($_POST['Pedido'])){
         
         if("$FechaHD"=="" && "$Resp"=="$Responsable" && "$Vend"=="$Vendedor"){
             echo "<tr align='center'>";
-            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM700g10 </td> <td> $AM800g20 </td> <td> $masax1k </td>";
+            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM700g10 </td> <td> $AM800g20 </td> <td> $masax1k </td><td> $RutaV </td>";
             echo "</tr>";
             $SumAM400g5+=$AM400g5;
             $SumAM550g5+=$AM550g5;
@@ -795,7 +798,7 @@ if(isset($_POST['Pedido'])){
         }
         if("$FechaHD"=="$FechaD" && "$Resp"=="" && "$Vend"=="$Vendedor"){
             echo "<tr align='center'>";
-            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM700g10 </td> <td> $AM800g20 </td> <td> $masax1k </td>";
+            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM700g10 </td> <td> $AM800g20 </td> <td> $masax1k </td><td> $RutaV </td>";
             echo "</tr>";
             $SumAM400g5+=$AM400g5;
             $SumAM550g5+=$AM550g5;
@@ -805,7 +808,7 @@ if(isset($_POST['Pedido'])){
         }
         if("$FechaHD"=="$FechaD" && "$Resp"=="$Responsable" && "$Vend"==""){
             echo "<tr align='center'>";
-            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM700g10 </td> <td> $AM800g20 </td><td> $masax1k </td>";
+            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM700g10 </td> <td> $AM800g20 </td><td> $masax1k </td><td> $RutaV </td>";
             echo "</tr>";
             $SumAM400g5+=$AM400g5;
             $SumAM550g5+=$AM550g5;
@@ -815,7 +818,7 @@ if(isset($_POST['Pedido'])){
         }
         if("$FechaHD"=="$FechaD" && "$Resp"=="" && "$Vend"==""){
             echo "<tr align='center'>";
-            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM700g10 </td> <td> $AM800g20 </td><td> $masax1k </td>";
+            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM700g10 </td> <td> $AM800g20 </td><td> $masax1k </td><td> $RutaV </td>";
             echo "</tr>";
             $SumAM400g5+=$AM400g5;
             $SumAM550g5+=$AM550g5;
@@ -825,7 +828,7 @@ if(isset($_POST['Pedido'])){
         }
         if("$FechaHD"=="" && "$Resp"=="$Responsable" && "$Vend"==""){
             echo "<tr align='center'>";
-            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM700g10 </td> <td> $AM800g20 </td><td> $masax1k </td>";
+            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM700g10 </td> <td> $AM800g20 </td><td> $masax1k </td><td> $RutaV </td>";
             echo "</tr>";
             $SumAM400g5+=$AM400g5;
             $SumAM550g5+=$AM550g5;
@@ -835,7 +838,7 @@ if(isset($_POST['Pedido'])){
         }
         if("$FechaHD"=="" && "$Resp"=="" && "$Vend"=="$Vendedor"){
             echo "<tr align='center'>";
-            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM700g10 </td> <td> $AM800g20 </td><td> $masax1k </td>";
+            echo "<td> $FechaD </td> <td> $HoraD </td> <td> $Responsable </td> <td> $Vendedor </td> <td> $AM400g5 </td> <td> $AM550g5 </td> <td> $AM700g10 </td> <td> $AM800g20 </td><td> $masax1k </td><td> $RutaV </td>";
             echo "</tr>";
             $SumAM400g5+=$AM400g5;
             $SumAM550g5+=$AM550g5;
@@ -1043,7 +1046,7 @@ if(isset($_POST['Pedido'])){
 
                     $visita_unix=strtotime("$Visita");
 
-                    if($fecha_actual>=$visita_unix && $customer==0 && "$cola"=="$hour"){
+                    if($fecha_actual>=$visita_unix && $customer==0 && "$cola"=="$hour" && $RutaV==$RutaC){
 
                     if($OAM400g5>=$DAM400g5 && $OAM550g5>=$DAM550g5 && $OAM700g10>=$DAM700g10 && $OAM800g20>=$DAM800g20 && $o_masax1k>=$d_masax1k
                     &&($OAM400g5>0 or $OAM550g5>0 or $OAM700g10>0 or $OAM800g20>0 or $o_masax1k>0)){

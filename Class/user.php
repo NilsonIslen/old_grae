@@ -11,4 +11,5 @@ $OAM550g5=$result->AM550g5;
 $OAM700g10=$result->AM700g10;
 $OAM800g20=$result->AM800g20;
 $o_masax1k=$result->masax1k;
+$RutaV=$result->Ruta;
 ?>

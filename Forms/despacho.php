@@ -18,6 +18,7 @@
         <input type='number' name='AM700g10' placeholder='AM700g10'>
         <input type='number' name='AM800g20' placeholder='AM800g20'>
         <input type='number' name='masax1k' placeholder='Masax1K'>
+        <input type='number' name='Ruta' placeholder='Ruta' min='0' max='2' required>
         <button type='submit' name='despacho'> Despachar </button>
         </form>
 </body>
