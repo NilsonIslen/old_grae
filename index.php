@@ -1012,7 +1012,7 @@ if(isset($_POST['Pedido'])){
                         echo "<p> $NameCli </p>";
                         echo "<p class='p_br'> $Barrio </p> ";
                         echo "<p> $Direccion </p>";
-                        echo "<p> $TelCli </p> ";
+                        echo "<p><a href='tel:$TelCli'>$TelCli</a></p>";
                         if($Pedido<>'0'){
                             echo "<p class='Pedido'>$Pedido</p>";
                         }
@@ -1053,9 +1053,7 @@ if(isset($_POST['Pedido'])){
                     echo "<div>";
                     echo "<p> $NameCli </p>";
                     echo "<p class='p_br'> $Barrio </p> ";
-                    echo "<p> $Direccion </p>";
-                    echo "<p> $TelCli </p> ";
-                    
+                    echo "<p> $Direccion </p>";                    
                                                          
                     if($Pedido<>'0'){   
                             echo "<p class='Pedido'>$Pedido</p>";
