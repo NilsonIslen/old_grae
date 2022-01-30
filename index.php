@@ -122,6 +122,7 @@ if(isset($_GET['seccion'])){
         $AM700g10=0;
         $AM800g20=0;
         $masax1k=0;
+        $Ruta=0;
 
 
         include "dbRepAGD.php";
