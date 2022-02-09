@@ -1,3 +1,8 @@
+*{
+    margin:0;
+    padding:0;
+
+}
 body{
         background-color: rgb(172, 172, 172);
         width: 96%;
@@ -7,7 +12,7 @@ body{
         padding: 5px;
         margin: 5px;
         text-align: center;
-    }
+}
 
     div{
         background-color: white;
@@ -172,7 +177,7 @@ body{
    
     p{
         background-color: transparent;
-        width: 100%;
+        /*width: 100%;*/
         height: auto;
         padding: 0% 0% 0% 0%;
         margin: 0% 0% 0% 0%;

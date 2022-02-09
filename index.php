@@ -1033,43 +1033,46 @@ if(isset($_POST['Pedido'])){
                         }}}}     
             
 
-            include "arrays/time.php";
+            include "arrays/neighborhoods.php";
             
-            $cola_h=0;
-            while($cola_h <= 1379){
-               $cola_h2 = $cola_h++; 
+            $cola_b=0;
+            while($cola_b <= $cant_neighb){
+               $cola_b2 = $cola_b++; 
 
-                $cola = $time[$cola_h2];                
+                $cola = $Barrs[$cola_b2];  
 
+            $cola2=0;
+            
              if($queryClients -> rowCount() > 0){
              foreach($resultsClients as $result) {
              include "Class/client.php";
+             
 
                     $visita_unix=strtotime("$Visita");
+                    
 
-                    if($fecha_actual>=$visita_unix && $customer==0 && "$cola"=="$hour" && $RutaV==$RutaC){
-
+                    if($fecha_actual>=$visita_unix && $customer==0 && "$cola"=="$Barrio" && $RutaV==$RutaC){
+                    $cola2_b2=$cola2++;
+                    
                     if($OAM400g5>=$DAM400g5 && $OAM550g5>=$DAM550g5 && $OAM700g10>=$DAM700g10 && $OAM800g20>=$DAM800g20 && $o_masax1k>=$d_masax1k
                     &&($OAM400g5>0 or $OAM550g5>0 or $OAM700g10>0 or $OAM800g20>0 or $o_masax1k>0)){
-                    echo "<div>";
-                    echo "<p> $NameCli </p>";
-                    echo "<p class='p_br'> $Barrio </p> ";
-                    echo "<p> $Direccion </p>";                    
-                                                         
-                    if($Pedido<>'0'){   
-                            echo "<p class='Pedido'>$Pedido</p>";
-                            }
+
+                    
+                    if($cola2==1){echo "<div> <b> $Barrio </b>";};
 
                     if($IdVendedor==0){   
-                    echo "<p> <a href='index.php?Cliente=$IdCli&usuario=$id_us'> Gestionar Cliente </a> </p>";
-                    echo "</div>";
+                    echo "<p> <a href='index.php?Cliente=$IdCli&usuario=$id_us'> $NameCli </a> </p>";
                     }
 
                     if($IdVendedor<>0){
                     echo "<p class='p_green'>  Asignado a $NameVendedor </p>";
+                    }
+                    }
+                    }
+                    }
                     echo "</div>";
                     }
-                    }}}}}
+                }
                    
 
                     if($OAM400g5<=0 && $OAM550g5<=0 && $OAM700g10<=0 && $OAM800g20<=0 && $o_masax1k<=0){
