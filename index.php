@@ -1020,10 +1020,8 @@ if(isset($_POST['Pedido'])){
 
                         if($NameVendedor==$UsuarioS){
                             include "Forms/regVenta.php";
-                            }else{
-                            echo "<p class='p_green'>  Asignado a $NameVendedor </p>";
                             }
-                        
+
                         echo "<form action='index.php' method='POST'>";
                         echo "<button type='submit' name='Cancelar'> Cancelar </button>";
                         echo "</form>";
@@ -1065,7 +1063,7 @@ if(isset($_POST['Pedido'])){
                     }
 
                     if($IdVendedor<>0){
-                    echo "<p class='p_green'>  Asignado a $NameVendedor </p>";
+                    echo "<p class='p_green'>  $NameVendedor -> $NameCli </p>";
                     }
                     }
                     }
