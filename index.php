@@ -973,7 +973,7 @@ if(isset($_POST['Pedido'])){
         $ClaveS = $_SESSION['clave'];
         $ClaveEnc=md5($ClaveS);
         }
-
+        
         include "dbRepAGD.php";
         if($queryUsers -> rowCount() > 0){
         foreach($resultsUsers as $result) {
